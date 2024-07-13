@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foresty - Ecology and Environment Template</title>
+    {% load static %}
+    <!-- Favicon img -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}' %}">
+    <!-- Bootstarp min css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- All min css -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <!-- Swiper bundle min css -->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <!-- Magnigic popup css -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- Animate css -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Nice select css -->
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- Style css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Preloader area start -->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="loading-icon text-center d-flex flex-column align-items-center justify-content-center">
+                    <img class="loading-logo" src="{% static 'images/preloader.svg' %}" alt="icon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader area end -->
+
+    <!-- Header area start here -->
+    <header class="header">
+        <div class="header-section">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo-menu">
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'images/logo/logo.svg' %}" alt="logo">
+                        </a>
+                    </div>
+                    <div class="header-bar d-xl-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="main-menu">
+                        <li>
+                            <a href="#">Home <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="index.html">Environmental One</a></li>
+                                <li><a href="index-2.html">Environmental Two</a></li>
+                                <li><a href="index-3.html">Environmental Three</a></li>
+                                <li><a href="index-4.html">Animal Protection Zoo</a></li>
+                                <li><a href="index-5.html">Environmental NGO</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">About Us <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="about.html">About One</a></li>
+                                <li><a href="about-2.html">About Two</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="service.html">Service One</a></li>
+                                <li><a href="service-2.html">Service Two</a></li>
+                                <li><a href="service-single.html">Service Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="mega-menu-btn" href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li class="d-block d-xl-none"><a href="project.html">Our Project 01</a></li>
+                                <li class="d-block d-xl-none"><a href="project-2.html">Our Project 02</a></li>
+                                <li class="d-block d-xl-none"><a href="project-single.html">Project Details</a></li>
+                                <li class="d-block d-xl-none"><a href="donation.html">Donation 01</a></li>
+                                <li class="d-block d-xl-none"><a href="donation-2.html">Donation 02</a></li>
+                                <li class="d-block d-xl-none"><a href="donation-single.html">Donation Details</a></li>
+                                <li class="d-block d-xl-none"><a href="event.html">Events 01</a></li>
+                                <li class="d-block d-xl-none"><a href="event-2.html">Events 01</a></li>
+                                <li class="d-block d-xl-none"><a href="event-single.html">Events Details</a></li>
+                                <li class="d-block d-xl-none"><a href="shop.html">Shop</a></li>
+                                <li class="d-block d-xl-none"><a href="shop-single.html">Shop Details</a></li>
+                                <li class="d-block d-xl-none"><a href="cart.html">Cart</a></li>
+                                <li class="d-block d-xl-none"><a href="checkout.html">Checkout</a></li>
+                                <li class="d-block d-xl-none"><a href="team.html">Our Teams 01</a></li>
+                                <li class="d-block d-xl-none"><a href="team-2.html">Our Teams 02</a></li>
+                                <li class="d-block d-xl-none"><a href="team-single.html">Our Teams Details</a></li>
+                                <li class="d-block d-xl-none"><a href="faq.html">FAQ</a></li>
+                                <li class="d-block d-xl-none"><a href="login.html">Login / Register</a></li>
+                                <li class="d-block d-xl-none"><a href="error.html">404 Error</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li class="sub_menu_wrp d-none d-xl-block"><a href="#">Blog Grid <i
+                                            class="fas fa-chevron-right float-end"></i></a>
+                                    <ul class="sub_sub_menu">
+                                        <li><a href="blog-2.html">2 Columns</a></li>
+                                        <li><a href="blog-3.html">3 Columns</a></li>
+                                    </ul>
+                                </li>
+                                <li class="d-block d-xl-none"><a href="blog-2.html">Blog Grid One</a></li>
+                                <li class="d-block d-xl-none"><a href="blog-3.html">Blog Grid Two</a></li>
+                                <li class="sub_menu_wrp d-none d-xl-block"><a href="#">Blog Standard <i
+                                            class="fas fa-chevron-right float-end"></i></a>
+                                    <ul class="sub_sub_menu">
+                                        <li><a href="blog-left.html">Left SideBar</a></li>
+                                        <li><a href="blog.html">Right SideBar</a></li>
+                                    </ul>
+                                </li>
+                                <li class="d-block d-xl-none"><a href="blog.html">Blog Standard One</a></li>
+                                <li class="d-block d-xl-none"><a href="blog-left.html">Blog Standard Two</a></li>
+                                <li class="sub_menu_wrp d-none d-xl-block"><a href="#">Blog Details <i
+                                            class="fas fa-chevron-right float-end"></i></a>
+                                    <ul class="sub_sub_menu">
+                                        <li><a href="blog-single-left.html">Left SideBar</a></li>
+                                        <li><a href="blog-single.html">Right SideBar</a></li>
+                                    </ul>
+                                </li>
+                                <li class="d-block d-xl-none"><a href="blog-single.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact Us</a>
+                        </li>
+                        <li class="m-0 menu-btn ">
+                            <a href="contact.html"><span>Get a quote</span> <i class="fa-solid fa-angles-right"></i></a>
+                        </li>
+                    </ul>
+                    <!-- Mega menu area start here -->
+                    <div class="mega-menu-area d-none d-xl-block">
+                        <div class="container">
+                            <div class="mega-menu">
+                                <div class="row g-4 justify-content-between">
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item">
+                                            <h5 class="primary-color">Our Project</h5>
+                                            <ul>
+                                                <li><a href="project.html">Our Project 01</a></li>
+                                                <li><a href="project-2.html">Our Project 02</a></li>
+                                                <li><a href="project-single.html">Project Details</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item">
+                                            <h5 class="primary-color">Donation</h5>
+                                            <ul>
+                                                <li><a href="donation.html">Donation 01</a></li>
+                                                <li><a href="donation-2.html">Donation 02</a></li>
+                                                <li><a href="donation-single.html">Donation Details</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item">
+                                            <h5 class="primary-color">Our Events</h5>
+                                            <ul>
+                                                <li><a href="event.html">Events 01</a></li>
+                                                <li><a href="event-2.html">Events 02</a></li>
+                                                <li><a href="event-single.html">Events Details</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item">
+                                            <h5 class="primary-color">Our Shop</h5>
+                                            <ul>
+                                                <li><a href="shop.html">Shop Page</a></li>
+                                                <li><a href="shop-single.html">Shop Details</a></li>
+                                                <li><a href="cart.html">Cart</a></li>
+                                                <li><a href="checkout.html">Checkout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item">
+                                            <h5 class="primary-color">Team Members</h5>
+                                            <ul>
+                                                <li><a href="team.html">Our Teams 01</a></li>
+                                                <li><a href="team-2.html">Our Teams 02</a></li>
+                                                <li><a href="team-single.html">Team Details</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mega-menu__item float-end">
+                                            <h5 class="primary-color">More Pages</h5>
+                                            <ul>
+                                                <li><a href="faq.html">FAQ</a></li>
+                                                <li><a href="login.html">Login / Register</a></li>
+                                                <li><a href="error.html">404 Error</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mega menu area end here -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header area end here -->
+
+{% block content %}
+{% endblock %}
+
+{% include 'website/shared/footer.html' %}
+
+    

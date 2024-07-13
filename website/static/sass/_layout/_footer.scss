@@ -1,0 +1,192 @@
+// Footer one area start here ***
+.footer {
+	&__item {
+		&-title {
+			margin-bottom: 30px;
+			h4 {
+				font-size: 20px;
+				line-height: 10px;
+				text-transform: capitalize;
+			}
+			&-line {
+				width: 33px;
+				height: 2px;
+				background-color: var(--primary-color);
+				margin-right: 5px;
+			}
+			&-line2 {
+				width: 0px;
+				height: 2px;
+				background-color: var(--primary-color);
+				transition: var(--transition);
+			}
+		}
+		p {
+			color: var(--heading-color);
+		}
+		&-map-popup {
+			margin-top: 30px;
+			font-weight: 500;
+			font-size: 14px;
+			color: var(--primary-color);
+			&:hover {
+				color: var(--primary-color);
+			}
+		}
+		ul {
+			li {
+				a {
+					&:hover {
+						color: var(--primary-color);
+					}
+				}
+			}
+		}
+		&-blog {
+			li {
+				@include flex;
+			}
+			span {
+				font-size: 14px;
+				color: var(--primary-color);
+				margin-top: 15px;
+			}
+		}
+		&:hover {
+			.footer__item-title-line2 {
+				width: 89px;
+			}
+		}
+	}
+	&__copyright {
+		text-align: center;
+		padding: 30px 0;
+		background-color: var(--primary-color);
+		p {
+			color: var(--white);
+		}
+		a {
+			color: var(--white);
+		}
+	}
+}
+// Footer one area end here ***
+
+// Footer two area start here ***
+.footer-two {
+	&__wrp {
+		overflow: hidden;
+		p {
+			color: var(--white);
+		}
+		h4 {
+			color: var(--white);
+		}
+		ul {
+			li {
+				color: var(--white);
+				a {
+					color: var(--white);
+				}
+			}
+		}
+		i {
+			color: var(--white) !important;
+		}
+	}
+	&__copyright {
+		padding: 60px 0;
+		background-color: transparent;
+		p {
+			color: #717171;
+			a {
+				color: #717171;
+				&:hover {
+					color: var(--primary-color);
+				}
+			}
+		}
+	}
+	&__item {
+		.input-area {
+			position: relative;
+			input {
+				width: 100%;
+				padding: 15px 20px;
+				border-radius: 8px;
+				border: none;
+			}
+			button {
+				i {
+					color: var(--primary-color) !important;
+				}
+				position: absolute;
+				top: 14px;
+				right: 14px;
+			}
+		}
+		.social-icon {
+			a {
+				@include radius(36px, 36px, 36px);
+				border: 1px solid var(--white);
+				font-size: 14px;
+				margin-right: 3px;
+			}
+		}
+	}
+}
+// Footer two area end here ***
+
+// Footer three area start here ***
+.footer-three {
+	&__wrp {
+		background-color: var(--heading-color);
+		h4,
+		p,
+		li,
+		a {
+			color: var(--white);
+		}
+	}
+	&__item {
+		.footer-popup {
+			position: relative;
+			.icon {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 1;
+				color: var(--primary-color);
+				width: 25px;
+				height: 25px;
+				line-height: 27px;
+				border-radius: 50%;
+				background-color: var(--white);
+				text-align: center;
+				transition: var(--transition);
+				opacity: 0;
+			}
+			&::after {
+				position: absolute;
+				content: "";
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: rgba(75, 175, 71, 0.7);
+				transition: var(--transition);
+				opacity: 0;
+			}
+			&:hover {
+				.icon {
+					opacity: 1;
+				}
+				&::after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+// Footer three area end here ***

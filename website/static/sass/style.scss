@@ -1,0 +1,59 @@
+/*-----------------------------------------------------------------
+
+Template Name:  Foresty - Ecology and Environment Template
+Author:  Gramentheme
+Author URI: https://themeforest.net/user/gramentheme/portfolio
+Developer: Kawser Ahmed Roni
+Version: 1.0.0
+Description: Foresty - Ecology and Environment Template
+
+-------------------------------------------------------------------
+CSS TABLE OF CONTENTS
+-------------------------------------------------------------------
+
+01. abstracts
+    1.01 --> mixins
+    1.02 --> variable
+
+02. base
+    2.01 --> typography
+    2.02 --> animation
+    2.03 --> responsive
+
+03. components
+    3.01 --> buttons
+    3.02 --> progress
+
+04. layout
+    4.01 --> header
+    4.02 --> banner
+    4.03 --> section
+    4.04 --> footer
+
+------------------------------------------------------------------*/
+
+// Google fonts ***
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// Abstracts styles ***
+@import "_abstracts/_mixins";
+@import "_abstracts/_variables";
+
+// Typography styles***
+@import "_base/_typography";
+
+// Component styles ***
+@import "_components/_buttons";
+@import "_components/_progress";
+
+// Layout styles ***
+@import "_layout/_header";
+@import "_layout/_banner";
+@import "_layout/_section";
+@import "_layout/_footer";
+
+// Animation styles***
+@import "_base/_animation";
+
+// Responsive styles ***
+@import "_base/_responsive";

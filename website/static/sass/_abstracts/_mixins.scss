@@ -1,0 +1,39 @@
+@mixin justify {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+@mixin justify-wrp {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+@mixin flex {
+	display: flex;
+	align-items: center;
+}
+@mixin flex-wrp {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+@mixin radius($width, $height, $line-hight) {
+	width: $width;
+	height: $height;
+	line-height: $line-hight;
+	text-align: center;
+	border-radius: 50%;
+	transition: var(--transition);
+}
+@mixin bg-image {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

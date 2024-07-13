@@ -1,0 +1,407 @@
+// Button one area start here ***
+.btn-one {
+	padding: 15px 20px;
+	font-weight: 600;
+	color: var(--primary-color);
+	transition: var(--transition);
+	border: 2px solid var(--primary-color);
+	border-radius: 6px;
+	position: relative;
+	text-transform: capitalize;
+	i {
+		padding: 0 5px;
+		position: relative;
+	}
+	span {
+		color: var(--primary-color);
+		position: relative;
+		transition: var(--transition);
+	}
+	&::before {
+		position: absolute;
+		content: "";
+		width: 0%;
+		height: 100%;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		background-color: var(--primary-color);
+		transition: var(--transition);
+	}
+	&:hover {
+		color: var(--white);
+		span {
+			color: var(--white);
+		}
+		&::before {
+			width: 100%;
+			left: 0px;
+		}
+	}
+}
+// Button one area end here ***
+
+// Button one light area start here ***
+.btn-one-light {
+	@extend.btn-one;
+	border: 2px solid var(--white);
+	color: var(--white);
+	span {
+		color: var(--white);
+	}
+	&:hover {
+		border: 2px solid var(--primary-color);
+	}
+}
+// Button one light area end here ***
+
+// Button one white area start here ***
+.btn-one-white {
+	@extend.btn-one;
+	background-color: var(--white);
+	border: 2px solid var(--white);
+	&::before {
+		border-radius: 6px;
+	}
+}
+// Button one white area end here ***
+
+// Button two area start here ***
+.btn-two {
+	@extend.btn-one;
+	border-radius: 100px;
+	overflow: hidden;
+	&::before {
+		border-radius: 100px;
+	}
+}
+// Button two area end here ***
+
+// Button two area start here ***
+.btn-two-light {
+	@extend.btn-two;
+	border: 2px solid var(--white);
+	color: var(--white);
+	span {
+		color: var(--white);
+	}
+	&::before {
+		background-color: var(--white);
+	}
+	&:hover {
+		color: var(--primary-color);
+		span {
+			color: var(--primary-color);
+		}
+	}
+}
+// Button two area end here ***
+
+// Arry button area start here ***
+.arry-btn {
+	button {
+		text-align: center;
+		width: 70px;
+		height: 70px;
+		line-height: 70px;
+		font-size: 24px;
+		border-radius: 50%;
+		border: 1px solid var(--border);
+		color: var(--border);
+		transition: var(--transition);
+		&:hover {
+			background-color: var(--primary-color);
+			color: var(--white);
+			border: 1px solid var(--primary-color);
+		}
+	}
+	.active {
+		background-color: var(--primary-color);
+		color: var(--white);
+		border: 1px solid var(--primary-color);
+	}
+}
+.arry-prev {
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	color: var(--border);
+	transition: var(--transition);
+	&:hover {
+		background-color: var(--primary-color);
+		color: var(--white);
+		border: 1px solid var(--primary-color);
+	}
+}
+.arry-next {
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	border-radius: 50%;
+	transition: var(--transition);
+	background-color: var(--primary-color);
+	color: var(--white);
+	border: 1px solid var(--primary-color);
+}
+// Arry button area end here ***
+
+// Image arry button area start here ***
+.image-arry {
+	@include radius(86px, 86px, 86px);
+	border: 1px solid var(--white);
+	line-height: 90px;
+	i {
+		@include radius(64px, 64px, 64px);
+		font-size: 22px;
+		color: var(--white);
+		display: inline-block;
+	}
+}
+// Image arry button area end here ***
+
+// Dots area start here ***
+.dot {
+	.swiper-pagination-bullet {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		transition: 0.6s;
+		background-color: transparent;
+		opacity: 1;
+		position: relative;
+		border: 1px solid transparent;
+		&::before {
+			position: absolute;
+			content: "";
+			top: 5px;
+			left: 5px;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background-color: #858585;
+			transition: 0.6s;
+		}
+	}
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+		&::before {
+			background-color: var(--primary-color);
+		}
+		border: 1px solid var(--primary-color);
+	}
+}
+.dot-light {
+	@extend.dot;
+	.swiper-pagination-bullet {
+		background-color: transparent;
+		border: 1px solid transparent;
+		&::before {
+			background-color: var(--white);
+		}
+	}
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+		&::before {
+			background-color: var(--white);
+		}
+		border: 1px solid var(--white);
+	}
+}
+// Dots area end here ***
+
+// Video button area start here ***
+.video-btn {
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	z-index: 2;
+	a {
+		position: relative;
+		color: var(--primary-color);
+		font-size: 28px;
+		z-index: 1;
+		background-color: #ffffffcc;
+		width: 90px;
+		height: 90px;
+		line-height: 90px;
+		border-radius: 50%;
+		display: block;
+		transition: 0.4s;
+	}
+}
+.video-pulse::after,
+.video-pulse::before {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	border: 1px solid var(--white);
+	opacity: 0.7;
+	left: 0;
+	top: 0;
+	border-radius: 50%;
+	-webkit-animation-duration: 2.5s;
+	animation-duration: 2.5s;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	-webkit-animation-name: video-animation;
+	animation-name: video-animation;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+.video-pulse::before {
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+}
+// Video button area end here ***
+
+// Text video button area start here ***
+.text-btn {
+	width: 180px;
+	height: 180px;
+	line-height: 180px;
+	position: relative;
+	text-align: center;
+	i {
+		display: inline-block;
+		font-size: 26px;
+		background-color: var(--white);
+		@include radius(112px, 112px, 112px);
+		color: var(--primary-color);
+	}
+	.the-text {
+		position: absolute;
+		top: -3px;
+		left: 0;
+		animation: rotate 15s linear infinite;
+		animation-play-state: running;
+	}
+	&:hover {
+		.the-text {
+			animation-play-state: paused;
+		}
+	}
+}
+// Text video button area end here ***
+
+// Pagi button area start here ***
+.pagi-btn {
+	@include radius(50px, 50px, 50px);
+	border: var(--border-1px);
+	&:hover {
+		background-color: var(--primary-color);
+		color: var(--white);
+		border: 1px solid var(--primary-color);
+	}
+}
+.pagi-btn.active {
+	background-color: var(--primary-color);
+	color: var(--white);
+	border: 1px solid var(--primary-color);
+}
+.pagi-wrp {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	.fa-arrow-right {
+		font-size: 24px;
+		margin-left: 5px;
+		color: var(--span);
+		&:hover {
+			color: var(--primary-color);
+		}
+	}
+}
+// Pagi button area end here ***
+
+// Radio button area start here ***
+.radio-btn {
+	display: flex;
+	align-items: center;
+	p {
+		color: var(--span);
+		margin-left: 10px;
+		font-size: 14px;
+	}
+	span {
+		width: 20px;
+		height: 20px;
+		border: 1px solid var(--primary-color);
+		border-radius: 50%;
+		position: relative;
+		cursor: pointer;
+		&::after {
+			position: absolute;
+			content: "";
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background-color: var(--primary-color);
+			top: 6px;
+			left: 6px;
+		}
+	}
+	.radio-btn-active {
+		border: 1px solid var(--primary-color);
+		background-color: var(--primary-color);
+		&::after {
+			background-color: var(--white);
+		}
+	}
+}
+// Radio button area end here ***
+
+// Back to top button area start here ***
+.scroll-up {
+	cursor: pointer;
+	display: block;
+	border-radius: 50px;
+	box-shadow: inset 0 0 0 2px var(--border);
+	z-index: 99;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(15px);
+	position: fixed;
+	right: 25px;
+	bottom: 35px;
+	height: 50px;
+	width: 50px;
+	transition: var(--transition);
+	&::after {
+		position: absolute;
+		font-family: "Font Awesome 6 Pro";
+		content: "\f30c";
+		text-align: center;
+		line-height: 50px;
+		font-weight: 700;
+		font-size: 18px;
+		color: var(--primary-color);
+		left: 0;
+		top: 0;
+		height: 50px;
+		width: 50px;
+		cursor: pointer;
+		display: block;
+		z-index: 1;
+		transition: var(--transition);
+	}
+	svg path {
+		fill: none;
+	}
+	svg.scroll-circle path {
+		stroke: var(--primary-color);
+		stroke-width: 4px;
+		box-sizing: border-box;
+		transition: var(--transition);
+	}
+}
+.scroll-up.active-scroll {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+// Back to top button area end here ***

@@ -1,0 +1,174 @@
+//  Animation of the video button area start here ***
+@-webkit-keyframes video-animation {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(2);
+	}
+}
+
+@keyframes video-animation {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(2);
+	}
+}
+//  Animation of the video button end here ***
+
+// Animation rotate area start here ***
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.animation__rotate {
+	animation: rotate 40s linear infinite;
+}
+// Animation rotate area end here ***
+
+//  Bobble animation start here ***
+@keyframes bobble {
+	0% {
+		transform: translateY(0) scale(1);
+	}
+	100% {
+		transform: translateY(-20px) scale(1.1);
+	}
+}
+.bobble__animation {
+	animation: bobble 4s ease-in-out infinite alternate;
+}
+//  Bobble animation end here ***
+
+//  Fall animation start here ***
+@keyframes fall {
+	0% {
+		transform: translateY(-10%);
+		opacity: 0;
+	}
+	25% {
+		opacity: 0.8;
+	}
+	50% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateY(150%);
+		opacity: 0;
+	}
+}
+.fall__animation {
+	animation: fall 10s linear infinite;
+}
+//  Fall animation end here ***
+
+@keyframes fallAndRotate {
+	0% {
+		transform: translateY(-10%) rotate(0deg);
+		opacity: 0;
+	}
+	25% {
+		opacity: 0.8;
+		transform: translateY(-5%) rotate(45deg);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(0%) rotate(90deg);
+	}
+	75% {
+		opacity: 0.8;
+		transform: translateY(-5%) rotate(45deg);
+	}
+	100% {
+		transform: translateY(150%) rotate(180deg);
+		opacity: 0;
+	}
+}
+.animation__fallAndRotate {
+	animation: fallAndRotate 10s linear infinite;
+}
+
+//  Sway animation start here ***
+@keyframes sway {
+	0% {
+		transform: translateX(-10px);
+	}
+	100% {
+		transform: translateX(10px);
+	}
+}
+.sway__animation {
+	animation: sway 2s linear infinite alternate;
+}
+
+@keyframes sway_Y {
+	0% {
+		transform: translateY(-10px);
+	}
+	100% {
+		transform: translateY(10px);
+	}
+}
+.sway_Y__animation {
+	animation: sway_Y 2s linear infinite alternate;
+}
+//  Sway animation end here ***
+
+//  Animation of the ring rotete start here ***
+@keyframes ring-animation {
+	from {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+	20%,
+	32%,
+	44%,
+	56%,
+	68% {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+	23%,
+	35%,
+	47%,
+	59%,
+	71% {
+		transform: rotate3d(0, 0, 1, 15deg);
+	}
+	26%,
+	38%,
+	50%,
+	62%,
+	74% {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+	29%,
+	41%,
+	53%,
+	65%,
+	77% {
+		transform: rotate3d(0, 0, 1, -15deg);
+	}
+	80% {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+}
+.ring-animation {
+	animation: ring-animation 1.5s ease-in-out infinite;
+}
+//  Animation of the ring rotete end here ***
