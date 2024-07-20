@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------
 
-Template Name:  Foresty - Ecology and Environment Template
+Template Name:  Green AI - Revolutionising Smart City Infrastructure
 Author:  Gramentheme
 Author URI: https://themeforest.net/user/gramentheme/portfolio
 Developer: Kawser Ahmed Roni
 Version: 1.0.0
-Description: Foresty - Ecology and Environment Template
+Description: Green AI - Revolutionising Smart City Infrastructure
 
 -------------------------------------------------------------------
 CSS TABLE OF CONTENTS
@@ -2811,7 +2811,7 @@ input {
 }
 
 .page-banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/images/banner/page-banner.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../static/images/banner/page-banner.jpg);
   text-transform: capitalize;
   text-align: center;
 }
@@ -4225,7 +4225,7 @@ input {
 }
 .testimonial-two__image::after {
   position: absolute;
-  content: url(../../assets/images/testimonial/testimonial-line.png);
+  content: url(../../static/images/testimonial/testimonial-line.png);
   left: -80px;
   top: 5px;
 }
@@ -4264,7 +4264,7 @@ input {
 }
 .team__item::after {
   content: "";
-  background-image: url("../../assets/images/team/bg.jpg");
+  background-image: url("../../static/images/team/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -5313,7 +5313,7 @@ input {
 }
 .contact .content {
   color: var(--white);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../assets/images/contact/01.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../static/images/contact/01.jpg);
   padding: 40px 30px;
 }
 .contact .content h2 {

@@ -2,6 +2,14 @@
 
 {% block content %}
 {% load static %}
+<style>
+.content.bg-image {
+            background-image: url("{% static 'images/icon/customer_care.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: white; /* Ensure text is readable on the background */
+        }
+</style>
 <main>
         <!-- Banner area start here -->
         <section class="banner-two bor-bottom">
@@ -13,15 +21,15 @@
             <div class="swiper banner-two__slider">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner-1.jpg' %}">
+                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner1.jpg' %}">
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner-2.jpg' %}">
+                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner2.jpg' %}">
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner-3.jpg' %}">
+                        <div class="banner-two__image bg-image" data-background="{% static 'images/banner/banner3.jpg' %}">
                         </div>
                     </div>
                 </div>
@@ -31,43 +39,34 @@
                     <div class="swiper banner-slider">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <h4 data-animation="fadeInUp" data-delay="0.4s">Embrace the Green, Sow the Future</h4>
-                                <h1 data-animation="fadeInUp" data-delay=".8s">Leading the way<img
-                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> to a
-                                    greener
-                                    future</h1>
-                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Ecology is the
-                                    scientific study of the relationships between
-                                    organisms <br>
-                                    and their environment, including their physical, chemical</p>
+                                <h4 data-animation="fadeInUp" data-delay=".4s">Pioneering the Future of Smart City Infrastructure</h4>
+                                <h1 data-animation="fadeInUp" data-delay=".8s">GreenAI<img
+                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> 
+                                </h1>
+                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Revolutionising Smart City Infrastructure
+                                </p>
+                                <a data-animation="fadeInUp" data-delay="1.6s" href="{% url 'about' %}"
+                                    class="btn-one"><span>Discover
+                                        with us</span> <i class="fa-solid fa-angles-right"></i></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <h4 data-animation="fadeInUp" data-delay=".4s">Pioneering the Future of Smart City Infrastructure</h4>
+                                <h1 data-animation="fadeInUp" data-delay=".8s">GreenAI<img
+                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> 
+                                </h1>
+                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Revolutionising Smart City Infrastructure
+                                </p>
                                 <a data-animation="fadeInUp" data-delay="1.6s" href="about-2.html"
                                     class="btn-one"><span>Discover
                                         with us</span> <i class="fa-solid fa-angles-right"></i></a>
                             </div>
                             <div class="swiper-slide">
-                                <h4 data-animation="fadeInUp" data-delay="0.4s">Embrace the Green, Sow the Future</h4>
-                                <h1 data-animation="fadeInUp" data-delay=".8s">Leading the way<img
-                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> to a
-                                    greener
-                                    future</h1>
-                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Ecology is the
-                                    scientific study of the relationships between
-                                    organisms <br>
-                                    and their environment, including their physical, chemical</p>
-                                <a data-animation="fadeInUp" data-delay="1.6s" href="about-2.html"
-                                    class="btn-one"><span>Discover
-                                        with us</span> <i class="fa-solid fa-angles-right"></i></a>
-                            </div>
-                            <div class="swiper-slide">
-                                <h4 data-animation="fadeInUp" data-delay="0.4s">Embrace the Green, Sow the Future</h4>
-                                <h1 data-animation="fadeInUp" data-delay=".8s">Leading the way<img
-                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> to a
-                                    greener
-                                    future</h1>
-                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Ecology is the
-                                    scientific study of the relationships between
-                                    organisms <br>
-                                    and their environment, including their physical, chemical</p>
+                                <h4 data-animation="fadeInUp" data-delay=".4s">Pioneering the Future of Smart City Infrastructure</h4>
+                                <h1 data-animation="fadeInUp" data-delay=".8s">GreenAI<img
+                                        src="{% static 'images/banner/earth.png' %}" alt="icon"> 
+                                </h1>
+                                <p class="mt-55 mb-55" data-animation="fadeInUp" data-delay="1.2s">Revolutionising Smart City Infrastructure
+                                </p>
                                 <a data-animation="fadeInUp" data-delay="1.6s" href="about-2.html"
                                     class="btn-one"><span>Discover
                                         with us</span> <i class="fa-solid fa-angles-right"></i></a>
@@ -77,13 +76,13 @@
                 </div>
             </div>
             <div class="dot-light banner-two__dot"></div>
-            <a class="text-btn d-none d-sm-inline-block banner-two__video-btn video-popup"
+            {% comment %} <a class="text-btn d-none d-sm-inline-block banner-two__video-btn video-popup"
                 href="https://www.youtube.com/watch?v=Cn4G2lZ_g2I">
                 <i class="fa-duotone fa-play"></i>
                 <div class="the-text">
                     <img src="{% static 'images/shape/btn-text.png' %}" alt="text-image">
                 </div>
-            </a>
+            </a> {% endcomment %}
         </section>
         <!-- Banner area end here -->
 
@@ -99,78 +98,53 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-xl-6">
                         <div class="about-two__image">
-                            <img src="{% static 'images/about/01.jpg' %}" alt="image">
-                            <div class="sm-image d-none d-sm-block">
-                                <img src="{% static 'images/about/02.png' %}" alt="image">
-                            </div>
-                            <div class="info d-none d-sm-block bg-image"
-                                data-background="{% static 'images/about/about-ex-bg.png' %}">
-                                <h2><span class="count">25</span>+</h2>
-                                <span class="year">Years Experience</span>
-                            </div>
-                            <div class="stroke-text d-none d-sm-block">
-                                <h2>since 1980</h2>
-                            </div>
+                            <img src="{% static 'images/about/greenbuilding.jpg' %}" alt="image">
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="about-two__right-item">
                             <div class="section-header mb-4">
-                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> ABOUT US</h5>
-                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">We Are Here to
-                                    Increase Your modern life With planting</h2>
-                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">Tree planting is
-                                    the act of planting young trees, shrubs, or other woody plants into the ground to
-                                    establish new forests
-                                    or enhance existing ones. It is a crucial component of environmental conservation
-                                    and reforestation efforts aimed at
-                                    combating deforestation, mitigating climate change, improving biodiversity.</p>
+                                {% comment %} <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> ABOUT US</h5> {% endcomment %}
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Our Products and Services
+                                </h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">
+                                </p>
                             </div>
-                            <h3 class="pb-30 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">Here are some
+                            {% comment %} <h3 class="pb-30 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">Here are some
                                 key aspects of
-                                tree planting</h3>
+                                tree planting</h3> {% endcomment %}
                             <div class="d-flex align-items-center justify-content-between flex-wrap mb-10">
                                 <ul class="wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">
                                     <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Reforestation
+                                        Fibre Cables
                                     </li>
+                                    <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Durable, high-quality fibre cables for telecommunication companies.</p>
+                                    <br>
                                     <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Soil Conservation
+                                        Triple Play 3-in-1 LED Lights
                                     </li>
+                                    <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Energy-saving LED lights offer street lighting, EV charging, and advertising capabilities. Available in street light and in-house versions, they save up to 30% in power consumption.</p>
+                                    <br>
                                 </ul>
                                 <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
                                     <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Climate Change Mitigation
+                                        Installation Services
                                     </li>
-                                    <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Biodiversity Conservation
-                                    </li>
-                                </ul>
-                                <ul class="wow fadeInDown" data-wow-duration="1.6s" data-wow-delay=".6s">
-                                    <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Air Quality Improvement
-                                    </li>
-                                    <li class="mb-30"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Economic Benefits
-                                    </li>
+                                    <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Comprehensive installation services for all products, including EV charging systems.</p>
+                                    <br>
                                 </ul>
                             </div>
-                            <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">It's important to
-                                note
-                                that tree planting should be carried out thoughtfully, considering
-                                factors such as the
-                                suitability of tree species to the local ecosystem</p>
                             <div class="about_info d-flex align-items-center pt-65 wow fadeInUp"
                                 data-wow-duration="1.9s" data-wow-delay=".9s">
-                                <a href="about.html" class="btn-one"><span>More About us</span> <i
+                                <a href="{% url 'about' %}" class="btn-one"><span>More About us</span> <i
                                         class="fa-solid fa-angles-right"></i></a>
                                 <span class="bor-left d-none d-sm-block mx-4"></span>
                                 <div class="info d-flex flex-wrap align-items-center">
                                     <i class="fa-solid fa-phone-volume ring-animation"></i>
                                     <div class="about_info_con">
                                         <span class="d-block text-capitalize">call any time</span>
-                                        <a href="tel:+912659302003">+91 2659 302 003</a>
+                                        <a href="tel:+254712345678">+254 712 345 678</a>
                                     </div>
                                 </div>
                             </div>
@@ -181,774 +155,170 @@
         </section>
         <!-- About area end here -->
 
-        <!-- Work area start here -->
-        <section class="work pt-130 pb-130 bg-image" data-background="{% static 'images/bg/banner1.jpg' %}">
+        <!-- Contact form area start here -->
+        <section class="contact pt-130 pb-130">
             <div class="container">
-                <div class="pb-65 bor-bottom mb-65">
-                    <div class="row g-5 align-items-center">
-                        <div class="col-lg-6">
-                            <div class="section-header m-0">
-                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> HOW WE WORK</h5>
-                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">We work together
-                                    for bettering tomorrow</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">we are an organization
-                                engaged in "Tree Planting" activities, therefore you can "Donate
-                                Trees. We also join in
-                                "Community Forestry | Reforestation" to keep the earth together so that it remains
-                                sustainable.</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="row g-4">
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.2s"
-                        data-wow-delay=".2s">
-                        <div class="work__item">
-                            <div class="work__item-icon">
-                                <img src="{% static 'images/icon/work1.svg' %}" alt="icon">
-                                <span>01</span>
-                            </div>
-                            <h3><a href="service-single.html">Community Forestry</a></h3>
-                            <p>We maintain a busy network of forestry and social development staff along with local
-                                facilitators in the areas we work.</p>
-                            <a class="work__item-arrow" href="service-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                            <div class="work__item-leaf">
-                                <img src="{% static 'images/shape/work-leaf.png' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.4s"
-                        data-wow-delay=".4s">
-                        <div class="work__item">
-                            <div class="work__item-icon">
-                                <img src="{% static 'images/icon/work2.svg' %}" alt="icon">
-                                <span>02</span>
-                            </div>
-                            <h3><a href="service-single.html">Individuals</a></h3>
-                            <p>We maintain a busy network of forestry and social development staff along with local
-                                facilitators in the areas we work.</p>
-                            <a class="work__item-arrow" href="service-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                            <div class="work__item-leaf">
-                                <img src="{% static 'images/shape/work-leaf.png' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.6s"
-                        data-wow-delay=".6s">
-                        <div class="work__item">
-                            <div class="work__item-icon">
-                                <img src="{% static 'images/icon/work3.svg' %}" alt="icon">
-                                <span>03</span>
-                            </div>
-                            <h3><a href="service-single.html">Companies</a></h3>
-                            <p>We maintain a busy network of forestry and social development staff along with local
-                                facilitators in the areas we work.</p>
-                            <a class="work__item-arrow" href="service-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                            <div class="work__item-leaf">
-                                <img src="{% static 'images/shape/work-leaf.png' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.8s"
-                        data-wow-delay=".8s">
-                        <div class="work__item">
-                            <div class="work__item-icon">
-                                <img src="{% static 'images/icon/work4.svg' %}" alt="icon">
-                                <span>04</span>
-                            </div>
-                            <h3><a href="service-single.html">Education</a></h3>
-                            <p>We maintain a busy network of forestry and social development staff along with local
-                                facilitators in the areas we work.</p>
-                            <a class="work__item-arrow" href="service-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                            <div class="work__item-leaf">
-                                <img src="{% static 'images/shape/work-leaf.png' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Work area end here -->
-
-        <!-- Achievement area start here -->
-        <div class="achievement-two mt-130">
-            <div class="container">
-                <div class="achievement p-5" data-background="{% static 'images/bg/achievement2.jpg' %}">
-                    <div class="row g-4 align-items-center justify-content-between">
-                        <div class="col-lg-5 achievement__bor-right wow fadeInUp" data-wow-duration="1.2s"
-                            data-wow-delay=".2s">
-                            <div class="achievement__item">
-                                <h2 class="text-white pt-3 pb-3">Our trees
-                                    have been monitored</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 achievement__bor-right wow fadeInUp" data-wow-duration="1.4s"
-                            data-wow-delay=".4s">
-                            <div class="achievement__item text-center">
-                                <img src="{% static 'images/icon/achieve1.png' %}" alt="icon">
-                                <h5>Trees planted</h5>
-                                <span class="count">6,472,068</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 achievement__bor-right wow fadeInUp" data-wow-duration="1.6s"
-                            data-wow-delay=".6s">
-                            <div class="achievement__item text-center">
-                                <img src="{% static 'images/icon/achieve2.png' %}" alt="icon">
-                                <h5>Families helped</h5>
-                                <span class="count">38,768</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                            <div class="achievement__item text-center">
-                                <img src="{% static 'images/icon/achieve3.png' %}" alt="icon">
-                                <h5>CO2 captured (tonne)</h5>
-                                <span class="count">1,193,210</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Achievement area end here -->
-
-        <!-- Service area start here -->
-        <section class="service service-two pt-130 pb-130">
-            <div class="service-two__shape-left wow slideInLeft d-none d-xl-block" data-wow-duration="1.4s"
-                data-wow-delay="1.4s">
-                <img src="{% static 'images/shape/service-left.png' %}" alt="shape">
-            </div>
-            <div class="service-two__shape-right wow slideInRight d-none d-xl-block" data-wow-duration="1s"
-                data-wow-delay="1s">
-                <img src="{% static 'images/shape/service-right.png' %}" alt="shape">
-            </div>
-            <div class="container">
-                <div class="section-header text-center">
-                    <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                            src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR SERVICE</h5>
-                    <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Preserving The Earth For
-                        Future <br>
-                        Generations</h2>
-                </div>
-                <div class="row g-4">
-                    <div class="col-xl-6">
-                        <div class="service-two__item">
-                            <a href="service-single.html" class="changeImage2 wow fadeInUp pt-0 clicked"
-                                data-wow-duration="1.2s" data-wow-delay=".2s" data-image="{% static 'images/service/01.jpg' %}">
-                                Carbon Offsetting
-                                <i class="fa-sharp fa-regular fa-arrow-right-long"></i>
-                            </a>
-                            <a href="service-single.html" class="changeImage2 wow fadeInUp" data-wow-duration="1.3s"
-                                data-wow-delay=".3s" data-image="{% static 'images/service/02.jpg' %}">
-                                E-Waste Recycling
-                                <i class="fa-sharp fa-regular fa-arrow-right-long"></i>
-                            </a>
-                            <a href="service-single.html" class="changeImage2 wow fadeInUp" data-wow-duration="1.4s"
-                                data-wow-delay=".4s" data-image="{% static 'images/service/03.jpg' %}">
-                                Awareness Creation
-                                <i class="fa-sharp fa-regular fa-arrow-right-long"></i>
-                            </a>
-                            <a href="service-single.html" class="changeImage2 wow fadeInUp" data-wow-duration="1.5s"
-                                data-wow-delay=".5s" data-image="{% static 'images/service/04.jpg' %}">
-                                Cleaning Environment
-                                <i class="fa-sharp fa-regular fa-arrow-right-long"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".4s">
-                        <div class="image">
-                            <img id="myImage2" src="{% static 'images/service/01.jpg' %}" alt="image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Service area end here -->
-
-        <!-- Donation area start here -->
-        <section class="donation donation-two pt-130 pb-130" data-background="{% static 'images/bg/donation.jpg' %}">
-            <div class="donation-two__shape sway_Y__animation">
-                <img src="{% static 'images/shape/donation-shape.png' %}" alt="shape">
-            </div>
-            <div class="container">
-                <div class="donation__wrp">
-                    <div class="donation__head-wrp mb-65">
-                        <div class="section-header m-0">
-                            <h5 class="text-white wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                    src="{% static 'images/icon/leaf-light.svg' %}" alt="image"> OPEN
-                                DONATION
-                            </h5>
-                            <h2 class="text-white wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                                Fundraising Causes Need <br>
-                                for future</h2>
-                        </div>
-                        <div class="arry-btn mt-5 mt-lg-0">
-                            <button class="arry-prev donation__arry-prev wow fadeInUp" data-wow-duration="1.6s"
-                                data-wow-delay=".6s"><i class="fa-light fa-chevron-left"></i></button>
-                            <button class="ms-3 active arry-next donation__arry-next wow fadeInUp"
-                                data-wow-duration="1.8s" data-wow-delay=".8s"><i
-                                    class="fa-light fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="swiper donation__slider">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="donation__item">
-                                    <div class="image mb-30">
-                                        <img src="{% static 'images/donation/01.jpg' %}" alt="image">
-                                    </div>
-                                    <div class="donation__item-progress-wrp">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6>Goal $3000</h6>
-                                            <h6>Raised $2000</h6>
-                                        </div>
-                                        <div class="donation__item-progress-bar"></div>
-                                    </div>
-                                    <h3><a href="donation-single.html">The Mary Donate For Youth Health & plants</a>
-                                    </h3>
-                                    <a class="donation__item-arrow" href="donation-single.html"><i
-                                            class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="donation__item">
-                                    <div class="image mb-30">
-                                        <img src="{% static 'images/donation/02.jpg' %}" alt="image">
-                                    </div>
-                                    <div class="donation__item-progress-wrp">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6>Goal $3000</h6>
-                                            <h6>Raised $2000</h6>
-                                        </div>
-                                        <div class="donation__item-progress-bar"></div>
-                                    </div>
-                                    <h3><a href="donation-single.html">Need Help Donate For Pet <br> Doctor & nurse</a>
-                                    </h3>
-                                    <a class="donation__item-arrow" href="donation-single.html"><i
-                                            class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="donation__item">
-                                    <div class="image mb-30">
-                                        <img src="{% static 'images/donation/03.jpg' %}" alt="image">
-                                    </div>
-                                    <div class="donation__item-progress-wrp">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6>Goal $3000</h6>
-                                            <h6>Raised $2000</h6>
-                                        </div>
-                                        <div class="donation__item-progress-bar"></div>
-                                    </div>
-                                    <h3><a href="donation-single.html">The Mary Donate For Youth Health & plants</a>
-                                    </h3>
-                                    <a class="donation__item-arrow" href="donation-single.html"><i
-                                            class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Donation area end here -->
-
-        <!-- Involved area start here -->
-        <section class="involve-two pt-130 pb-130">
-            <div class="involve-two__shape d-none d-md-block animation__rotate">
-                <img src="{% static 'images/shape/involve-shape.png' %}" alt="shape">
-            </div>
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-xl-6">
-                        <div class="involve-two__image">
-                            <img src="{% static 'images/involve/involve1.png' %}" alt="image">
-                            <div class="image-sm">
-                                <img src="{% static 'images/involve/involve-sm.jpg' %}" alt="image">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="about-two__right-item">
-                            <div class="section-header mb-4">
-                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> protecting nature</h5>
-                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Protecting Nature
-                                    By Proper Waste Management!g</h2>
-                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">Quis ipsum
-                                    suspendisse ultrices gravida. Risus commodo viverra. Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. It's important to
-                                    note that tree planting should be
-                                    carried out.</p>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-5 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                                    <div class="d-flex align-items-center">
-                                        <img src="{% static 'images/about/about-info1.png' %}" alt="image">
-                                        <h4 class="ml-20">Recycle Plastic</h4>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                                    <div class="d-flex align-items-center">
-                                        <img src="{% static 'images/about/about-info2.png' %}" alt="image">
-                                        <h4 class="ml-20">Wastage Management</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="wow mt-4 fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">
-                                <li class="mb-20"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                    Elit ullamcorper dignissim cras tincidunt lobortis feugiat vibe
+                    <div class="col-lg-6">
+                        <div class="content bg-image">
+                            <h2>Have a question for us? <br>
+                                Let's talk.</h2>
+                            
+                            <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
+                            <ul>
+                                <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17"
+                                        target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City
+                                        </a>
                                 </li>
-                                <li class="mb-20"><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                    Praesent id ligula et nibh bibendum hendrerit vel et mi.
+                                <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678
+                                        </a>
                                 </li>
-                                <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                    Etiam auctor lacus quis justo porttitor lacinia.
-                                </li>
+                                <li><a href="mailto:company.info@mail.com"><i
+                                        class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
                             </ul>
-                            <div class="about_info d-flex align-items-center pt-60 wow fadeInUp"
-                                data-wow-duration="1.9s" data-wow-delay=".9s">
-                                <a href="about.html" class="btn-one"><span>Join With Us</span> <i
-                                        class="fa-solid fa-angles-right"></i></a>
-                                <span class="bor-left d-none d-sm-block mx-4"></span>
-                                <div class="info d-flex flex-wrap align-items-center">
-                                    <i class="fa-solid fa-phone-volume ring-animation"></i>
-                                    <div class="about_info_con">
-                                        <span class="d-block text-capitalize">call any time</span>
-                                        <a href="tel:+912659302003">+91 2659 302 003</a>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-area">
+                            <form method="post" action="{% url 'index' %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="mt-40">Submit Now <i class="fa-solid fa-arrow-right-long"></i></button>
+                            </form>
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li class="{{ message.tags }}">{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Involved area end here -->
-
-        <!-- Team area start here -->
-        <section class="team team-two pt-130 pb-130 sub-bg">
-            <div class="team-two__shape sway__animation d-none d-lg-block">
-                <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1s"
-                    src="{% static 'images/shape/team2.png' %}" alt="shape">
-            </div>
-            <div class="container">
-                <div class="section-header text-center">
-                    <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                            src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR TEAM MEMBERS</h5>
-                    <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">foresty awesome team</h2>
-                </div>
-                <div class="row g-4">
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                        <div class="team__item team-two__item">
-                            <div class="team__item-image">
-                                <img src="{% static 'images/team/01.png' %}" alt="image">
-                                <div class="team__item-image-icon social-icon">
-                                    <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <h3><a href="team-single.html">Dana A. Hutchison</a></h3>
-                            <span>Founder</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                        <div class="team__item team-two__item">
-                            <div class="team__item-image">
-                                <img src="{% static 'images/team/02.png' %}" alt="image">
-                                <div class="team__item-image-icon social-icon">
-                                    <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <h3><a href="team-single.html">Bonnie J. Britt</a></h3>
-                            <span>Forest Officer</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">
-                        <div class="team__item team-two__item">
-                            <div class="team__item-image">
-                                <img src="{% static 'images/team/03.png' %}" alt="image">
-                                <div class="team__item-image-icon social-icon">
-                                    <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <h3><a href="team-single.html">Francis A. Cote</a></h3>
-                            <span>Garden Maker</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                        <div class="team__item team-two__item">
-                            <div class="team__item-image">
-                                <img src="{% static 'images/team/04.png' %}" alt="image">
-                                <div class="team__item-image-icon social-icon">
-                                    <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <h3><a href="#0">Mario L. Lawhorn</a></h3>
-                            <span>Co - Founder</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Team area end here -->
-
-        <!-- Testimonial area start here -->
-        <section class="testimonial-two pt-130">
-            <div class="container">
-                <div class="testimonial-two__wrp bor">
-                    <div class="testimonial__head-wrp bor-bottom pb-65 pt-65 pl-65 pr-65">
-                        <div class="section-header m-0">
-                            <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                    src="{% static 'images/icon/leaf.svg' %}" alt="image"> our client’s feedback
-                            </h5>
-                            <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">foresty loves people
-                            </h2>
-                        </div>
-                        <div class="dot-wrp wow fadeInUp mt-5 mt-sm-0" data-wow-duration="1.6s" data-wow-delay=".6s">
-                            <div class="dot testimonial-two__dot"></div>
-                        </div>
-                    </div>
-                    <div class="pt-45 pb-45 pr-55">
-                        <div class="row g-4 align-items-center justify-content-between">
-                            <div class="col-lg-7">
-                                <div class="swiper testimonial-two__slider">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="testimonial-two__item pl-65">
-                                                <div class="testi-header mb-50">
-                                                    <div class="testi-content">
-                                                        <h3>Kenneth S. Fisher</h3>
-                                                        <span>marketing manager</span>
-                                                    </div>
-                                                    <i class="fa-solid fa-quote-right"></i>
-                                                </div>
-                                                <p>posuere luctus orci. Donec vitae mattis quam, vitae tempor arcu.
-                                                    Aenean non odio
-                                                    porttitor, convallis erat sit amet,
-                                                    facilisis velit. Nulla ornare convallis malesuada. Phasellus</p>
-                                                <div class="star mt-50">
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial-two__item pl-65">
-                                                <div class="testi-header mb-50">
-                                                    <div class="testi-content">
-                                                        <h3>Francis A. Cote</h3>
-                                                        <span>Garden Maker</span>
-                                                    </div>
-                                                    <i class="fa-solid fa-quote-right"></i>
-                                                </div>
-                                                <p>posuere luctus orci. Donec vitae mattis quam, vitae tempor arcu.
-                                                    Aenean non odio
-                                                    porttitor, convallis erat sit amet,
-                                                    facilisis velit. Nulla ornare convallis malesuada. Phasellus</p>
-                                                <div class="star mt-50">
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial-two__item pl-65">
-                                                <div class="testi-header mb-50">
-                                                    <div class="testi-content">
-                                                        <h3>Mario L. Lawhorn</h3>
-                                                        <span>marketing manager</span>
-                                                    </div>
-                                                    <i class="fa-solid fa-quote-right"></i>
-                                                </div>
-                                                <p>posuere luctus orci. Donec vitae mattis quam, vitae tempor arcu.
-                                                    Aenean non odio
-                                                    porttitor, convallis erat sit amet,
-                                                    facilisis velit. Nulla ornare convallis malesuada. Phasellus</p>
-                                                <div class="star mt-50">
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="testimonial-two__image">
-                                    <div class="swiper testimonial-two__slider">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <img src="{% static 'images/testimonial/testimonial1.jpg' %}" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="{% static 'images/testimonial/testimonial2.jpg' %}" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="{% static 'images/testimonial/testimonial3.jpg' %}" alt="image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Testimonial area end here -->
+        <!-- Contact form area end here -->
 
         <!-- Blog area start here -->
-        <section class="blog-two pt-130">
-            <div class="blog-two__shape sway__animation">
-                <img src="{% static 'images/shape/blog.png' %}" alt="shape">
-            </div>
+        <section class="blog-two blog-three pt-130 pb-130">
             <div class="container">
                 <div class="blog__head-wrp mb-65">
-                    <div class="section-header m-0">
+                    <div class="section-header m-">
                         <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
                                 src="{% static 'images/icon/leaf.svg' %}" alt="image"> LATEST NEWS</h5>
-                        <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Let’s checkout our all
+                        <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Checkout all our
                             <br>
                             latest news
                         </h2>
                     </div>
-                    <a href="blog-2.html" class="btn-one mt-4 mt-md-0 wow fadeInUp" data-wow-duration="1.6s"
+                    <a href="blog-3.html" class="btn-one mt-4 mt-md- wow fadeInUp" data-wow-duration="1.6s"
                         data-wow-delay=".6s"><span>view all news</span> <i class="fa-solid fa-angles-right"></i></a>
                 </div>
-            </div>
-            <div class="swiper blog-two__slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="donation__item blog-two__item bor">
-                            <div class="blog-two__image mb-85">
+                <div class="row g-4">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.2s"
+                        data-wow-delay=".2s">
+                        <div class="donation__item blog-two__item blog-three__item bor">
+                            <div class="blog-two__image blog-three__image">
                                 <div class="image">
-                                    <img src="{% static 'images/blog/blog1.jpg' %}" alt="image">
+                                    <img src="{% static 'images/blog/blog-three-image1.jpg" alt="image">
                                     <div class="blog-two__info">
                                         <h4>15 <br> JUNE</h4>
                                         <span>2023</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3><a href="blog-single.html">Make A Statement Support Of The Eco green</a></h3>
-                            <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
+                            <div class="blog-three__content">
+                                <h3><a href="blog-single.html">Make A Statement Support Of The Eco green</a></h3>
+                                <a class="blog-two__item-arrow" href="blog-single.html"><i
+                                        class="fa-solid fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="donation__item blog-two__item bor">
-                            <div class="blog-two__image mb-85">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.4s"
+                        data-wow-delay=".4s">
+                        <div class="donation__item blog-two__item blog-three__item bor">
+                            <div class="blog-two__image blog-three__image">
                                 <div class="image">
-                                    <img src="{% static 'images/blog/blog2.jpg' %}" alt="image">
+                                    <img src="{% static 'images/blog/blog-three-image2.jpg" alt="image">
                                     <div class="blog-two__info">
                                         <h4>15 <br> JUNE</h4>
                                         <span>2023</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3><a href="blog-single.html">Going green and reducing your carbon footprint are import</a>
-                            </h3>
-                            <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
+                            <div class="blog-three__content">
+                                <h3><a href="blog-single.html">Going green and reducing your carbon footprint are
+                                        import</a></h3>
+                                <a class="blog-two__item-arrow" href="blog-single.html"><i
+                                        class="fa-solid fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="donation__item blog-two__item bor">
-                            <div class="blog-two__image mb-85">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.6s"
+                        data-wow-delay=".6s">
+                        <div class="donation__item blog-two__item blog-three__item bor">
+                            <div class="blog-two__image blog-three__image">
                                 <div class="image">
-                                    <img src="{% static 'images/blog/blog3.jpg' %}" alt="image">
+                                    <img src="{% static 'images/blog/blog-three-image3.jpg" alt="image">
                                     <div class="blog-two__info">
                                         <h4>15 <br> JUNE</h4>
                                         <span>2023</span>
                                     </div>
                                 </div>
                             </div>
-                            <h3><a href="blog-single.html">ddition to energy consumption and transportation, you can</a>
-                            </h3>
-                            <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="donation__item blog-two__item bor">
-                            <div class="blog-two__image mb-85">
-                                <div class="image">
-                                    <img src="{% static 'images/blog/blog4.jpg' %}" alt="image">
-                                    <div class="blog-two__info">
-                                        <h4>15 <br> JUNE</h4>
-                                        <span>2023</span>
-                                    </div>
-                                </div>
+                            <div class="blog-three__content">
+                                <h3><a href="blog-single.html">Ddition to energy consumption and transportation, you
+                                        can</a></h3>
+                                <a class="blog-two__item-arrow" href="blog-single.html"><i
+                                        class="fa-solid fa-arrow-right"></i></a>
                             </div>
-                            <h3><a href="blog-single.html">carbon footprint is about making conscious choices that</a>
-                            </h3>
-                            <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="donation__item blog-two__item bor">
-                            <div class="blog-two__image mb-85">
-                                <div class="image">
-                                    <img src="{% static 'images/blog/blog5.jpg' %}" alt="image">
-                                    <div class="blog-two__info">
-                                        <h4>15 <br> JUNE</h4>
-                                        <span>2023</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3><a href="blog-single.html">The Mary Donate For Youth Health & plants</a></h3>
-                            <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                    class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Blog area end here -->
-    </main>
 
-    <!-- Footer area start here -->
-    <footer class="footer footer-two pt-130 bg-image" data-background="{% static 'images/bg/footer-two-bg.jpg' %}">
-        <div class="container">
-            <div class="footer-two__wrp secondary-bg">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                        <div class="footer__item px-4 pt-40 pb-40 footer-two__item primary-bg">
-                            <a href="index.html" class="logo mb-30">
-                                <img src="{% static 'images/logo/logo-light.svg' %}" alt="logo">
-                            </a>
-                            <p class="mb-20 pb-20 bor-bottom">Tree planting is the act of planting young trees,
-                                shrubs,
-                                or
-                                other woody plants into the
-                                ground to establish new</p>
-                            <div class="social-icon">
-                                <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                            </div>
-
+        <!-- Our info area start here -->
+        <div class="our-info" data-background="{% static 'images/bg/aerial-city.jpg' %}">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                        <a href="{% url 'index' %}" class="our-info__logo mb-4 mb-lg-">
+                            <img src="{% static 'images/logo/logo-light.svg' %}" alt="logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-5 wow fadeInDown" data-wow-duration="1.6s" data-wow-delay=".6s">
+                        <div class="our-info__input">
+                            <input type="text" placeholder="Your email Address">
+                            <i class="fa-regular fa-envelope our-info__input-envelope"></i>
+                            <i class="fa-solid fa-paper-plane our-info__input-plane"></i>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".6s">
-                        <div class="footer__item footer-two__item pt-60 pb-40">
-                            <div class="footer__item-title">
-                                <h4>Quick Link</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
-                            </div>
-                            <ul>
-                                <li class="pb-1"><a href="service-single.html"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i>
-                                        Water Conservation
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="service-single.html"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i>
-                                        Eco System
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="service-single.html"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i>
-                                        Plastic Recycleing
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="service-single.html"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i>
-                                        Urban planning
-                                    </a>
-                                </li>
-                                <li><a href="service-single.html"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> Save Green
-                                        House
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".4s">
-                        <div class="footer__item footer-two__item pt-60 pb-40">
-                            <div class="footer__item-title">
-                                <h4>Get in touch!</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
-                            </div>
-                            <ul>
-                                <li class="pb-3"><a href="#0"><i
-                                            class="fa-solid fa-location-dot pe-1 primary-color"></i>
-                                        901 N Pitt Str., Suite 170 <br>
-                                        Alexandria, USA
-                                    </a>
-                                </li>
-                                <li class="pb-3"><a href="tel:+4065550120"><i
-                                            class="fa-solid fa-phone-volume pe-1 primary-color"></i>
-                                        (406) 555-0120
-                                    </a></li>
-                                <li><a href="#0"><i class="fa-solid fa-envelope pe-1 primary-color"></i>
-                                        info@extrem.com</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                        <div class="footer__item footer-two__item pt-60 pb-40 pe-4">
-                            <div class="footer__item-title">
-                                <h4>Subscribe Newsletter</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
-                            </div>
-                            <p class="text-white">Subscribe to our newsletter for discounts and suffer in some form
-                            </p>
-                            <div class="input-area mt-30">
-                                <input type="text" placeholder="Your Email">
-                                <button>
-                                    <i class="fa-sharp fa-solid fa-paper-plane"></i>
-                                </button>
-                            </div>
+                    <div class="col-lg-4">
+                        <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-">
+                            <a class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s" href="#"><i
+                                    class="fa-brands fa-facebook-f"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".3s" href="#"><i
+                                    class="fa-brands fa-twitter"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s" href="#"><i
+                                    class="fa-brands fa-linkedin-in"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s" href="#"><i
+                                    class="fa-brands fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer__copyright footer-two__copyright">
-            <p>&copy; Copyright 2023 <a href="#0">foresty</a> All Rights Reserved</p>
-        </div>
-    </footer>
-    <!-- Footer area end here -->
+        <!-- Our info area end here -->
 
+    </main>
+
+    
     <!-- Back to top area start here -->
     <div class="scroll-up">
         <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            <path d="M50,1 a49,49  ,1 ,98 a49,49  ,1 ,-98" />
         </svg>
     </div>
     <!-- Back to top area end here -->
@@ -974,7 +344,5 @@
     <script src="{% static 'js/jquery.waypoints.js' %}"></script>
     <!-- Script Js -->
     <script src="{% static 'js/script.js' %}"></script>
-</body>
 
-</html>
 {% endblock %}

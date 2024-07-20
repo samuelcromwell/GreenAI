@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------
 
-Template Name:  Foresty - Ecology and Environment Template
+Template Name:  Green AI - Revolutionising Smart City Infrastructure
 Author:  Gramentheme
 Author URI: https://themeforest.net/user/gramentheme/portfolio
 Developer: Kawser Ahmed Roni
 Version: 1.0.0
-Description: Foresty - Ecology and Environment Template
+Description: Green AI - Revolutionising Smart City Infrastructure
 
 -------------------------------------------------------------------
 CSS TABLE OF CONTENTS

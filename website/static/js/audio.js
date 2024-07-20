@@ -1,6 +1,6 @@
 // Audio area start here ***
 const audioPlayer = document.querySelector(".audio-player");
-const audio = new Audio("assets/images/music/1.mp3");
+const audio = new Audio("static/images/music/1.mp3");
 
 console.dir(audio);
 

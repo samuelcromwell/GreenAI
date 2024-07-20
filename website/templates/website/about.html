@@ -1,0 +1,231 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+        .page-banner.bg-image {
+            background-image: url('/static/images/about/aboutus2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .pt-130 {
+            padding-top: 130px;
+        }
+        .pb-130 {
+            padding-bottom: 130px;
+        }
+</style>
+<main>
+        <!-- Page banner area start here -->
+        <section class="page-banner bg-image pt-130 pb-130">
+            <div class="container">
+                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">About Us</h2>
+                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <a href="{% url 'index' %}">Home :</a>
+                    <span class="primary-color">About Us</span>
+                </div>
+            </div>
+        </section>
+        <!-- Page banner area end here -->
+
+
+        <!-- History area start here -->
+        <section class="about-two history-area pt-130 pb-130">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-xl-6">
+                        <div class="about-two__right-item">
+                            <div class="section-header mb-4">
+                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                                <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR History</h5>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                                    History of Our
+                                    Organization</h2>
+                            </div>
+                            <h5 class="pb-30 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                                Elit
+                                ullamcorper dignissim cras tincidunt lobortis feugiat vibe</h5>
+                            <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">ipsum dolor
+                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                labore et
+                                dolore magna
+                                aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
+                                maecenas accumsan</p>
+                            <div class="d-flex align-items-center gap-5 flex-wrap mt-45 mb-30">
+                                <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
+                                    <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
+                                        Lorem
+                                    </li>
+                                </ul>
+                                <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
+                                    <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
+                                        Dolor
+                                    </li>
+                                </ul>
+                                <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
+                                    <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
+                                        Ipsum
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Yiuym
+                                ipsum dolor
+                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                labore et
+                                dolore magna
+                                aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
+                                maecenas accumsan
+                                lacus vel facilisis.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="image">
+                            <img src="{% static 'images/history/history.jpg' %}" alt="image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- History area end here -->
+
+        <!-- Team area start here -->
+        <section class="team team-two pt-130 pb-130 bg-image" data-background="{% static 'images/bg/banner1.jpg' %}">
+            <div class="team-two__shape sway__animation d-none d-lg-block">
+                <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1s" src="{% static 'images/shape/team2.png' %}" alt="shape">
+            </div>
+            <div class="container">
+                <div class="section-header text-center">
+                    <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR TEAM MEMBERS
+                    </h5>
+                    <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Green AI Leadership Team</h2>
+                </div>
+                <div class="row g-4">
+                    {% for member in team_members %}
+                        <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                            <div class="team__item team-two__item">
+                                <div class="team__item-image">
+                                    <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                                    <div class="team__item-image-icon social-icon">
+                                        <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="#0"><i class="fa-brands fa-twitter"></i></a>
+                                        <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="#0"><i class="fa-brands fa-youtube"></i></a>
+                                    </div>
+                                </div>
+                                <h3><a href="team-single.html">{{ member.name }}</a></h3>
+                                <span>{{ member.role }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- Team area end here -->
+
+
+        <!-- Involved area start here -->
+        <section class="involve-two help-area mt-130 mb-130">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="image pe-lg-5 pe-0">
+                            <img src="{% static 'images/involve/vision_mission.jpg' %}" alt="image">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="involve-two__item help-area__item">
+                            <div class="section-header mb-4">
+                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                                        src="{% static 'images/icon/leaf.svg' %}" alt="image">Vision & Mission</h5>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Our Vision
+                                </h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">To lead in providing sustainable
+                                    technology solutions that drive
+                                    environmental conservation, reduce
+                                    energy costs, and empower communities
+                                    through digital connectivity and smart
+                                    infrastructure.
+                                </p>
+                                <br>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Our Mission
+                                </h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">To innovate and deliver eco-friendly
+                                    technology solutions that reduce carbon
+                                    footprints, promote sustainability, and
+                                    support the digital transformation of
+                                    communities in Kenya and beyond.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Involved area end here -->
+
+        <!-- Our info area start here -->
+        <div class="our-info" data-background="{% static 'images/bg/aerial-city.jpg' %}">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                        <a href="{% url 'index' %}" class="our-info__logo mb-4 mb-lg-">
+                            <img src="{% static 'images/logo/logo-light.svg' %}" alt="logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-5 wow fadeInDown" data-wow-duration="1.6s" data-wow-delay=".6s">
+                        <div class="our-info__input">
+                            <input type="text" placeholder="Your email Address">
+                            <i class="fa-regular fa-envelope our-info__input-envelope"></i>
+                            <i class="fa-solid fa-paper-plane our-info__input-plane"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-">
+                            <a class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s" href="#"><i
+                                    class="fa-brands fa-facebook-f"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".3s" href="#"><i
+                                    class="fa-brands fa-twitter"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s" href="#"><i
+                                    class="fa-brands fa-linkedin-in"></i></a>
+                            <a class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s" href="#"><i
+                                    class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Our info area end here -->
+    </main>
+
+    <!-- Back to top area start here -->
+    <div class="scroll-up">
+        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Back to top area end here -->
+
+    <!-- Jquery 3. 7. 1 Min Js -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap min Js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Swiper bundle min Js -->
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <!-- Counterup min Js -->
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <!-- Wow min Js -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <!-- Magnific popup min Js -->
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <!-- Nice select min Js -->
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <!-- Isotope pkgd min Js -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <!-- Waypoints Js -->
+    <script src="{% static 'js/jquery.waypoints.js' %}"></script>
+    <!-- Script Js -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}

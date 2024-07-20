@@ -1511,7 +1511,7 @@
 		}
 		&::after {
 			position: absolute;
-			content: url(../../assets/images/testimonial/testimonial-line.png);
+			content: url(../../static/images/testimonial/testimonial-line.png);
 			left: -80px;
 			top: 5px;
 		}
@@ -1551,7 +1551,7 @@
 		overflow: hidden;
 		&::after {
 			content: "";
-			background-image: url("../../assets/images/team/bg.jpg");
+			background-image: url("../../static/images/team/bg.jpg");
 			@include bg-image;
 			position: absolute;
 			top: 0;
@@ -2734,7 +2734,7 @@
 	.content {
 		color: var(--white);
 		background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-			url(../../assets/images/contact/01.jpg);
+			url(../../static/images/contact/01.jpg);
 		padding: 40px 30px;
 		h2 {
 			color: var(--white);
