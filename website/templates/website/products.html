@@ -1,0 +1,461 @@
+{% extends 'website/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+        .page-banner.bg-image {
+            background-image: url('/static/images/product/product1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .pt-130 {
+            padding-top: 130px;
+        }
+        .pb-130 {
+            padding-bottom: 130px;
+        }
+        .project__image {
+            width: 100%;
+            height: 100%; /* Set height to ensure the image container has a fixed height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .project__image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures the entire image is visible */
+            object-position: center; /* Centers the image */
+        }
+
+</style>
+<main>
+        <!-- Page banner area start here -->
+        <section class="page-banner bg-image pt-130 pb-130">
+            <div class="container">
+                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Products</h2>
+                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <a href="{% url 'index' %}">Home :</a>
+                    <span class="primary-color">Products</span>
+                </div>
+            </div>
+        </section>
+        <!-- Page banner area end here -->
+
+        <!-- Project area start here -->
+        <section class="project project-right sub-bg pt-130 pb-130">
+            <div class="project__wrp">
+                <div class="swiper have-bg project-slider d-none d-lg-block">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="project__image project-right__image">
+                                <img src="{% static 'images/product/fibrecables.jpg' %}" alt="Fibre Cables">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="project__image project-right__image">
+                                <img src="{% static 'images/product/ledlights.jpg' %}" alt="Project Image 02">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="project__image project-right__image">
+                                <img src="{% static 'images/product/installation.jpg' %}" alt="Project Image 03">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-lg-6 ps-4 bor-right py-lg-5">
+                            <div class="section-header pr-20">
+                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR products</h5>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Some
+                                    of the products we offer</h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">we are an
+                                    organization engaged in pioneering the future of smart city infrastructure with innovative
+                                    solutions that combine 5G connectivity, WiFi access, LED lighting, and
+                                    environmental monitoring. 
+                            </div>
+                            <div class="arry-btn mb-4 d-block d-lg-none">
+                                <button class="arry-prev project-arry-prev"><i
+                                        class="fa-light fa-chevron-left"></i></button>
+                                <button class="ms-3 active arry-next project-arry-next"><i
+                                        class="fa-light fa-chevron-right"></i></button>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-sm-4">
+                                    <div class="wrp">
+                                        <div class="pegi-number pt-4">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="swiper project-slider2">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <div class="project__item">
+                                                    <h3>Fibre Cables</h3>
+                                                    <p>Durable, high-quality fibre cables for telecommunication companies.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="project__item">
+                                                    <h3>Triple Play 3-in-1 LED Lights</h3>
+                                                    <p>Energy-saving LED lights offer street
+                                                        lighting, EV charging, and advertising
+                                                        capabilities. Available in street light
+                                                        and in-house versions, they save up
+                                                        to 30% in power consumption
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="project__item">
+                                                    <h3>Installation Services</h3>
+                                                    <p>Comprehensive installation services for all products, including EV charging systems                      development
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arry-btn mt-65 d-none d-lg-block">
+                                <button class="arry-prev project-arry-prev"><i
+                                        class="fa-light fa-chevron-left"></i></button>
+                                <button class="ms-3 active arry-next project-arry-next"><i
+                                        class="fa-light fa-chevron-right"></i></button>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="swiper project-slider mt-5 d-block d-lg-none">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/project/fibrecables.jpg' %}" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/project/led-lights.jpg' %}" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/project/installation.jpg' %}" alt="image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Project area end here -->
+
+      
+        <!-- Shop page area start here -->
+        <div class="shop pt-130 pb-130">
+            <div class="container">
+                <div class="section-header pr-20">
+                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> E-commerce section</h5>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">You can purchase our
+                                    products here</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div
+                            class="top-bar sub-bg mb-4 d-flex flex-wrap justify-content-between align-items-center main-bg radius10 px-4 py-3">
+                            <span>Showing 1–12 of 15 results</span>
+                            <select name="select" id="select">
+                                <option value="select">Sort by latest</option>
+                                <option value="select">Sort by Ubdate</option>
+                                <option value="select">Sort by New</option>
+                            </select>
+                        </div>
+                        <div class="product light">
+                            <div class="container">
+                                <div class="row g-4">
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product1.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Bowls</a></h4>
+                                                <del>$1099</del> <span>- $999</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product2.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Trays</a></h4>
+                                                <del>$259</del> <span>- $199</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product3.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Frames</a></h4>
+                                                <del>$299</del> <span>- $258</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product4.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Utensils</a></h4>
+                                                <del>$459</del> <span>- $358</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product5.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Coasters</a></h4>
+                                                <del>$1099</del> <span>- $999</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product6.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Placemats</a></h4>
+                                                <del>$259</del> <span>- $199</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product7.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Boxes</a></h4>
+                                                <del>$299</del> <span>- $258</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product8.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Chopsticks</a></h4>
+                                                <del>$1099</del> <span>- $999</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product9.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Sculptures</a></h4>
+                                                <del>$259</del> <span>- $199</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product10.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Skewers</a></h4>
+                                                <del>$299</del> <span>- $258</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product11.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Wood Mirrors</a></h4>
+                                                <del>$259</del> <span>- $199</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="item">
+                                            <img src="{% static 'images/product/product12.png' %}" alt="image">
+                                            <div class="content">
+                                                <h4><a href="shop-single.html">Bamboo Rugs</a></h4>
+                                                <del>$299</del> <span>- $258</span>
+                                            </div>
+                                            <div class="icon">
+                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                                <a href="#0" class="active"><i
+                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-30 bor-top mt-65">
+                                    <a class="blog-pegi" href="#0">01</a>
+                                    <a class="blog-pegi active" href="#0">02</a>
+                                    <a class="blog-pegi" href="#0">03</a>
+                                    <a href="#0"><i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-slingle">
+                            <div class="right-item sub-bg">
+                                <h4 class="mb-30">Search</h4>
+                                <div class="search mb-40">
+                                    <input type="text" placeholder="Search here. . .">
+                                    <button><i class="fa-solid fa-search"></i></button>
+                                </div>
+                                <h4 class="mb-30">Categories</h4>
+                                <ul class="right_list mb-40">
+                                    <li><a class="d-block pb-1 mb-2" href="#0">Business</a></li>
+                                    <li><a class="d-block pb-1 mb-2" href="#0">Job Market</a></li>
+                                    <li><a class="d-block pb-1 mb-2" href="#0">Marketing</a></li>
+                                    <li><a class="d-block pb-1 mb-2" href="#0">News</a></li>
+                                    <li><a class="d-block pb-1 mb-2" href="#0">Social Media</a></li>
+                                    <li><a class="d-block pb-1 mb-2" href="#0">Trends</a></li>
+                                    <li><a class="d-block" href="#0">Writing</a></li>
+                                </ul>
+                                <h4 class="mb-30">Popular Products</h4>
+                                <div class="recent-post p-0 bor-bottom pb-4 mb-4 sub-bg">
+                                    <div class="img"><img src="{% static 'images/product/product1.png' %}" alt="image"></div>
+                                    <div class="con">
+                                        <h5><a href="shop-single.html">Wood Shelves</a></h5>
+                                        <span>$299</span>
+                                    </div>
+                                </div>
+                                <div class="recent-post p-0 bor-bottom pb-4 mb-4 sub-bg">
+                                    <div class="img"><img src="{% static 'images/product/product2.png' %}" alt="image"></div>
+                                    <div class="con">
+                                        <h5><a href="shop-single.html">Bamboo Pendants</a></h5>
+                                        <span>$299</span>
+                                    </div>
+                                </div>
+                                <div class="recent-post p-0 bor-bottom pb-4 mb-4 sub-bg">
+                                    <div class="img"><img src="{% static 'images/product/product3.png' %}" alt="image"></div>
+                                    <div class="con">
+                                        <h5><a href="shop-single.html">Wood Planters</a></h5>
+                                        <span>$299</span>
+                                    </div>
+                                </div>
+                                <h4 class="mb-30 mt-40">Hot Items</h4>
+                                <div class="swiper hot-items__slider">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/product/product8.png' %}" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/product/product9.png' %}" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="image">
+                                                <img src="{% static 'images/product/product10.png' %}" alt="image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop page area end here -->
+    </main>
+
+    <!-- Back to top area start here -->
+    <div class="scroll-up">
+        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Back to top area end here -->
+
+    <!-- Jquery 3. 7. 1 Min Js -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap min Js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Swiper bundle min Js -->
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <!-- Counterup min Js -->
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <!-- Wow min Js -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <!-- Magnific popup min Js -->
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <!-- Nice select min Js -->
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <!-- Isotope pkgd min Js -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <!-- Waypoints Js -->
+    <script src="{% static 'js/jquery.waypoints.js' %}"></script>
+    <!-- Script Js -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}

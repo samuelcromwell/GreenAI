@@ -1,0 +1,256 @@
+{% extends "website/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+        .page-banner.bg-image {
+            background-image: url('/static/images/sustainability/sustainability.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .pt-130 {
+            padding-top: 130px;
+        }
+        .pb-130 {
+            padding-bottom: 130px;
+        }
+</style>
+<main>
+        <!-- Page banner area start here -->
+        <section class="page-banner bg-image pt-130 pb-130">
+            <div class="container">
+                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Sustainability</h2>
+                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <a href="{% url 'index' %}">Home :</a>
+                    <span class="primary-color">Sustainability</span>
+                </div>
+            </div>
+        </section>
+        <!-- Page banner area end here -->
+
+        <!-- Project one banner area start here -->
+        <section class="project-banner pt-130 pb-130">
+            <div class="container">
+                <div class="banner-three banner-five">
+                    <div class="swiper banner-three__slider banner-five__slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="slide-bg project-banner__bg"
+                                    data-background="{% static 'images/project/project-banner1.jpg' %}"></div>
+                                <div class="container">
+                                    <div class="banner-three__content project-banner__content banner-five__content">
+                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our green initiatives
+                                            </h2>
+                                        <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
+                                            <div class="about_info d-flex align-items-center pt-65">
+                                                <a href="{% url 'contact' %}" class="btn-one-light"><span>contact us</span> <i
+                                                        class="fa-solid fa-angles-right"></i></a>
+                                                <span class="bor-left d-none d-sm-block mx-4"></span>
+                                                <div class="info d-flex flex-wrap align-items-center">
+                                                    <i
+                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
+                                                    <div class="about_info_con">
+                                                        <span class="d-block text-capitalize text-white">call any
+                                                            time</span>
+                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide-bg project-banner__bg"
+                                    data-background="{% static 'images/project/project-banner2.jpg' %}"></div>
+                                <div class="container">
+                                    <div class="banner-three__content project-banner__content banner-five__content">
+                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our projects
+                                            for Ecology <br>
+                                            awareness</h2>
+                                        <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
+                                            <div class="about_info d-flex align-items-center pt-65">
+                                                <a href="about.html" class="btn-one-light"><span>contact us</span> <i
+                                                        class="fa-solid fa-angles-right"></i></a>
+                                                <span class="bor-left d-none d-sm-block mx-4"></span>
+                                                <div class="info d-flex flex-wrap align-items-center">
+                                                    <i
+                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
+                                                    <div class="about_info_con">
+                                                        <span class="d-block text-capitalize text-white">call any
+                                                            time</span>
+                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide-bg project-banner__bg"
+                                    data-background="{% static 'images/project/project-banner3.jpg' %}"></div>
+                                <div class="container">
+                                    <div class="banner-three__content project-banner__content banner-five__content">
+                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our projects
+                                            for Ecology <br>
+                                            awareness</h2>
+                                        <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
+                                            <div class="about_info d-flex align-items-center pt-65">
+                                                <a href="about.html" class="btn-one-light"><span>contact us</span> <i
+                                                        class="fa-solid fa-angles-right"></i></a>
+                                                <span class="bor-left d-none d-sm-block mx-4"></span>
+                                                <div class="info d-flex flex-wrap align-items-center">
+                                                    <i
+                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
+                                                    <div class="about_info_con">
+                                                        <span class="d-block text-capitalize text-white">call any
+                                                            time</span>
+                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="banner-five__arry-btn">
+                        <button class="arry-prev mb-15 banner-five__arry-prev"><i
+                                class="fa-light fa-chevron-left"></i></button>
+                        <button class="arry-next banner-five__arry-next"><i
+                                class="fa-light fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Project one banner area end here -->
+        
+        <!-- Project area start here -->
+        <section class="project-five">
+            <div class="row g-0">
+                <div class="col-xxl-3 wow fadeInDown col-lg-6" data-wow-duration="1.2s" data-wow-delay=".2s">
+                    <div class="project-five__image">
+                        <img src="{% static 'images/project/project1.jpg' %}" alt="image">
+                    </div>
+                </div>
+                <div class="col-xxl-3 wow fadeInDown col-lg-6" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <div class="project-five__item sub-bg">
+                        <div class="project-five__content bg-white">
+                            <h3><a href="project-single.html">How to save plains and forests Capitalize on low
+                                    hanging</a></h3>
+                            <p>We maintain a busy network of forestry and social development staff
+                                along with local
+                                facilitators in the areas we work.</p>
+                            <a href="project-single.html" class="btn-two"><span>details project</span> <i
+                                    class="fa-solid fa-angles-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 wow fadeInDown col-lg-6" data-wow-duration="1.6s" data-wow-delay=".6s">
+                    <div class="project-five__image">
+                        <img src="{% static 'images/project/project2.jpg' %}" alt="image">
+                    </div>
+                </div>
+                <div class="col-xxl-3 wow fadeInDown col-lg-6" data-wow-duration="1.8s" data-wow-delay=".8s">
+                    <div class="project-five__item sub-bg">
+                        <div class="project-five__content bg-white">
+                            <h3><a href="project-single.html">Project: Planting 300 trees in the city, Bring to the
+                                    table win-win
+                                    survival</a></h3>
+                            <p>We maintain a busy network of forestry and social development staff
+                                along with local
+                                facilitators in the areas we work.</p>
+                            <a href="project-single.html" class="btn-two"><span>details project</span> <i
+                                    class="fa-solid fa-angles-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                    <div class="project-five__item sub-bg">
+                        <div class="project-five__content bg-white">
+                            <h3><a href="project-single.html">How to find inspiring solution and movement Leverage agile
+                                    frameworks</a>
+                            </h3>
+                            <p>We maintain a busy network of forestry and social development staff
+                                along with local
+                                facilitators in the areas we work.</p>
+                            <a href="project-single.html" class="btn-two"><span>details project</span> <i
+                                    class="fa-solid fa-angles-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <div class="project-five__image">
+                        <img src="{% static 'images/project/project3.jpg' %}" alt="image">
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-6 wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">
+                    <div class="project-five__item sub-bg">
+                        <div class="project-five__content bg-white">
+                            <h3><a href="project-single.html">Efficiently unleash cross-media information without
+                                    cross-media value.</a>
+                            </h3>
+                            <p>We maintain a busy network of forestry and social development staff
+                                along with local
+                                facilitators in the areas we work.</p>
+                            <a href="project-single.html" class="btn-two"><span>details project</span> <i
+                                    class="fa-solid fa-angles-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-6 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
+                    <div class="project-five__image">
+                        <img src="{% static 'images/project/project4.jpg' %}" alt="image">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Project area end here -->
+
+        <!-- achievement area start here -->
+        <section class="achievement-five mt-130 mb-130">
+            <div class="container">
+                <div class="achievement-five__wrp bg-image" data-background="{% static 'images/bg/achievement-bg.jpg' %}">
+                    <div class="row g-4 align-items-center justify-content-between">
+                        <div class="col-lg-5">
+                            <div class="achievement-five__item">
+                                <h3 class="wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">What have we
+                                    achieved so far?</h3>
+                                <a href="team-2.html" class="btn-two-light wow fadeInUp mt-50" data-wow-duration="1.2s"
+                                    data-wow-delay=".2s"><span>join our team</span> <i
+                                        class="fa-solid fa-angles-right"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                            <div class="achievement-five__count">
+                                <h2 class="count">120</h2>
+                                <h5>Social activism projects
+                                    accomplished</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                            <div class="achievement-five__count">
+                                <h2 class="count">90</h2>
+                                <h5>Communities in
+                                    environment</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">
+                            <div class="achievement-five__count">
+                                <h2 class="count">75</h2>
+                                <h5>Team members activate <br>
+                                    in nature</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="achievement-five__bg-overlay">
+                        <img src="{% static 'images/bg/achievement-bg-image.jpg' %}" alt="image">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- achievement area end here -->
+{% endblock %}
