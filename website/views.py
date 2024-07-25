@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import ContactForm
+from .forms import ContactForm, SubscribeForm
 from .models import TeamMember
 
 def index(request):
@@ -52,3 +52,19 @@ def partners(request):
 
 def feedback(request):
     return render(request, 'website/feedback.html')
+
+def blog(request):
+    return render(request, 'website/blog.html')
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully subscribed to our Newsletter')
+            return redirect('subscribe')
+        else:
+            messages.error(request, 'Subscription failed. Please enter a valid email address')
+    else:
+        form = SubscribeForm()
+    return render(request, 'website/base.html', {'form': form})

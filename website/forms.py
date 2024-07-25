@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact
+from .models import Contact, Subscriber
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -8,3 +8,9 @@ class ContactForm(forms.ModelForm):
         widgets = {
             'subject': forms.Select(choices=Contact.SUBJECT_CHOICES),
         }
+
+class SubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['email']
+        

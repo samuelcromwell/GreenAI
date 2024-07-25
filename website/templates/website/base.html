@@ -98,7 +98,7 @@
                         <li>
                             <a href="#">Resources <i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="service.html">Blogs</a></li>
+                                <li><a href="{% url 'blog' %}">Blogs</a></li>
                                 <li><a href="service-2.html">Whitepapers</a></li>
                                 <li><a href="service-single.html">Case Studies</a></li>
                                 <li><a href="service-single.html">FAQs</a></li>
@@ -209,10 +209,22 @@
             </div>
             <div class="col-lg-5 wow fadeInDown" data-wow-duration="1.6s" data-wow-delay=".6s">
                 <div class="our-info__input">
-                    <input type="text" placeholder="Your email Address">
+                    <form method="post" placeholder="Your email Address"action="{% url 'subscribe' %}">
                     <i class="fa-regular fa-envelope our-info__input-envelope"></i>
                     <i class="fa-solid fa-paper-plane our-info__input-plane"></i>
+                        {% csrf_token %}
+                        {{ form.email }}
+                        <i class="fa-regular fa-envelope our-info__input-envelope"></i>
+                        <button type="submit" class="fa-solid fa-paper-plane our-info__input-plane"></button>
+                    </form>
                 </div>
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
             <div class="col-lg-4">
                 <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-">

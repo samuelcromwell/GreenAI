@@ -15,8 +15,8 @@ urlpatterns = [
     path("support/", views.support, name="support"),
     path("partners/", views.partners, name="partners"),
     path("feedback/", views.feedback, name="feedback"),
-    # path("blog", views.blog, name="blog"),
-    # path("services", views.services, name="services"),
+    path("blog/", views.blog, name="blog"),
+    path('subscribe/', views.subscribe, name='subscribe'),
     # path("single-blog", views.singleblog, name="singleblog"),
 ]
 
