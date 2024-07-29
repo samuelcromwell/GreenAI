@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green AI - Revolutionising Smart City Infrastructure</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load static %}
     <!-- Favicon img -->
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
     <!-- Bootstarp min css -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <!-- All min css -->
@@ -48,6 +48,48 @@
 .our-info__input, .our-info__social-icon {
     position: relative;
     z-index: 1;
+}
+
+.messages-container {
+    background-color: #f9f9f9; /* Whitish background color */
+    padding: 15px; /* Padding for some space around the messages */
+    border-radius: 5px; /* Rounded corners for better aesthetics */
+    margin-top: 15px; /* Space above the message container */
+}
+
+.messages-container ul {
+    list-style-type: none; /* Remove the default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.message-item {
+    padding: 10px; /* Space around each message */
+    margin-bottom: 10px; /* Space between messages */
+    border: 1px solid #ddd; /* Light border around each message */
+    border-radius: 5px; /* Rounded corners for each message */
+    background-color: #fff; /* White background for each message */
+    color: #333; /* Dark text color for readability */
+}
+
+.message-item.success {
+    border-color: #4CAF50; /* Green border for success messages */
+    color: #4CAF50; /* Green text for success messages */
+}
+
+.message-item.error {
+    border-color: #f44336; /* Red border for error messages */
+    color: #f44336; /* Red text for error messages */
+}
+
+.message-item.warning {
+    border-color: #ff9800; /* Orange border for warning messages */
+    color: #ff9800; /* Orange text for warning messages */
+}
+
+.message-item.info {
+    border-color: #2196F3; /* Blue border for info messages */
+    color: #2196F3; /* Blue text for info messages */
 }
 </style>
 <body>
@@ -209,23 +251,16 @@
             </div>
             <div class="col-lg-5 wow fadeInDown" data-wow-duration="1.6s" data-wow-delay=".6s">
                 <div class="our-info__input">
-                    <form method="post" placeholder="Your email Address"action="{% url 'subscribe' %}">
-                    <i class="fa-regular fa-envelope our-info__input-envelope"></i>
-                    <i class="fa-solid fa-paper-plane our-info__input-plane"></i>
+                    <form method="post" placeholder="Your email Address" action="{% url 'subscribe' %}">
+                        <i class="fa-regular fa-envelope our-info__input-envelope"></i>
+                        <i class="fa-solid fa-paper-plane our-info__input-plane"></i>
                         {% csrf_token %}
                         {{ form.email }}
-                        <i class="fa-regular fa-envelope our-info__input-envelope"></i>
                         <button type="submit" class="fa-solid fa-paper-plane our-info__input-plane"></button>
                     </form>
                 </div>
-                {% if messages %}
-                    <ul>
-                        {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
             </div>
+
             <div class="col-lg-4">
                 <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-">
                     <a class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s" href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -235,10 +270,52 @@
                 </div>
             </div>
         </div>
+        {% if messages %}
+        <div class="messages-container" id="message-container">
+            <ul>
+                {% for message in messages %}
+                <li class="message-item {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
 </div>
 <!-- Our info area end here -->
+<script>
+        $(document).ready(function() {
+            $('#subscribe-form').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+                var formData = $(this).serialize(); // Serialize the form data
 
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        var messageContainer = $('#message-container');
+                        messageContainer.empty(); // Clear previous messages
+
+                        var messageItem = $('<div class="message-item"></div>');
+                        if (response.success) {
+                            messageItem.addClass('success').text(response.message);
+                        } else {
+                            messageItem.addClass('error').text(response.message);
+                        }
+                        messageContainer.append(messageItem);
+                    },
+                    error: function(xhr, status, error) {
+                        var messageContainer = $('#message-container');
+                        messageContainer.empty(); // Clear previous messages
+
+                        var messageItem = $('<div class="message-item error"></div>');
+                        messageItem.text('An error occurred. Please try again later.');
+                        messageContainer.append(messageItem);
+                    }
+                });
+            });
+        });
+</script>
 
 {% include 'website/shared/footer.html' %}
 

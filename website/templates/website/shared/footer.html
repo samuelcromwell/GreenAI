@@ -1,5 +1,34 @@
 {% load static %}
-<!-- Footer area start here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and other head content -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <style>
+        .footer-gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item {
+            width: calc(33.333% - 10px); /* Adjust width for three per line with some gap */
+            height: 100px; /* Adjust height for better visibility */
+            margin-bottom: 10px; /* Adjust margin for proper spacing */
+            overflow: hidden;
+        }
+        .footer__gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Adjust gap for proper spacing */
+            justify-content: flex-start;
+        }
+        .footer__item-title {
+            margin-bottom: 10px; /* Adjust margin for title spacing */
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer area start here -->
     <footer class="footer bg-image" data-background="{% static 'images/bg/footer-bg.jpg' %}">
         <div class="container">
             <div class="pt-65 pb-65">
@@ -8,35 +37,23 @@
                         <div class="footer__item">
                             <div class="footer__item-title">
                                 <h4>about green aI</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
+                                <span class="footer__item-title-line"></span>
+                                <span class="footer__item-title-line2"></span>
                             </div>
                             <p>Green AI is pioneering the future of smart city infrastructure with innovative solutions that combine 5G connectivity, WiFi access, LED lighting, and environmental monitoring.</p>
-                            {% comment %} <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29581.552527417!2d-77.04440883230183!3d38.80089850193032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b0f02c6539a9%3A0xacc6091466dd9068!2s901%20N%20Pitt%20St%20Suite%20170%2C%20Alexandria%2C%20VA%2022314%2C%20USA!5e0!3m2!1sen!2sbd!4v1694324425557!5m2!1sen!2sbd"
-                                class="footer__item-map-popup map-popup">View Map <i
-                                class="fa-solid fa-location-arrow"></i></a> {% endcomment %}
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
                         <div class="footer__item">
                             <div class="footer__item-title">
                                 <h4>Get in touch!</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
+                                <span class="footer__item-title-line"></span>
+                                <span class="footer__item-title-line2"></span>
                             </div>
                             <ul>
-                                <li class="pb-3"><a href="#0"><i
-                                            class="fa-solid fa-location-dot pe-1 primary-color"></i>
-                                        Westport Industrial City
-                                    </a>
-                                </li>
-                                <li class="pb-3"><a href="tel:+4065550120"><i
-                                            class="fa-solid fa-phone-volume pe-1 primary-color"></i>
-                                        (254) 712-345-678
-                                    </a></li>
-                                <li><a href="#0"><i class="fa-solid fa-envelope pe-1 primary-color"></i>
-                                        info@greenai.com</a>
-                                </li>
+                                <li class="pb-3"><a href="#0"><i class="fa-solid fa-location-dot pe-1 primary-color"></i> Westport Industrial City</a></li>
+                                <li class="pb-3"><a href="tel:+4065550120"><i class="fa-solid fa-phone-volume pe-1 primary-color"></i> (254) 712-345-678</a></li>
+                                <li><a href="#0"><i class="fa-solid fa-envelope pe-1 primary-color"></i> info@greenai.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -44,92 +61,39 @@
                         <div class="footer__item">
                             <div class="footer__item-title">
                                 <h4>Quick Links</h4>
-                                <span class="footer__item-title-line"></span><span
-                                    class="footer__item-title-line2"></span>
+                                <span class="footer__item-title-line"></span>
+                                <span class="footer__item-title-line2"></span>
                             </div>
                             <ul>
-                                <li class="pb-1"><a href="{% url 'about' %}"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> About Us
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="{% url 'products' %}"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> Our Products
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="{% url 'contact' %}"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> Contact Us
-                                    </a>
-                                </li>
-                                <li class="pb-1"><a href="{% url 'sustainability' %}"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> Sustainability
-                                    </a>
-                                </li>
-                                <li><a href="{% url 'feedback' %}"><i
-                                            class="fa-solid fa-chevron-right pe-1 primary-color"></i> Feedback
-                                    </a>
-                                </li>
+                                <li class="pb-1"><a href="{% url 'about' %}"><i class="fa-solid fa-chevron-right pe-1 primary-color"></i> About Us</a></li>
+                                <li class="pb-1"><a href="{% url 'products' %}"><i class="fa-solid fa-chevron-right pe-1 primary-color"></i> Our Products</a></li>
+                                <li class="pb-1"><a href="{% url 'contact' %}"><i class="fa-solid fa-chevron-right pe-1 primary-color"></i> Contact Us</a></li>
+                                <li class="pb-1"><a href="{% url 'sustainability' %}"><i class="fa-solid fa-chevron-right pe-1 primary-color"></i> Sustainability</a></li>
+                                <li class="pb-1"><a href="{% url 'feedback' %}"><i class="fa-solid fa-chevron-right pe-1 primary-color"></i> Feedback</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                            <div class="footer__item footer-three__item">
-                                <div class="footer__item-title">
-                                    <h4>gallery</h4>
-                                    <span class="footer__item-title-line"></span><span
-                                        class="footer__item-title-line2"></span>
+                        <div class="footer__item footer-three__item">
+                            <div class="footer__item-title">
+                                <h4>Gallery</h4>
+                                <span class="footer__item-title-line"></span>
+                                <span class="footer__item-title-line2"></span>
+                            </div>
+                            <div class="footer__gallery">
+                                {% for image in images %}
+                                <div class="gallery-item">
+                                    <a data-fancybox="gallery" href="{{ image.image.url }}">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.name }}" class="footer-gallery-image">
+                                        <div class="icon">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="row g-3">
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery1.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery1.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery2.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery2.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery3.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery3.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery4.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery4.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery5.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery5.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="{% static 'images/footer/gallery6.png' %}" class="footer-popup image d-block">
-                                            <img src="{% static 'images/footer/gallery6.png' %}" alt="image">
-                                            <div class="icon">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,3 +102,7 @@
         </div>
     </footer>
     <!-- Footer area end here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+</body>
+</html>

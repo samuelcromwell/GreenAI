@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember
+from .models import TeamMember, FooterGallery
+from django.http import JsonResponse
 
 def index(request):
     if request.method == 'POST':
@@ -61,10 +62,13 @@ def subscribe(request):
         form = SubscribeForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'You have successfully subscribed to our Newsletter')
-            return redirect('subscribe')
+            return JsonResponse({'success': True, 'message': 'You have successfully subscribed to our Newsletter'})
         else:
-            messages.error(request, 'Subscription failed. Please enter a valid email address')
+            return JsonResponse({'success': False, 'message': 'Subscription failed. Please enter a valid email address'})
     else:
         form = SubscribeForm()
     return render(request, 'website/base.html', {'form': form})
+
+def footer_gallery_view(request):
+    images = FooterGallery.objects.all()
+    return render(request, 'website/shared/footer.html', {'images': images})

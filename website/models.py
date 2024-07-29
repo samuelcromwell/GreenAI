@@ -29,3 +29,10 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class FooterGallery(models.Model):
+    image = models.ImageField(upload_to='footer_gallery/')
+
+    def __str__(self):
+        return self.image.name
