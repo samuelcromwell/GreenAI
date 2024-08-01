@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery
+from .models import TeamMember, FooterGallery, Subscriber
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -60,7 +60,13 @@ def blog(request):
 def subscribe(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
-        if form.is_valid():
+        email = request.POST.get('email')
+        if Subscriber.objects.filter(email=email).exists():
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'message': 'You have already subscribed to our Newsletter'})
+            else:
+                messages.error(request, 'You have already subscribed to our Newsletter')
+        elif form.is_valid():
             form.save()
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': True, 'message': 'You have successfully subscribed to our Newsletter'})

@@ -51,13 +51,6 @@
     z-index: 1;
 }
 
-.messages-container {
-    background-color: #f9f9f9; /* Whitish background color */
-    padding: 15px; /* Padding for some space around the messages */
-    border-radius: 5px; /* Rounded corners for better aesthetics */
-    margin-top: 15px; /* Space above the message container */
-}
-
 .messages-container ul {
     list-style-type: none; /* Remove the default list styling */
     padding: 0; /* Remove default padding */
@@ -142,9 +135,9 @@
                             <a href="#">Resources <i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
                                 <li><a href="{% url 'blog' %}">Blogs</a></li>
-                                <li><a href="service-2.html">Whitepapers</a></li>
-                                <li><a href="service-single.html">Case Studies</a></li>
-                                <li><a href="service-single.html">FAQs</a></li>
+                                <li><a href="#">Whitepapers</a></li>
+                                <li><a href="#">Case Studies</a></li>
+                                <li><a href="#">FAQs</a></li>
                             </ul>
                         </li>
                         <li>
@@ -192,7 +185,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-">
+                    <div class="our-info__social-icon float-lg-end float-none mt-4 mt-lg-0">
                         <a class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s" href="#"><i class="fa-brands fa-facebook-f"></i></a>
                         <a class="wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".3s" href="#"><i class="fa-brands fa-twitter"></i></a>
                         <a class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -221,10 +214,12 @@
                         var messageItem = $('<li class="message-item"></li>');
                         if (response.success) {
                             messageItem.addClass('success').text(response.message);
+                            $('#subscribe-form')[0].reset(); // Reset the form on success
                         } else {
                             messageItem.addClass('error').text(response.message);
                         }
                         messageContainer.append(messageItem);
+                        messageContainer.show(); // Show the messages container
                     },
                     error: function(xhr, status, error) {
                         var messageContainer = $('#message-container');
@@ -233,6 +228,7 @@
                         var messageItem = $('<li class="message-item error"></li>');
                         messageItem.text('An error occurred. Please try again later.');
                         messageContainer.append(messageItem);
+                        messageContainer.show(); // Show the messages container
                     }
                 });
             });
