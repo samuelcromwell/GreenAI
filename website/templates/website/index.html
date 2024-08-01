@@ -10,6 +10,62 @@
             color: white; /* Ensure text is readable on the background */
         }
 </style>
+<!-- Add necessary scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{ csrf_token }}' }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "contact" %}',
+            data: {
+                name: $('input[name="name"]').val(),
+                email: $('input[name="email"]').val(),
+                subject: $('select[name="subject"]').val(),
+                message: $('textarea[name="message"]').val(),
+                'g-recaptcha-response': token,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#form-messages').html('<p style="color: green;">Your message has been recorded! We will get back to you soon.</p>');
+                    $('#contact_form')[0].reset();
+                    grecaptcha.reset();
+                } else {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try again.</p>');
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                try {
+                    let errors = JSON.parse(xhr.responseText).errors;
+                    let errorMessages = '<p style="color: red;">Please fill in the form correctly:</p><ul style="color: red;">';
+                    for (let field in errors) {
+                        errors[field].forEach(function(error) {
+                            errorMessages += '<li>' + error + '</li>';
+                        });
+                    }
+                    errorMessages += '</ul>';
+                    $('#form-messages').html(errorMessages);
+                } catch (e) {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try filling in the form again.</p>');
+                }
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#contact_form').on('submit', function(e) {
+            e.preventDefault();
+            grecaptcha.execute();
+        });
+
+        window.onSubmit = onSubmit; // Make onSubmit function available globally
+    });
+</script>
 <main>
         <!-- Banner area start here -->
         <section class="banner-two bor-bottom">
@@ -161,29 +217,26 @@
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="content bg-image">
-                            <h2>Have a question for us? <br>
-                                Let's talk.</h2>
-                            
+                            <h2>Have a question for us? <br> Let's talk.</h2>
                             <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
                             <ul>
-                                <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17"
-                                        target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City
-                                        </a>
-                                </li>
-                                <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678
-                                        </a>
-                                </li>
-                                <li><a href="mailto:company.info@mail.com"><i
-                                        class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
+                                <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17" target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City</a></li>
+                                <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678</a></li>
+                                <li><a href="mailto:company.info@mail.com"><i class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-area">
-                            <form method="post">
+                            <form method="post" action="{% url 'contact' %}" id="contact_form">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                                <button type="submit" class="mt-40">Submit Now <i class="fa-solid fa-arrow-right-long"></i></button>
+                                <!-- Invisible reCAPTCHA button -->
+                                <button class="g-recaptcha mt-40" 
+                                        data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
+                                        data-callback="onSubmit" 
+                                        data-action="submit">Submit Now <i class="fa-solid fa-arrow-right-long"></i>
+                                </button>
                             </form>
                             {% if messages %}
                                 <ul class="messages">
@@ -192,7 +245,8 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-                        </div>
+                            <div id="form-messages" class="col-md-12 mt-3"></div>
+                        </div>    
                     </div>
                 </div>
             </div>

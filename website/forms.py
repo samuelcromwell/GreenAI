@@ -13,4 +13,6 @@ class SubscribeForm(forms.ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email']
-        
+        widgets = {
+            'email': forms.EmailInput(attrs={'placeholder': 'Your email to subscribe to our Newsletter'})
+        }

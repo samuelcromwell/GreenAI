@@ -1,37 +1,37 @@
+import requests # type: ignore
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
 from .models import TeamMember, FooterGallery
 from django.http import JsonResponse
+from django.conf import settings
+from django.views import View
+
 
 def index(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your message has been sent successfully! We will respond soon')
-            return redirect('index')
+            return JsonResponse({'status': 'success'}, status=200)
         else:
-            messages.error(request, 'There was an error in your form submission. Kindly try again')
+            return JsonResponse({'status': 'error', 'errors': form.errors.as_json()}, status=400)
     else:
         form = ContactForm()
     return render(request, 'website/index.html', {'form': form})
 
-
-
 def about(request):
     team_members = TeamMember.objects.all()
     return render(request, 'website/about.html', {'team_members': team_members})
-
+    
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your message has been sent successfully! We will get back to you soon')
-            return redirect('contact')
+            return JsonResponse({'status': 'success'}, status=200)
         else:
-            messages.error(request, 'There was an error in your form submission. Kindly try again')
+            return JsonResponse({'status': 'error', 'errors': form.errors.as_json()}, status=400)
     else:
         form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
@@ -62,12 +62,18 @@ def subscribe(request):
         form = SubscribeForm(request.POST)
         if form.is_valid():
             form.save()
-            return JsonResponse({'success': True, 'message': 'You have successfully subscribed to our Newsletter'})
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'message': 'You have successfully subscribed to our Newsletter'})
+            else:
+                messages.success(request, 'You have successfully subscribed to our Newsletter')
         else:
-            return JsonResponse({'success': False, 'message': 'Subscription failed. Please enter a valid email address'})
-    else:
-        form = SubscribeForm()
-    return render(request, 'website/base.html', {'form': form})
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'message': 'Subscription failed. Please enter a valid email address'})
+            else:
+                messages.error(request, 'Subscription failed. Please enter a valid email address')
+
+    # For non-AJAX requests, redirect back to the referring page
+    return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 def footer_gallery_view(request):
     images = FooterGallery.objects.all()

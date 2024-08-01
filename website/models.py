@@ -10,7 +10,6 @@ class Contact(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=100, choices=SUBJECT_CHOICES)
     message = models.TextField()
-    accepted_terms = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

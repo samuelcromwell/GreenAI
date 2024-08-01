@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'website.context_processors.footer_gallery_images',
+                'website.context_processors.subscribe_form',
             ],
         },
     },
@@ -136,3 +137,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TIME_ZONE = 'Africa/Nairobi'
+
+RECAPTCHA_PUBLIC_KEY = '6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN'
+RECAPTCHA_SECRET_KEY = '6LeavgsqAAAAAAgyMutCg5jo3XFsf4ySjJ7T9O95'
+
