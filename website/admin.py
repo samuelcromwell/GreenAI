@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Contact, TeamMember, Subscriber, FooterGallery
+from django import forms
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog
 
 admin.site.register(Contact)
 
@@ -14,3 +15,16 @@ class SubscriberAdmin(admin.ModelAdmin):
 @admin.register(FooterGallery)
 class FooterGalleryAdmin(admin.ModelAdmin):
     list_display = ('id', 'image')
+
+
+class BlogAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={'id': "richtext_field"}))
+
+    class Meta:
+        model = Blog
+        fields = "__all__"
+
+class BlogAdmin(admin.ModelAdmin):
+    form = BlogAdminForm
+
+admin.site.register(Blog, BlogAdmin)

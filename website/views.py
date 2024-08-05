@@ -2,10 +2,11 @@ import requests # type: ignore
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery, Subscriber
+from .models import TeamMember, FooterGallery, Subscriber, Blog
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -55,7 +56,12 @@ def feedback(request):
     return render(request, 'website/feedback.html')
 
 def blog(request):
-    return render(request, 'website/blog.html')
+    blogs = Blog.objects.all().order_by("-time")
+    paginator = Paginator(blogs, 3)
+    page = request.GET.get("page")
+    blogs = paginator.get_page(page)
+    context = {"blogs": blogs}
+    return render(request, "website/blog.html", context)
 
 def subscribe(request):
     if request.method == 'POST':
