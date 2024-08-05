@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -96,3 +96,13 @@ def subscribe(request):
 def footer_gallery_view(request):
     images = FooterGallery.objects.all()
     return render(request, 'website/shared/footer.html', {'images': images})
+
+def whitepapers(request):
+    return render(request, 'website/whitepapers.html')
+
+def FAQs(request):
+    faq = FAQ.objects.all()
+    return render(request, 'website/FAQs.html', {'faq': faq})
+
+def casestudies(request):
+    return render(request, 'website/casestudies.html')

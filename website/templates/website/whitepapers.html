@@ -1,0 +1,33 @@
+{% extends 'website/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+        .page-banner.bg-image {
+            background-image: url('/static/images/whitepapers/whitepapers.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .pt-130 {
+            padding-top: 130px;
+        }
+        .pb-130 {
+            padding-bottom: 130px;
+        }
+</style>
+<main>
+        <!-- Page banner area start here -->
+        <section class="page-banner bg-image pt-130 pb-130">
+            <div class="container">
+                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Whitepapers</h2>
+                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <a href="{% url 'index' %}">Home :</a>
+                    <span class="primary-color">Whitepapers</span>
+                </div>
+            </div>
+        </section>
+        <!-- Page banner area end here -->
+</main>
+
+
+{% endblock %}

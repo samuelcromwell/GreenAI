@@ -20,6 +20,9 @@ urlpatterns = [
     path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path("footer/", views.footer_gallery_view, name="footer_gallery"),
+    path("whitepapers/", views.whitepapers, name="whitepapers"),
+    path("casestudies/", views.casestudies, name="casestudies"),
+    path("FAQs/", views.FAQs, name='FAQs'),
 ]
 
 

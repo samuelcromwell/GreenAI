@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ
 
 admin.site.register(Contact)
 
@@ -28,3 +28,7 @@ class BlogAdmin(admin.ModelAdmin):
     form = BlogAdminForm
 
 admin.site.register(Blog, BlogAdmin)
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question',)
