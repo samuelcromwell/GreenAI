@@ -16,7 +16,8 @@ urlpatterns = [
     path("support/", views.support, name="support"),
     path("partners/", views.partners, name="partners"),
     path("feedback/", views.feedback, name="feedback"),
-    path("blog/", views.blog, name="blog"),
+    path("blogs/", views.blogs, name="blogs"),
+    path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path("footer/", views.footer_gallery_view, name="footer_gallery"),
 ]

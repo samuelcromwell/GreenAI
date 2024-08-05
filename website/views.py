@@ -1,5 +1,5 @@
 import requests # type: ignore
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
 from .models import TeamMember, FooterGallery, Subscriber, Blog
@@ -7,6 +7,11 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
 from django.core.paginator import Paginator
+
+def blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    context = {'blog': blog}
+    return render(request, 'website/blog_detail.html', context)
 
 
 def index(request):
@@ -55,13 +60,14 @@ def partners(request):
 def feedback(request):
     return render(request, 'website/feedback.html')
 
-def blog(request):
+def blogs(request):
     blogs = Blog.objects.all().order_by("-time")
-    paginator = Paginator(blogs, 3)
+    paginator = Paginator(blogs, 6)  # Paginate by 6 blogs per page
     page = request.GET.get("page")
     blogs = paginator.get_page(page)
     context = {"blogs": blogs}
-    return render(request, "website/blog.html", context)
+    return render(request, "website/blogs.html", context)
+
 
 def subscribe(request):
     if request.method == 'POST':
