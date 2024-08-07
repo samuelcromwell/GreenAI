@@ -44,4 +44,4 @@ class InvestorAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class Product(admin.ModelAdmin):
     list_display = ('name', 'current_price')
-    fields = ('name', 'image', 'description', 'initial_price', 'current_price')
+    fields = ('name', 'image', 'description', 'initial_price', 'current_price', 'slug')

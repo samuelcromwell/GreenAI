@@ -3,7 +3,7 @@
 {% load static %}
 <style>
         .page-banner.bg-image {
-            background-image: url('/static/images/partners/partners.jpg');
+            background-image: url('/static/images/feedback/feedback2.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -16,6 +16,16 @@
         }
 </style>
 <main>
-
+     <!-- Page banner area start here -->
+    <section class="page-banner bg-image pt-130 pb-130">
+        <div class="container">
+            <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Feedback</h2>
+            <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                <a href="{% url 'index' %}">Home :</a>
+                <span class="primary-color">Feedback</span>
+            </div>
+        </div>
+    </section>
+    <!-- Page banner area end here -->
 </main>
 {% endblock %}

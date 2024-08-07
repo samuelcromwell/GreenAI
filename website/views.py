@@ -2,17 +2,11 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
 from django.core.paginator import Paginator
-
-def blog_detail(request, slug):
-    blog = get_object_or_404(Blog, slug=slug)
-    context = {'blog': blog}
-    return render(request, 'website/blog_detail.html', context)
-
 
 def index(request):
     if request.method == 'POST':
@@ -45,9 +39,6 @@ def contact(request):
         form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
 
-def products(request):
-    return render(request, 'website/products.html')
-
 def solutions(request):
     return render(request, 'website/solutions.html')
 
@@ -72,6 +63,23 @@ def blogs(request):
     context = {"blogs": blogs}
     return render(request, "website/blogs.html", context)
 
+def blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    context = {'blog': blog}
+    return render(request, 'website/blog_detail.html', context)
+
+def products(request):
+    products = Product.objects.all().order_by("-time")
+    paginator = Paginator(products, 12) #12 products per page
+    page = request.GET.get("page")
+    products = paginator.get_page(page)
+    context = {"products": products}
+    return render(request, 'website/products.html', context)
+
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    context = {'product': product}
+    return render(request, 'website/product_detail.html', context)
 
 def subscribe(request):
     if request.method == 'POST':

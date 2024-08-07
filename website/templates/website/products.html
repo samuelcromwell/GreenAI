@@ -30,6 +30,11 @@
             object-position: center; /* Centers the image */
         }
 
+        .item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
 </style>
 <main>
         <!-- Page banner area start here -->
@@ -175,7 +180,7 @@
                             <span>Showing 1–12 of 15 results</span>
                             <select name="select" id="select">
                                 <option value="select">Sort by latest</option>
-                                <option value="select">Sort by Ubdate</option>
+                                <option value="select">Sort by Update</option>
                                 <option value="select">Sort by New</option>
                             </select>
                         </div>
@@ -186,16 +191,15 @@
                                     <div class="col-md-4">
                                         <div class="item">
                                             {% if product.image %}
-                                                <img src="{{ product.image.url }}" alt="image">
-                                            {% else %}
-                                                <img src="{% static 'images/product/default.png' %}" alt="image">
+                                                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>                                            {% else %}
+                                                <img src="{% static 'images/product/default.png' %}" alt="{{ product.name }}">
                                             {% endif %}
                                             <div class="content">
-                                                <h4><a href="shop-single.html">{{ product.name }}</a></h4>
+                                                <h4><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
                                                 {% if product.initial_price %}
-                                                    <del>${{ product.initial_price }}</del>
+                                                    <del>Kshs.{{ product.initial_price }}</del>
                                                 {% endif %}
-                                                    <span>- ${{ product.current_price }}</span>
+                                                    <span>Kshs.{{ product.current_price }}</span>
                                             </div>
                                             <div class="icon">
                                                 <a href="#0"><i class="fa-solid fa-heart"></i></a>
@@ -206,9 +210,13 @@
                                     {% endfor %}
                                 </div>
                                 <div class="pt-30 bor-top mt-65">
-                                    <a class="blog-pegi" href="#0">01</a>
-                                    <a class="blog-pegi active" href="#0">02</a>
-                                    <a class="blog-pegi" href="#0">03</a>
+                                    {% for page_num in products.paginator.page_range %}
+                                        {% if products.number == page_num %}
+                                            <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
+                                        {% else %}
+                                            <a href="?page={{ page_num }}" class="blog-pegi">{{ page_num }}</a>
+                                        {% endif %}
+                                    {% endfor %}
                                     <a href="#0"><i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i></a>
                                 </div>
                             </div>
