@@ -265,69 +265,34 @@
                             latest news
                         </h2>
                     </div>
-                    <a href="blog-3.html" class="btn-one mt-4 mt-md- wow fadeInUp" data-wow-duration="1.6s"
+                    <a href="{% url 'blogs' %}" class="btn-one mt-4 mt-md- wow fadeInUp" data-wow-duration="1.6s"
                         data-wow-delay=".6s"><span>view all news</span> <i class="fa-solid fa-angles-right"></i></a>
                 </div>
                 <div class="row g-4">
+                    {% for blog in blogs %}
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.2s"
                         data-wow-delay=".2s">
                         <div class="donation__item blog-two__item blog-three__item bor">
                             <div class="blog-two__image blog-three__image">
                                 <div class="image">
-                                    <img src="{% static 'images/blog/blog-three-image1.jpg' %}" alt="image">
+                                    {% if blog.thumbnail_img %}
+                                        <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}">
+                                    {% else %}
+                                        <img src="{% static 'images/blog/default.jpg' %}" alt="{{ blog.title }}">
+                                    {% endif %}
                                     <div class="blog-two__info">
-                                        <h4>15 <br> JUNE</h4>
-                                        <span>2023</span>
+                                        <h4>{{ blog.time|date:"d"}} <br> {{ blog.time|date:"F" }}</h4>
+                                        <span>{{ blog.time|date:"Y"}}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="blog-three__content">
-                                <h3><a href="blog-single.html">Make A Statement Support Of The Eco green</a></h3>
-                                <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <h3><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h3>
+                                <a class="blog-two__item-arrow" href="{{ blog.get_absolute_url }}"><i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.4s"
-                        data-wow-delay=".4s">
-                        <div class="donation__item blog-two__item blog-three__item bor">
-                            <div class="blog-two__image blog-three__image">
-                                <div class="image">
-                                    <img src="{% static 'images/blog/blog-three-image2.jpg' %}" alt="image">
-                                    <div class="blog-two__info">
-                                        <h4>15 <br> JUNE</h4>
-                                        <span>2023</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-three__content">
-                                <h3><a href="blog-single.html">Going green and reducing your carbon footprint are
-                                        import</a></h3>
-                                <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.6s"
-                        data-wow-delay=".6s">
-                        <div class="donation__item blog-two__item blog-three__item bor">
-                            <div class="blog-two__image blog-three__image">
-                                <div class="image">
-                                    <img src="{% static 'images/blog/blog-three-image3.jpg' %}" alt="image">
-                                    <div class="blog-two__info">
-                                        <h4>15 <br> JUNE</h4>
-                                        <span>2023</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-three__content">
-                                <h3><a href="blog-single.html">Ddition to energy consumption and transportation, you
-                                        can</a></h3>
-                                <a class="blog-two__item-arrow" href="blog-single.html"><i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

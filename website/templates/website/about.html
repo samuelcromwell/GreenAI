@@ -44,39 +44,28 @@
                                     Organization</h2>
                             </div>
                             <h5 class="pb-30 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                                Elit
-                                ullamcorper dignissim cras tincidunt lobortis feugiat vibe</h5>
-                            <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">ipsum dolor
-                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et
-                                dolore magna
-                                aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                                maecenas accumsan</p>
-                            <div class="d-flex align-items-center gap-5 flex-wrap mt-45 mb-30">
+                                a timeline of significant milestones and developments in Green AI's journey
+                            </h5>
                                 <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
                                     <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Lorem
+                                        Initial Projects
                                     </li>
                                 </ul>
+                                <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">The organization began by launching pilot projects focused on integrating smart technologies in urban settings, which laid the groundwork for future expansions.</p>
+                                <br>
                                 <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
                                     <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Dolor
+                                        Partnership Development
                                     </li>
                                 </ul>
+                                <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Over the years, Green AI has formed strategic partnerships with various stakeholders, including government agencies and technology firms, to enhance its service offerings.</p>
+                                <br>
                                 <ul class="wow fadeInDown" data-wow-duration="1.4s" data-wow-delay=".4s">
                                     <li><img class="pe-2" src="{% static 'images/icon/leaf.svg' %}" alt="icon">
-                                        Ipsum
+                                        Product Innovations
                                     </li>
                                 </ul>
-                            </div>
-                            <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">Yiuym
-                                ipsum dolor
-                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et
-                                dolore magna
-                                aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                                maecenas accumsan
-                                lacus vel facilisis.</p>
+                                <p class="wow fadeInDown" data-wow-duration="1.8s" data-wow-delay=".8s">The company has continuously innovated its product line, introducing eco-friendly solutions such as energy-efficient LED lighting and advanced telecommunications infrastructure.</p>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -108,10 +97,15 @@
                                 <div class="team__item-image">
                                     <img src="{{ member.image.url }}" alt="{{ member.name }}">
                                     <div class="team__item-image-icon social-icon">
-                                        <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                        <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                        <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                        <a href="#0"><i class="fa-brands fa-youtube"></i></a>
+                                        {% if member.facebook_url %}
+                                            <a href="{{ member.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a>
+                                        {% endif %}
+                                        {% if member.twitter_url %}
+                                            <a href="{{ member.twitter_url }}"><i class="fa-brands fa-twitter"></i></a>
+                                        {% endif %}
+                                        {% if member.linkedin_url %}
+                                            <a href="{{ member.linkedin_url }}"><i class="fa-brands fa-linkedin-in"></i></a>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <h3><a href="team-single.html">{{ member.name }}</a></h3>

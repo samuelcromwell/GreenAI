@@ -19,6 +19,9 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=255)
     role = models.CharField(max_length=255)
     image = models.ImageField(upload_to='team/')
+    facebook_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return self.name
@@ -64,3 +67,26 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+    
+class Investor(models.Model):
+    name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='investors/', blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    initial_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    current_price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    time = models.DateField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.name

@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -24,7 +24,10 @@ def index(request):
             return JsonResponse({'status': 'error', 'errors': form.errors.as_json()}, status=400)
     else:
         form = ContactForm()
-    return render(request, 'website/index.html', {'form': form})
+    # Fetch the latest 3 blog posts
+    blogs = Blog.objects.order_by('-time')[:3]
+
+    return render(request, 'website/index.html', {'form': form, 'blogs': blogs})
 
 def about(request):
     team_members = TeamMember.objects.all()
@@ -55,7 +58,8 @@ def support(request):
     return render(request, 'website/support.html')
 
 def partners(request):
-    return render(request, 'website/partners.html')
+    investors = Investor.objects.all()
+    return render(request, 'website/partners.html', {'investors': investors})
 
 def feedback(request):
     return render(request, 'website/feedback.html')
@@ -101,8 +105,8 @@ def whitepapers(request):
     return render(request, 'website/whitepapers.html')
 
 def FAQs(request):
-    faq = FAQ.objects.all()
-    return render(request, 'website/FAQs.html', {'faq': faq})
+    faqs = FAQ.objects.all()
+    return render(request, 'website/FAQs.html', {'faqs': faqs})
 
 def casestudies(request):
     return render(request, 'website/casestudies.html')

@@ -182,174 +182,28 @@
                         <div class="product light">
                             <div class="container">
                                 <div class="row g-4">
+                                    {% for product in products %}
                                     <div class="col-md-4">
                                         <div class="item">
-                                            <img src="{% static 'images/product/product1.png' %}" alt="image">
+                                            {% if product.image %}
+                                                <img src="{{ product.image.url }}" alt="image">
+                                            {% else %}
+                                                <img src="{% static 'images/product/default.png' %}" alt="image">
+                                            {% endif %}
                                             <div class="content">
-                                                <h4><a href="shop-single.html">Wood Bowls</a></h4>
-                                                <del>$1099</del> <span>- $999</span>
+                                                <h4><a href="shop-single.html">{{ product.name }}</a></h4>
+                                                {% if product.initial_price %}
+                                                    <del>${{ product.initial_price }}</del>
+                                                {% endif %}
+                                                    <span>- ${{ product.current_price }}</span>
                                             </div>
                                             <div class="icon">
                                                 <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
+                                                <a href="#0" class="active"><i class="fa-solid fa-cart-shopping"></i></a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product2.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Trays</a></h4>
-                                                <del>$259</del> <span>- $199</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product3.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Wood Frames</a></h4>
-                                                <del>$299</del> <span>- $258</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product4.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Utensils</a></h4>
-                                                <del>$459</del> <span>- $358</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product5.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Wood Coasters</a></h4>
-                                                <del>$1099</del> <span>- $999</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product6.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Placemats</a></h4>
-                                                <del>$259</del> <span>- $199</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product7.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Wood Boxes</a></h4>
-                                                <del>$299</del> <span>- $258</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product8.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Chopsticks</a></h4>
-                                                <del>$1099</del> <span>- $999</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product9.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Wood Sculptures</a></h4>
-                                                <del>$259</del> <span>- $199</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product10.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Skewers</a></h4>
-                                                <del>$299</del> <span>- $258</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product11.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Wood Mirrors</a></h4>
-                                                <del>$259</del> <span>- $199</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            <img src="{% static 'images/product/product12.png' %}" alt="image">
-                                            <div class="content">
-                                                <h4><a href="shop-single.html">Bamboo Rugs</a></h4>
-                                                <del>$299</del> <span>- $258</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i
-                                                        class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                                 <div class="pt-30 bor-top mt-65">
                                     <a class="blog-pegi" href="#0">01</a>
