@@ -230,6 +230,14 @@
                     messageContainer.append(messageItem);
                     messageContainer.show(); // Show the messages container
                     grecaptcha.reset(); // Reset the reCAPTCHA
+
+                    //Hide the messages after 5 seconds
+                    setTimeout(function() {
+                        messageContainer.fadeOut('slow', function() {
+                            messageContainer.empty(); //Clear the messages
+                            messageContainer.show(); //Keep the container available for future messages                             
+                        });
+                    }, 5000)
                 },
                 error: function(xhr, status, error) {
                     var messageContainer = $('#message-container');
@@ -240,6 +248,14 @@
                     messageContainer.append(messageItem);
                     messageContainer.show(); // Show the messages container
                     grecaptcha.reset(); // Reset the reCAPTCHA
+
+                    //Hide the messages after 5 seconds
+                    setTimeout(function() {
+                        messageContainer.fadeOut('slow', function() {
+                            messageContainer.empty(); //Clear the messages
+                            messageContainer.show(); //Keep the container available for future messages
+                        });
+                    }, 5000)
                 }
             });
         }
