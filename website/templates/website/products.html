@@ -178,11 +178,11 @@
                         <div
                             class="top-bar sub-bg mb-4 d-flex flex-wrap justify-content-between align-items-center main-bg radius10 px-4 py-3">
                             <span>Showing 1–12 of 15 results</span>
-                            <select name="select" id="select">
+                            {% comment %} <select name="select" id="select">
                                 <option value="select">Sort by latest</option>
                                 <option value="select">Sort by Update</option>
                                 <option value="select">Sort by New</option>
-                            </select>
+                            </select> {% endcomment %}
                         </div>
                         <div class="product light">
                             <div class="container">
@@ -211,13 +211,25 @@
                                 </div>
                                 <div class="pt-30 bor-top mt-65">
                                     {% for page_num in products.paginator.page_range %}
-                                        {% if products.number == page_num %}
+                                        {% if page_num <= 3 or page_num == products.paginator.num_pages %}
+                                            {% if products.number == page_num %}
+                                                <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
+                                            {% else %}
+                                                <a href="?page={{ page_num }}" class="blog-pegi">{{ page_num }}</a>
+                                            {% endif %}
+                                        {% elif page_num == products.number or page_num == products.paginator.num_pages %}
+                                            <!-- Display the current page number when beyond 3 or the last page -->
                                             <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
-                                        {% else %}
-                                            <a href="?page={{ page_num }}" class="blog-pegi">{{ page_num }}</a>
+                                        {% elif page_num == 4 %}
+                                            <span class="blog-pegi">...</span>
                                         {% endif %}
                                     {% endfor %}
-                                    <a href="#0"><i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i></a>
+                                    
+                                    {% if products.has_next %}
+                                        <a href="?page={{ products.next_page_number }}" class="blog-pegi-arrow">
+                                            <i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

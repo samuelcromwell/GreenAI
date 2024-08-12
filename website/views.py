@@ -1,8 +1,8 @@
 import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import ContactForm, SubscribeForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product
+from .forms import ContactForm, SubscribeForm, ReviewForm
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -78,7 +78,24 @@ def products(request):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    context = {'product': product}
+
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.product = product
+            review.save()
+            return redirect('product_detail', slug=product.slug)
+    else:
+        review_form = ReviewForm()
+
+    reviews = Review.objects.filter(product=product).order_by('-created_at')
+
+    context = {
+        'product': product,
+        'review_form': review_form,
+        'reviews': reviews
+    }
     return render(request, 'website/product_detail.html', context)
 
 def subscribe(request):

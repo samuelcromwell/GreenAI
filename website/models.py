@@ -66,7 +66,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     initial_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     current_price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
+    brief_description = models.TextField(max_length=70)
+    detailed_description = models.TextField()
     slug = models.SlugField(max_length=100, unique=True)
     time = models.DateField(auto_now_add=True)
 
@@ -100,3 +101,13 @@ class Investor(models.Model):
     def __str__(self):
         return self.name
 
+class Review(models.Model):
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.name} - {self.rating} Stars"

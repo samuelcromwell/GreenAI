@@ -79,7 +79,7 @@
                                 </div>
                                 <h2 class="pb-3">Kshs.{{ product.current_price|intcomma }}</h2>
                                 <h4 class="pb-2 primary-color">Product Description</h4>
-                                <p class="text-justify mb-10">{{ product.description }}</p>
+                                <p class="text-justify mb-10">{{ product.brief_description }}</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-8">
@@ -104,9 +104,7 @@
                                         <a href="#0" class="d-block text-center btn-one mt-40"><i
                                                 class="fa-solid fa-basket-shopping pe-2"></i> <span
                                                 class="text-capitalize">
-                                                add
-                                                to
-                                                cart
+                                                add to cart
                                             </span></a>
                                     </div>
                                 </div>
@@ -132,52 +130,7 @@
                     </ul>
                     <div class="tab-content">
                         <div id="description" class="tab-pane fade show active">
-                            <p class="pb-4 text-justify">Proactively disseminate impactful mindshare without technically
-                                sound web
-                                services.
-                                Distiively harness
-                                compelling
-                                innovation before high payoff testing procedures. Uniquely fashion customized web
-                                services
-                                with cross
-                                functional
-                                internal or "organic" sources. Uniquely restore error-free e-commerce via
-                                multidisciplinary
-                                antailers.
-                                Completely whiteboard user friendly quality vectors rather than synergistic technologi
-                                Professionally
-                                evisculate
-                                enterprise wide metrics without resource maximizing interfaces. Synergistically
-                                benchmark
-                                enterprise-wide e-tailers
-                                through optimal paradigms. Phosfluorescently foster cutting-edge was and benefits
-                                without
-                                magnetic</p>
-                            <p class="pb-4 text-justify">Completely build emerging ideas through covalent applications.
-                                Distinctively
-                                synthesize user
-                                friendly
-                                collaboration and
-                                idsharing with superior content. Energistically incentivize user friendly models rather
-                                than
-                                timely
-                                convergence.
-                                Objectively disintermediate high standards in paradigms before state the art process
-                                improvements.
-                                Interactively
-                                orchestrate plug-and-play human capital whereas customer directed initiatives.</p>
-                            <p class="text-justify">Intrinsicly provide access to team driven information without
-                                adaptive content.
-                                Collaboratively embrace
-                                reliable supply
-                                chains via extensible benefits. Enthusiastically visualize accurate human capital before
-                                backend
-                                meta-services.
-                                Continually reinvent interdependent schemas through mission-critical benefits.
-                                Competently
-                                leverage
-                                existing parallel
-                                action items through end-to-end "outside the box" thinking.</p>
+                            <p class="pb-4 text-justify">{{ product.detailed_description }}                      
                         </div>
                         <div id="review" class="tab-pane fade">
                             <div class="review-wrp">
@@ -315,8 +268,7 @@
                                 </div>
                                 <div class="section-title mt-5 py-15 mb-30">
                                     <h2 class="text-capitalize primary-color mb-10">add a review</h2>
-                                    <p class="mb-20">Your email address will not be published. Required fields are
-                                        marked *
+                                    <p class="mb-20">All Required fields are marked *
                                     </p>
                                     <div class="shop-single__rate-now">
                                         <p>Rate this product? *</p>
@@ -344,7 +296,7 @@
                                         <textarea class="w-100 mb-4 bor p-4" placeholder="Message"></textarea>
                                     </form>
                                     <div class="btn-wrp">
-                                        <button class="btn-one"><span>Post Submit</span></button>
+                                        <button class="btn-one"><span>Post Review</span></button>
                                     </div>
                                 </div>
                             </div>

@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review
 
 admin.site.register(Contact)
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('name', 'role')
-    fields = ('name', 'position', 'image', 'facebook_url', 'twitter_url', 'linkedin_url')
+    fields = ('name', 'role', 'image', 'facebook_url', 'twitter_url', 'linkedin_url')
 
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
@@ -44,4 +44,10 @@ class InvestorAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class Product(admin.ModelAdmin):
     list_display = ('name', 'current_price')
-    fields = ('name', 'image', 'description', 'initial_price', 'current_price', 'slug')
+    fields = ('name', 'image', 'brief_description', 'detailed_description', 'initial_price', 'current_price', 'slug')
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'rating', 'created_at', 'message')
+    list_filter = ('rating', 'created_at')
+    search_fields = ('name', 'email', 'message')
