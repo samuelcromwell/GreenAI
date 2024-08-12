@@ -178,10 +178,15 @@
                             <i class="fa-regular fa-envelope our-info__input-envelope"></i>
                             {% csrf_token %}
                             {{ subscribe_form.email }}
-                            <button type="submit" class="fa-solid fa-paper-plane our-info__input-plane"></button>
+                            <!-- Invisible reCAPTCHA button -->
+                            <button class="g-recaptcha fa-solid fa-paper-plane our-info__input-plane" 
+                                    data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
+                                    data-callback="onSubmitSubscribe" 
+                                    data-action="submit">
+                            </button>
                         </form>
                         <!-- Place the messages container here -->
-                        <div class="messages-container" id="message-container"></div>
+                        <div class="messages-container" id="message-container" style="display:none;"></div>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -197,41 +202,55 @@
     </div>
     <!-- Our info area end here -->
     
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        $(document).ready(function() {
-            $('#subscribe-form').submit(function(event) {
-                event.preventDefault(); // Prevent the form from submitting the traditional way
-                var formData = $(this).serialize(); // Serialize the form data
-
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        var messageContainer = $('#message-container');
-                        messageContainer.empty(); // Clear previous messages
-
-                        var messageItem = $('<li class="message-item"></li>');
-                        if (response.success) {
-                            messageItem.addClass(succes '').text(response.message);
-                            $('#subscribe-form')[0].reset(); // Reset the form on success
-                        } else {
-                            messageItem.addClass('error').text(response.message);
-                        }
-                        messageContainer.append(messageItem);
-                        messageContainer.show(); // Show the messages container
-                    },
-                    error: function(xhr, status, error) {
-                        var messageContainer = $('#message-container');
-                        messageContainer.empty(); // Clear previous messages
-
-                        var messageItem = $('<li class="message-item error"></li>');
-                        messageItem.text('An error occurred. Please try again later.');
-                        messageContainer.append(messageItem);
-                        messageContainer.show(); // Show the messages container
-                    }
-                });
+        function onSubmitSubscribe(token) {
+            $.ajaxSetup({
+                headers: { "X-CSRFToken": '{{ csrf_token }}' }
             });
+
+            var formData = $('#subscribe-form').serialize(); // Serialize the form data
+            formData += '&g-recaptcha-response=' + token; // Append the reCAPTCHA token
+
+            $.ajax({
+                type: 'POST',
+                url: $('#subscribe-form').attr('action'),
+                data: formData,
+                success: function(response) {
+                    var messageContainer = $('#message-container');
+                    messageContainer.empty(); // Clear previous messages
+
+                    var messageItem = $('<li class="message-item"></li>');
+                    if (response.success) {
+                        messageItem.addClass('success').text(response.message);
+                        $('#subscribe-form')[0].reset(); // Reset the form on success
+                    } else {
+                        messageItem.addClass('error').text(response.message);
+                    }
+                    messageContainer.append(messageItem);
+                    messageContainer.show(); // Show the messages container
+                    grecaptcha.reset(); // Reset the reCAPTCHA
+                },
+                error: function(xhr, status, error) {
+                    var messageContainer = $('#message-container');
+                    messageContainer.empty(); // Clear previous messages
+
+                    var messageItem = $('<li class="message-item error"></li>');
+                    messageItem.text('An error occurred. Please try again later.');
+                    messageContainer.append(messageItem);
+                    messageContainer.show(); // Show the messages container
+                    grecaptcha.reset(); // Reset the reCAPTCHA
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#subscribe-form').on('submit', function(e) {
+                e.preventDefault();
+                grecaptcha.execute(); // Execute reCAPTCHA
+            });
+
+            window.onSubmitSubscribe = onSubmitSubscribe; // Make onSubmitSubscribe function available globally
         });
     </script>
 
