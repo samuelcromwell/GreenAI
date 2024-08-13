@@ -11,14 +11,19 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     path("products/", views.products, name="products"),
+    path("products/<slug:slug>/", views.product_detail, name='product_detail'),
     path("solutions/", views.solutions, name="solutions"),
     path("sustainability/", views.sustainability, name="sustainability"),
     path("support/", views.support, name="support"),
     path("partners/", views.partners, name="partners"),
     path("feedback/", views.feedback, name="feedback"),
-    path("blog/", views.blog, name="blog"),
+    path("blogs/", views.blogs, name="blogs"),
+    path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path("footer/", views.footer_gallery_view, name="footer_gallery"),
+    path("whitepapers/", views.whitepapers, name="whitepapers"),
+    path("casestudies/", views.casestudies, name="casestudies"),
+    path("FAQs/", views.FAQs, name='FAQs'),
 ]
 
 

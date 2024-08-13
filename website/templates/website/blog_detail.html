@@ -1,0 +1,35 @@
+{% extends 'website/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .page-banner.bg-image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pt-130 {
+        padding-top: 130px;
+    }
+</style>
+    <!-- Page banner area start here -->
+    <section class="page-banner bg-image pt-130 pb-130" style="background-image: url({{ blog.thumbnail_img.url }});">
+        <div class="container">
+            <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"></h2>
+            <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                <a href="{% url 'index' %}">Home :</a>
+                <span class="primary-color">Latest News :</span>
+            </div>
+        </div>
+    </section>
+    <!-- Page banner area end here -->
+<main>
+    <!-- Specific Blog section start here -->
+    <section class="blog-detail pt-130 pb-130">
+        <div class="container">
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.content }}</p>
+        </div>
+    </section>
+</main>
+    <!-- Specific Blog section start here -->
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
@@ -10,7 +11,6 @@ class Contact(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=100, choices=SUBJECT_CHOICES)
     message = models.TextField()
-    accepted_terms = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -19,6 +19,9 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=255)
     role = models.CharField(max_length=255)
     image = models.ImageField(upload_to='team/')
+    facebook_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return self.name
@@ -36,3 +39,75 @@ class FooterGallery(models.Model):
 
     def __str__(self):
         return self.image.name
+
+
+class Blog(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    thumbnail_img = models.ImageField(null=True, blank=True, upload_to="blog_images/")
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    time = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('blog_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
+    
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    initial_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    current_price = models.DecimalField(max_digits=10, decimal_places=2)
+    brief_description = models.TextField(max_length=70)
+    detailed_description = models.TextField()
+    slug = models.SlugField(max_length=100, unique=True)
+    time = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('product_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.name
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+class Investor(models.Model):
+    name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='investors/', blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.name} - {self.rating} Stars"

@@ -3,118 +3,163 @@
 {% block content %}
 {% load static %}
 <style>
-        .page-banner.bg-image {
-            background-image: url('/static/images/contact/contact.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .pt-130 {
-            padding-top: 130px;
-        }
-        .pb-130 {
-            padding-bottom: 130px;
-        }
-
-        .content.bg-image {
-            background-image: url("{% static 'images/icon/customer_care.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            color: white; /* Ensure text is readable on the background */
-        }
+    .page-banner.bg-image {
+        background-image: url('/static/images/contact/contact.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pt-130 {
+        padding-top: 130px;
+    }
+    .pb-130 {
+        padding-bottom: 130px;
+    }
+    .content.bg-image {
+        background-image: url("{% static 'images/icon/customer_care.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        color: white; /* Ensure text is readable on the background */
+    }
 </style>
+<!-- Add necessary scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{ csrf_token }}' }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "contact" %}',
+            data: {
+                name: $('input[name="name"]').val(),
+                email: $('input[name="email"]').val(),
+                subject: $('select[name="subject"]').val(),
+                message: $('textarea[name="message"]').val(),
+                'g-recaptcha-response': token,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#form-messages').html('<p style="color: green;">Your message has been recorded! We will get back to you soon.</p>');
+                    $('#contact_form')[0].reset();
+                    grecaptcha.reset();
+                } else {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try again.</p>');
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                try {
+                    let errors = JSON.parse(xhr.responseText).errors;
+                    let errorMessages = '<p style="color: red;">Please fill in the form correctly:</p><ul style="color: red;">';
+                    for (let field in errors) {
+                        errors[field].forEach(function(error) {
+                            errorMessages += '<li>' + error + '</li>';
+                        });
+                    }
+                    errorMessages += '</ul>';
+                    $('#form-messages').html(errorMessages);
+                } catch (e) {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try filling in the form again.</p>');
+                }
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#contact_form').on('submit', function(e) {
+            e.preventDefault();
+            grecaptcha.execute();
+        });
+
+        window.onSubmit = onSubmit; // Make onSubmit function available globally
+    });
+</script>
 <main>
-        <!-- Page banner area start here -->
-        <section class="page-banner bg-image pt-130 pb-130">
-            <div class="container">
-                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Contact Us</h2>
-                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                    <a href="{% url 'index' %}">Home :</a>
-                    <span class="primary-color">Contact Us</span>
-                </div>
+    <!-- Page banner area start here -->
+    <section class="page-banner bg-image pt-130 pb-130">
+        <div class="container">
+            <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Contact Us</h2>
+            <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                <a href="{% url 'index' %}">Home :</a>
+                <span class="primary-color">Contact Us</span>
             </div>
-        </section>
-        <!-- Page banner area end here -->
-
-        <!-- Contact form area start here -->
-        <section class="contact pt-130 pb-130">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="content bg-image">
-                            <h2>Have a question for us? <br>
-                                Let's talk.</h2>
-                            
-                            <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
-                            <ul>
-                                <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17"
-                                        target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City
-                                        </a>
-                                </li>
-                                <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678
-                                        </a>
-                                </li>
-                                <li><a href="mailto:company.info@mail.com"><i
-                                        class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-area">
-                            <form method="post" action="{% url 'contact' %}">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" class="mt-40">Submit Now <i class="fa-solid fa-arrow-right-long"></i></button>
-                            </form>
-                            {% if messages %}
-                                <ul class="messages">
-                                    {% for message in messages %}
-                                        <li class="{{ message.tags }}">{{ message }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Contact form area end here -->
-
-        <!-- Contact map area start here -->
-        <div class="google-map">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d58172.13111404762!2d36.96200687344218!3d-1.1980466769871558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWestport%20Industrial%20city!5e1!3m2!1sen!2ske!4v1721807730967!5m2!1sen!2ske"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <!-- Contact map area end here -->
-</main>
-    <!-- Back to top area start here -->
-    <div class="scroll-up">
-        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49  ,1 ,98 a49,49  ,1 ,-98" />
-        </svg>
-    </div>
-    <!-- Back to top area end here -->
+    </section>
+    <!-- Page banner area end here -->
 
-<!-- Jquery 3. 7. 1 Min Js -->
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-    <!-- Bootstrap min Js -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Swiper bundle min Js -->
-    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
-    <!-- Counterup min Js -->
-    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
-    <!-- Wow min Js -->
-    <script src="{% static 'js/wow.min.js' %}"></script>
-    <!-- Magnific popup min Js -->
-    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
-    <!-- Nice select min Js -->
-    <script src="{% static 'js/nice-select.min.js' %}"></script>
-    <!-- Isotope pkgd min Js -->
-    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-    <!-- Waypoints Js -->
-    <script src="{% static 'js/jquery.waypoints.js' %}"></script>
-    <!-- Script Js -->
-    <script src="{% static 'js/script.js' %}"></script>
+    <!-- Contact form area start here -->
+    <section class="contact pt-130 pb-130">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="content bg-image">
+                        <h2>Have a question for us? <br> Let's talk.</h2>
+                        <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17" target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City</a></li>
+                            <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678</a></li>
+                            <li><a href="mailto:company.info@mail.com"><i class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-area">
+                        <form method="post" action="{% url 'contact' %}" id="contact_form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <!-- Invisible reCAPTCHA button -->
+                            <button class="g-recaptcha mt-40" 
+                                    data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
+                                    data-callback="onSubmit" 
+                                    data-action="submit">Submit Now <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </form>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li class="{{ message.tags }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div id="form-messages" class="col-md-12 mt-3"></div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact form area end here -->
+</main>
+<!-- Back to top area start here -->
+<div class="scroll-up">
+    <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49  ,1 ,98 a49,49  ,1 ,-98" />
+    </svg>
+</div>
+<!-- Back to top area end here -->
+
+<!-- Jquery 3.7.1 Min Js -->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<!-- Bootstrap min Js -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Swiper bundle min Js -->
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<!-- Counterup min Js -->
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<!-- Wow min Js -->
+<script src="{% static 'js/wow.min.js' %}"></script>
+<!-- Magnific popup min Js -->
+<script src="{% static 'js/magnific-popup.min.js' %}"></script>
+<!-- Nice select min Js -->
+<script src="{% static 'js/nice-select.min.js' %}"></script>
+<!-- Isotope pkgd min Js -->
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<!-- Waypoints Js -->
+<script src="{% static 'js/jquery.waypoints.js' %}"></script>
+<!-- Script Js -->
+<script src="{% static 'js/script.js' %}"></script>
 
 {% endblock %}

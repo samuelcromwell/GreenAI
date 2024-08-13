@@ -4225,7 +4225,7 @@ input {
 }
 .testimonial-two__image::after {
   position: absolute;
-  content: url(../../static/images/testimonial/testimonial-line.png' %});
+  content: url(../../static/images/testimonial/testimonial-line.png);
   left: -80px;
   top: 5px;
 }
