@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -43,7 +43,12 @@ def solutions(request):
     return render(request, 'website/solutions.html')
 
 def sustainability(request):
-    return render(request, 'website/sustainability.html')
+    sustainability = Sustainability.objects.all()
+    # paginator = Paginator(sustainability, 4) # Paginate by 4 articles per page
+    # page = request.GET.get("page")
+    # sustainability = paginator.get_page(page)
+    context = {"sustainability": sustainability}
+    return render(request, 'website/sustainability.html', context)
 
 def support(request):
     return render(request, 'website/support.html')
@@ -67,6 +72,11 @@ def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     context = {'blog': blog}
     return render(request, 'website/blog_detail.html', context)
+
+def sustainability_detail(request, slug):
+    sustainability = get_object_or_404(Sustainability, slug=slug)
+    context = {'sustainability': sustainability}
+    return render(request, 'website/sustainability_detail.html', context)
 
 def products(request):
     products = Product.objects.all().order_by("-time")

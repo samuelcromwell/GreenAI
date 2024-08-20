@@ -24,6 +24,73 @@
         </div>
     </section>
     <!-- Page banner area end here -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    $(document).ready(function() {
+        let rating = 0;
+
+        // Handle star rating selection
+        $('#rating-stars span').on('click', function() {
+            rating = $(this).data('value');
+            $('#rating').val(rating);
+            $('#rating-stars span').removeClass('selected');
+            $(this).addClass('selected');
+            $(this).prevAll().addClass('selected');
+        });
+
+        // Handle form submission
+        $('#review_form').on('submit', function(e) {
+            e.preventDefault();
+            grecaptcha.execute();
+        });
+
+        // reCAPTCHA submit function
+        window.onSubmit = function(token) {
+            $.ajaxSetup({
+                headers: { "X-CSRFToken": '{{ csrf_token }}' }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "submit_review" %}',  // Adjust the URL as needed
+                data: {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    rating: $('#rating').val(),
+                    message: $('#message').val(),
+                    'g-recaptcha-response': token,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        $('#form-messages').html('<p style="color: green;">Your review has been submitted! Thank you.</p>');
+                        $('#review_form')[0].reset();
+                        $('#rating-stars span').removeClass('selected');
+                        grecaptcha.reset();
+                    } else {
+                        $('#form-messages').html('<p style="color: red;">An error occurred. Please try again.</p>');
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    try {
+                        let errors = JSON.parse(xhr.responseText).errors;
+                        let errorMessages = '<p style="color: red;">Please fill in the form correctly:</p><ul style="color: red;">';
+                        for (let field in errors) {
+                            errors[field].forEach(function(error) {
+                                errorMessages += '<li>' + error + '</li>';
+                            });
+                        }
+                        errorMessages += '</ul>';
+                        $('#form-messages').html(errorMessages);
+                    } catch (e) {
+                        $('#form-messages').html('<p style="color: red;">An error occurred. Please try filling in the form again.</p>');
+                    }
+                }
+            });
+        };
+    });
+</script>
 <main>
 <!-- Shop single area start here -->
         <section class="shop-single pt-130 pb-130">
@@ -140,15 +207,6 @@
                                     </div>
                                     <div class="content position-relative p-4 bor">
                                         <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <a href="#0">
-                                                <h4 class="text-capitalize primary-color">Janaton Doe <span
-                                                        class="sm-font ms-2 fw-normal">27
-                                                        March 2023
-                                                        at
-                                                        3.44
-                                                        pm</span>
-                                                </h4>
-                                            </a>
                                             <div class="star primary-color">
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
@@ -157,14 +215,6 @@
                                                 <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
                                             </div>
                                         </div>
-                                        <p class="text-justify">Globally leverage existing sticky testing procedures
-                                            whereas
-                                            timely
-                                            alignments. Appropriately leverage existing cross unit human a capital
-                                            Globally
-                                            distributed
-                                            process improvements and empowered
-                                            internal or sources. </p>
                                     </div>
                                 </div>
                                 <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
@@ -173,15 +223,6 @@
                                     </div>
                                     <div class="content position-relative p-4 bor">
                                         <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <a href="#0">
-                                                <h4 class="text-capitalize primary-color">kawser ahemd<span
-                                                        class="sm-font ms-2 fw-normal">27
-                                                        March 2023
-                                                        at
-                                                        3.44
-                                                        pm</span>
-                                                </h4>
-                                            </a>
                                             <div class="star primary-color">
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
@@ -190,14 +231,6 @@
                                                 <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
                                             </div>
                                         </div>
-                                        <p class="text-justify">Globally leverage existing sticky testing procedures
-                                            whereas
-                                            timely
-                                            alignments. Appropriately leverage existing cross unit human a capital
-                                            Globally
-                                            distributed
-                                            process improvements and empowered
-                                            internal or sources. </p>
                                     </div>
                                 </div>
                                 <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
@@ -206,15 +239,6 @@
                                     </div>
                                     <div class="content position-relative p-4 bor">
                                         <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <a href="#0">
-                                                <h4 class="text-capitalize primary-color">famad sami<span
-                                                        class="sm-font ms-2 fw-normal">27
-                                                        March 2023
-                                                        at
-                                                        3.44
-                                                        pm</span>
-                                                </h4>
-                                            </a>
                                             <div class="star primary-color">
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
@@ -223,14 +247,6 @@
                                                 <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
                                             </div>
                                         </div>
-                                        <p class="text-justify">Globally leverage existing sticky testing procedures
-                                            whereas
-                                            timely
-                                            alignments. Appropriately leverage existing cross unit human a capital
-                                            Globally
-                                            distributed
-                                            process improvements and empowered
-                                            internal or sources. </p>
                                     </div>
                                 </div>
                                 <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
@@ -239,15 +255,6 @@
                                     </div>
                                     <div class="content position-relative p-4 bor">
                                         <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <a href="#0">
-                                                <h4 class="text-capitalize primary-color">Abu rayhan <span
-                                                        class="sm-font ms-2 fw-normal">27
-                                                        March 2023
-                                                        at
-                                                        3.44
-                                                        pm</span>
-                                                </h4>
-                                            </a>
                                             <div class="star primary-color">
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
                                                 <span><i class="fa-solid fa-star sm-font"></i></span>
@@ -256,48 +263,38 @@
                                                 <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
                                             </div>
                                         </div>
-                                        <p class="text-justify">Globally leverage existing sticky testing procedures
-                                            whereas
-                                            timely
-                                            alignments. Appropriately leverage existing cross unit human a capital
-                                            Globally
-                                            distributed
-                                            process improvements and empowered
-                                            internal or sources. </p>
                                     </div>
                                 </div>
                                 <div class="section-title mt-5 py-15 mb-30">
-                                    <h2 class="text-capitalize primary-color mb-10">add a review</h2>
-                                    <p class="mb-20">All Required fields are marked *
-                                    </p>
+                                    <h2 class="text-capitalize primary-color mb-10">Add a Review</h2>
+                                    <p class="mb-20">All Required fields are marked *</p>
                                     <div class="shop-single__rate-now">
                                         <p>Rate this product? *</p>
-                                        <div class="star">
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
-                                            <span><i class="fa-solid fa-star"></i></span>
+                                        <div class="star" id="rating-stars">
+                                            <span data-value="1"><i class="fa-solid fa-star"></i></span>
+                                            <span data-value="2"><i class="fa-solid fa-star"></i></span>
+                                            <span data-value="3"><i class="fa-solid fa-star"></i></span>
+                                            <span data-value="4"><i class="fa-solid fa-star"></i></span>
+                                            <span data-value="5"><i class="fa-solid fa-star"></i></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="comment-form">
-                                    <form action="#">
-                                        <div class="row g-4">
-                                            <div class="col-md-6">
-                                                <input type="text" class="w-100 mb-4 bor px-4 py-2"
-                                                    placeholder="Your Name*">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="email" class="w-100 mb-4 bor px-4 py-2"
-                                                    placeholder="Your Email*">
-                                            </div>
-                                        </div>
-                                        <textarea class="w-100 mb-4 bor p-4" placeholder="Message"></textarea>
+                                    <form method="post" id="review_form">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <input type="hidden" id="rating" name="rating" value="0">
                                     </form>
                                     <div class="btn-wrp">
-                                        <button class="btn-one"><span>Post Review</span></button>
+                                        <button class="g-recaptcha btn-one" 
+                                                data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
+                                                data-callback="onSubmit" 
+                                                data-action="submit">
+                                            <span>Post Review</span>
+                                        </button>
                                     </div>
+                                </div>
+                                    <div id="form-messages" class="col-md-12 mt-3"></div>
                                 </div>
                             </div>
                         </div>

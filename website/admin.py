@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability
 
 admin.site.register(Contact)
 
@@ -29,6 +29,17 @@ class BlogAdmin(admin.ModelAdmin):
     form = BlogAdminForm
 
 admin.site.register(Blog, BlogAdmin)
+
+
+class SustainabilityAdminForm(forms.ModelForm):
+    class Meta:
+        model = Sustainability
+        fields = "__all__"
+
+class SustainabilityAdmin(admin.ModelAdmin):
+    form = SustainabilityAdminForm
+
+admin.site.register(Sustainability, SustainabilityAdmin)
 
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
