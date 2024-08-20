@@ -44,9 +44,9 @@ def solutions(request):
 
 def sustainability(request):
     sustainability = Sustainability.objects.all()
-    # paginator = Paginator(sustainability, 4) # Paginate by 4 articles per page
-    # page = request.GET.get("page")
-    # sustainability = paginator.get_page(page)
+    paginator = Paginator(sustainability, 4) # Paginate by 4 articles per page
+    page = request.GET.get("page")
+    sustainability = paginator.get_page(page)
     context = {"sustainability": sustainability}
     return render(request, 'website/sustainability.html', context)
 
