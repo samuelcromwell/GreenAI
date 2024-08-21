@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
 from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
@@ -43,6 +43,30 @@ class SustainabilityAdmin(admin.ModelAdmin):
     form = SustainabilityAdminForm
 
 admin.site.register(Sustainability, SustainabilityAdmin)
+
+class CaseStudyAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = CaseStudy
+        fields = "__all__"
+
+class CaseStudyAdmin(admin.ModelAdmin):
+    forms = CaseStudyAdminForm
+
+admin.site.register(CaseStudy, CaseStudyAdmin)
+
+class SolutionAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Solution
+        fields = "__all__"
+
+class SolutionAdmin(admin.ModelAdmin):
+    forms = CaseStudyAdminForm
+
+admin.site.register(Solution, SolutionAdmin)
 
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):

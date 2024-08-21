@@ -45,7 +45,7 @@ class FooterGallery(models.Model):
 
 class Blog(models.Model):
     sno = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=55)
     content = HTMLField()
     thumbnail_img = models.ImageField(null=True, blank=True, upload_to="blog_images/")
     slug = models.SlugField(max_length=100, unique=True, blank=True)
@@ -83,6 +83,27 @@ class Sustainability(models.Model):
     def __str__(self):
         return self.title
 
+class CaseStudy(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=55)
+    content = HTMLField()
+    thumbnail_img = models.ImageField(null=True, blank=True, upload_to="case_studies/")
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    time = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('casestudies', kwargs={'slug': self.slug})
+    
+    def __str__(self):
+        return self.title
+
+
 class CSR(models.Model):
     name = models.CharField(max_length=100)
     number = models.DecimalField(max_digits=10, decimal_places=0)
@@ -108,6 +129,23 @@ class Initiative(models.Model):
     def __str__(self):
         return self.title
 
+class Solution(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='industry_solutions/')
+    content = HTMLField()
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('industry_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
     
 class Product(models.Model):
     name = models.CharField(max_length=255)

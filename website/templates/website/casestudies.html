@@ -1,9 +1,72 @@
 {% extends 'website/base.html' %}
 {% block content %}
 {% load static %}
+<style>
+    .page-banner.bg-image {
+        background-image: url('{% static 'images/casestudy/casestudy.jpg' %}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pt-130 {
+        padding-top: 130px;
+    }
+    .blog-two__image img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+</style>
+    <!-- Page banner area start here -->
+    <section class="page-banner bg-image pt-130 pb-130">
+        <div class="container">
+            <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Case Studies</h2>
+            <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                <a href="{% url 'index' %}">Home :</a>
+                <span class="primary-color">Case Studies :</span>
+            </div>
+        </div>
+    </section>
+    <!-- Page banner area end here -->
 
-
-
-
-
+<main>
+<!-- Case study area start here -->
+    <section class="blog-two pt-130 pb-130">
+        <div class="container">
+            <div class="row g-4">
+                {% for item in casestudies %}
+                <div class="col-lg-4 col-md-6 wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">
+                    <div class="donation__item blog-two__item bor">
+                        <div class="blog-two__image mb-85">
+                            <div class="image">
+                                {% if item.thumbnail_img %}
+                                    <img src="{{ item.thumbnail_img.url }}" alt="{{ item.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/blog/default.jpg' %}" alt="{{ item.title }}">
+                                {% endif %}
+                                <div class="blog-two__info">
+                                    <h4>{{ item.time|date:"d" }} <br> {{ item.time|date:"F" }}</h4>
+                                    <span>{{ item.time|date:"Y" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+                        <a class="blog-two__item-arrow" href="{{ item.get_absolute_url }}"><i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagi-wrp mt-65 justify-content-center wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">
+                {% for page_num in casestudies.paginator.page_range %}
+                    {% if blogs.number == page_num %}
+                        <a href="?page={{ page_num }}" class="pagi-btn active">{{ page_num }}</a>
+                    {% else %}
+                        <a href="?page={{ page_num }}" class="pagi-btn">{{ page_num }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+<!-- Case study area end here -->
+</main>
 {% endblock %}
