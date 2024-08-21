@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'website',  
+    'website',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,35 @@ TIME_ZONE = 'Africa/Nairobi'
 
 RECAPTCHA_PUBLIC_KEY = '6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN'
 RECAPTCHA_SECRET_KEY = '6LeavgsqAAAAAAgyMutCg5jo3XFsf4ySjJ7T9O95'
+
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_IMAGE_BACKEND = "pillow"
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': 800,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'silver',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}

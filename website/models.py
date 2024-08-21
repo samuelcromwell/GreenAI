@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from tinymce.models import HTMLField
+# from ckeditor.fields import RichTextField
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
@@ -44,7 +46,7 @@ class FooterGallery(models.Model):
 class Blog(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = HTMLField()
     thumbnail_img = models.ImageField(null=True, blank=True, upload_to="blog_images/")
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     time = models.DateField(auto_now_add=True)
@@ -64,7 +66,7 @@ class Blog(models.Model):
 class Sustainability(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = HTMLField()
     thumbnail_img = models.ImageField(null=True, blank=True, upload_to="sustainability_images/")
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     time = models.DateField(auto_now_add=True)
@@ -80,6 +82,32 @@ class Sustainability(models.Model):
 
     def __str__(self):
         return self.title
+
+class CSR(models.Model):
+    name = models.CharField(max_length=100)
+    number = models.DecimalField(max_digits=10, decimal_places=0)
+
+    def __str__(self):
+        return self.name
+    
+class Initiative(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='green_initiatives/')
+    content = HTMLField()
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('initiative_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
+
     
 class Product(models.Model):
     name = models.CharField(max_length=255)

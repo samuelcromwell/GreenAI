@@ -15,6 +15,7 @@ urlpatterns = [
     path("solutions/", views.solutions, name="solutions"),
     path("sustainability/", views.sustainability, name="sustainability"),
     path("sustainability/<slug:slug>/", views.sustainability_detail, name='sustainability_detail'),
+    path("sustainability/initiatives/<slug:slug>/", views.initiative_detail, name='initiative_detail'),
     path("support/", views.support, name="support"),
     path("partners/", views.partners, name="partners"),
     path("feedback/", views.feedback, name="feedback"),

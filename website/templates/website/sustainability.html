@@ -1,6 +1,7 @@
 {% extends "website/base.html" %}
 {% block content %}
 {% load static %}
+{% load humanize %}
 <style>
         .page-banner.bg-image {
             background-image: url('/static/images/sustainability/sustainability.jpg');
@@ -53,25 +54,24 @@
                 <div class="banner-three banner-five">
                     <div class="swiper banner-three__slider banner-five__slider">
                         <div class="swiper-wrapper">
+                            {% for initiative in initiatives %}
                             <div class="swiper-slide">
                                 <div class="slide-bg project-banner__bg"
-                                    data-background="{% static 'images/project/project-banner1.jpg' %}"></div>
+                                    style="background-image: url('{{ initiative.image.url }}');"></div>
                                 <div class="container">
                                     <div class="banner-three__content project-banner__content banner-five__content">
-                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our green initiatives
-                                            </h2>
+                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">{{ initiative.title }}</h2>
                                         <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
                                             <div class="about_info d-flex align-items-center pt-65">
-                                                <a href="{% url 'contact' %}" class="btn-one-light"><span>view more</span> <i
-                                                        class="fa-solid fa-angles-right"></i></a>
+                                                <a href="{{ initiative.get_absolute_url }}" class="btn-one-light"><span>view details</span> 
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                </a>
                                                 <span class="bor-left d-none d-sm-block mx-4"></span>
                                                 <div class="info d-flex flex-wrap align-items-center">
-                                                    <i
-                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
+                                                    <i class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
                                                     <div class="about_info_con">
-                                                        <span class="d-block text-capitalize text-white">call any
-                                                            time</span>
-                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
+                                                        <span class="d-block text-capitalize text-white">call any time</span>
+                                                        <a class="text-white" href="tel:+254712345678">+254 712 345 678</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,58 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="slide-bg project-banner__bg"
-                                    data-background="{% static 'images/project/project-banner2.jpg' %}"></div>
-                                <div class="container">
-                                    <div class="banner-three__content project-banner__content banner-five__content">
-                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our green initiatives
-                                        </h2>
-                                        <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
-                                            <div class="about_info d-flex align-items-center pt-65">
-                                                <a href="{% url 'contact' %}" class="btn-one-light"><span>view more</span> <i
-                                                        class="fa-solid fa-angles-right"></i></a>
-                                                <span class="bor-left d-none d-sm-block mx-4"></span>
-                                                <div class="info d-flex flex-wrap align-items-center">
-                                                    <i
-                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
-                                                    <div class="about_info_con">
-                                                        <span class="d-block text-capitalize text-white">call any
-                                                            time</span>
-                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="slide-bg project-banner__bg"
-                                    data-background="{% static 'images/project/project-banner3.jpg' %}"></div>
-                                <div class="container">
-                                    <div class="banner-three__content project-banner__content banner-five__content">
-                                        <h2 class="text-white" data-animation="fadeInUp" data-delay="1s">Our green initiatives
-                                        </h2>
-                                        <div class="about-two__right-item" data-animation="fadeInUp" data-delay="1.4s">
-                                            <div class="about_info d-flex align-items-center pt-65">
-                                                <a href="{% url 'contact' %}" class="btn-one-light"><span>view more</span> <i
-                                                        class="fa-solid fa-angles-right"></i></a>
-                                                <span class="bor-left d-none d-sm-block mx-4"></span>
-                                                <div class="info d-flex flex-wrap align-items-center">
-                                                    <i
-                                                        class="fa-solid bg-white border-0 fa-phone-volume ring-animation"></i>
-                                                    <div class="about_info_con">
-                                                        <span class="d-block text-capitalize text-white">call any
-                                                            time</span>
-                                                        <a class="text-white" href="tel:+912659302003">+254 712 345 678</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="banner-five__arry-btn">
@@ -143,6 +92,7 @@
             </div>
         </section>
         <!-- Project one banner area end here -->
+
         
         <!-- Project area start here -->
         <section class="project-five">
@@ -158,8 +108,8 @@
                         <div class="project-five__item sub-bg">
                             <div class="project-five__content bg-white">
                                 <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
-                                <p>{{ item.content|truncatewords:20 }}</p>
-                                <a href="{{ item.get_absolute_url }}" class="btn-two"><span>details project</span> <i class="fa-solid fa-angles-right"></i></a>
+                                <p>{{ item.content|truncatewords:20|safe }}</p>
+                                <a href="{{ item.get_absolute_url }}" class="btn-two"><span>read more</span> <i class="fa-solid fa-angles-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -181,39 +131,24 @@
         <!-- achievement area start here -->
         <section class="achievement-five mt-130 mb-130">
             <div class="container">
-                <div class="achievement-five__wrp bg-image" data-background="{% static 'images/bg/achievement-bg.jpg' %}">
+                <div class="achievement-five__wrp bg-image" data-background="{% static 'images/bg/CSR.jpg' %}">
                     <div class="row g-4 align-items-center justify-content-between">
                         <div class="col-lg-5">
                             <div class="achievement-five__item">
-                                <h3 class="wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">CSR Projects
-                                </h3>
-                                <a href="team-2.html" class="btn-two-light wow fadeInUp mt-50" data-wow-duration="1.2s"
-                                    data-wow-delay=".2s"><span>view more</span> <i
-                                        class="fa-solid fa-angles-right"></i></a>
+                                <h3 class="wow fadeInDown" data-wow-duration="1.2s" data-wow-delay=".2s">CSR Projects</h3>
+                                <a href="{% url 'blogs' %}" class="btn-two-light wow fadeInUp mt-50" data-wow-duration="1.2s"
+                                    data-wow-delay=".2s"><span>view more</span> <i class="fa-solid fa-angles-right"></i></a>
+                            </div>
+                        </div>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                        {% for csr in csr_data %}
+                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".{{ forloop.counter|add:1 }}s">
                             <div class="achievement-five__count">
-                                <h2 class="count">120</h2>
-                                <h5>Social activism projects
-                                    accomplished</h5>
+                                <h2 class="count">{{ csr.number|intcomma }}</h2>
+                                <h5>{{ csr.name }}</h5>
                             </div>
                         </div>
-                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                            <div class="achievement-five__count">
-                                <h2 class="count">90</h2>
-                                <h5>Communities in
-                                    environment</h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">
-                            <div class="achievement-five__count">
-                                <h2 class="count">75</h2>
-                                <h5>Team members activate <br>
-                                    in nature</h5>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="achievement-five__bg-overlay">
                         <img src="{% static 'images/bg/achievement-bg-image.jpg' %}" alt="">
@@ -222,5 +157,6 @@
             </div>
         </section>
         <!-- achievement area end here -->
+
 </main>
 {% endblock %}

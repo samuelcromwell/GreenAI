@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -43,11 +43,25 @@ def solutions(request):
     return render(request, 'website/solutions.html')
 
 def sustainability(request):
+    #sustainability articles
     sustainability = Sustainability.objects.all()
     paginator = Paginator(sustainability, 4) # Paginate by 4 articles per page
     page = request.GET.get("page")
     sustainability = paginator.get_page(page)
-    context = {"sustainability": sustainability}
+
+    #CSR data
+    csr_data = CSR.objects.all()
+
+    #Initiative data
+    initiatives = Initiative.objects.all()
+
+    #combined contexts
+    context = {
+        "sustainability": sustainability,
+        "csr_data": csr_data,
+        "initiatives": initiatives,
+        }
+    
     return render(request, 'website/sustainability.html', context)
 
 def support(request):
@@ -77,6 +91,11 @@ def sustainability_detail(request, slug):
     sustainability = get_object_or_404(Sustainability, slug=slug)
     context = {'sustainability': sustainability}
     return render(request, 'website/sustainability_detail.html', context)
+
+def initiative_detail(request, slug):
+    initiative = get_object_or_404(Initiative, slug=slug)
+    context = {'initiative': initiative}
+    return render(request, 'website/initiative_detail.html', context)
 
 def products(request):
     products = Product.objects.all().order_by("-time")
