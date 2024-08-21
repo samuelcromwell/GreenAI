@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from tinymce.models import HTMLField
+# from ckeditor.fields import RichTextField
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
@@ -43,8 +45,8 @@ class FooterGallery(models.Model):
 
 class Blog(models.Model):
     sno = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    title = models.CharField(max_length=55)
+    content = HTMLField()
     thumbnail_img = models.ImageField(null=True, blank=True, upload_to="blog_images/")
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     time = models.DateField(auto_now_add=True)
@@ -57,6 +59,90 @@ class Blog(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('blog_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
+    
+class Sustainability(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    content = HTMLField()
+    thumbnail_img = models.ImageField(null=True, blank=True, upload_to="sustainability_images/")
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    time = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('sustainability_detail', kwargs={'slug': self.slug})    
+
+    def __str__(self):
+        return self.title
+
+class CaseStudy(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=55)
+    content = HTMLField()
+    thumbnail_img = models.ImageField(null=True, blank=True, upload_to="case_studies/")
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    time = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('casestudies', kwargs={'slug': self.slug})
+    
+    def __str__(self):
+        return self.title
+
+
+class CSR(models.Model):
+    name = models.CharField(max_length=100)
+    number = models.DecimalField(max_digits=10, decimal_places=0)
+
+    def __str__(self):
+        return self.name
+    
+class Initiative(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='green_initiatives/')
+    content = HTMLField()
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('initiative_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title
+
+class Solution(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='industry_solutions/')
+    content = HTMLField()
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('industry_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title
@@ -102,12 +188,20 @@ class Investor(models.Model):
         return self.name
 
 class Review(models.Model):
-    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    RATING_CHOICES = [
+        (1, '1 Star'),
+        (2, '2 Stars'),
+        (3, '3 Stars'),
+        (4, '4 Stars'),
+        (5, '5 Stars'),
+    ]
+    
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    rating = models.IntegerField(choices=RATING_CHOICES)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Review by {self.name} - {self.rating} Stars"
+        return f"{self.name} ({self.rating} Stars)"

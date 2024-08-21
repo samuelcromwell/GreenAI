@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
+from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
 
@@ -19,7 +20,7 @@ class FooterGalleryAdmin(admin.ModelAdmin):
 
 
 class BlogAdminForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'id': "richtext_field"}))
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
         model = Blog
@@ -29,6 +30,43 @@ class BlogAdmin(admin.ModelAdmin):
     form = BlogAdminForm
 
 admin.site.register(Blog, BlogAdmin)
+
+
+class SustainabilityAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Sustainability
+        fields = "__all__"
+
+class SustainabilityAdmin(admin.ModelAdmin):
+    form = SustainabilityAdminForm
+
+admin.site.register(Sustainability, SustainabilityAdmin)
+
+class CaseStudyAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = CaseStudy
+        fields = "__all__"
+
+class CaseStudyAdmin(admin.ModelAdmin):
+    forms = CaseStudyAdminForm
+
+admin.site.register(CaseStudy, CaseStudyAdmin)
+
+class SolutionAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Solution
+        fields = "__all__"
+
+class SolutionAdmin(admin.ModelAdmin):
+    forms = CaseStudyAdminForm
+
+admin.site.register(Solution, SolutionAdmin)
 
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
@@ -51,3 +89,13 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'rating', 'created_at', 'message')
     list_filter = ('rating', 'created_at')
     search_fields = ('name', 'email', 'message')
+
+@admin.register(CSR)
+class CSR(admin.ModelAdmin):
+    list_display = ('name', 'number')
+    fields = ('name', 'number')
+
+@admin.register(Initiative)
+class Initiative(admin.ModelAdmin):
+    lisy_display = ('title', 'image')
+    fields = ('title', 'image', 'content', 'slug')

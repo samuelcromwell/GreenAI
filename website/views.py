@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -40,10 +40,44 @@ def contact(request):
     return render(request, 'website/contact.html', {'form': form})
 
 def solutions(request):
-    return render(request, 'website/solutions.html')
+    #case studies
+    casestudies = CaseStudy.objects.all()
+    paginator = Paginator(casestudies, 4) # 4 Case studies per page
+    page = request.GET.get("page")
+    casestudies = paginator.get_page(page)
+
+    #solutions
+    solutions = Solution.objects.all()
+
+    #contexts
+    context = {
+        "casestudies": casestudies,
+        "solutions": solutions        
+    }
+
+    return render(request, 'website/solutions.html', context)
 
 def sustainability(request):
-    return render(request, 'website/sustainability.html')
+    #sustainability articles
+    sustainability = Sustainability.objects.all()
+    paginator = Paginator(sustainability, 4) # Paginate by 4 articles per page
+    page = request.GET.get("page")
+    sustainability = paginator.get_page(page)
+
+    #CSR data
+    csr_data = CSR.objects.all()
+
+    #Initiative data
+    initiatives = Initiative.objects.all()
+
+    #combined contexts
+    context = {
+        "sustainability": sustainability,
+        "csr_data": csr_data,
+        "initiatives": initiatives,
+        }
+    
+    return render(request, 'website/sustainability.html', context)
 
 def support(request):
     return render(request, 'website/support.html')
@@ -67,6 +101,34 @@ def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     context = {'blog': blog}
     return render(request, 'website/blog_detail.html', context)
+
+def sustainability_detail(request, slug):
+    sustainability = get_object_or_404(Sustainability, slug=slug)
+    context = {'sustainability': sustainability}
+    return render(request, 'website/sustainability_detail.html', context)
+
+def initiative_detail(request, slug):
+    initiative = get_object_or_404(Initiative, slug=slug)
+    context = {'initiative': initiative}
+    return render(request, 'website/initiative_detail.html', context)
+
+def casestudy_detail(request, slug):
+    casestudy = get_object_or_404(CaseStudy, slug=slug)
+    context = {'casestudy': casestudy}
+    return render(request, 'website/casestudy_detail.html', context)
+
+def industry_detail(request, slug):
+    solutions = get_object_or_404(Solution, slug=slug)
+    context = {'solutions': solutions}
+    return render(request, 'website/industry_detail.html', context)
+
+def casestudies(request):
+    casestudies = CaseStudy.objects.all().order_by("-time")
+    paginator = Paginator(casestudies, 6) #6 case studies per page
+    page = request.GET.get("page")
+    casestudies = paginator.get_page(page)
+    context = {"casestudies": casestudies}
+    return render(request, 'website/casestudies.html', context)
 
 def products(request):
     products = Product.objects.all().order_by("-time")
@@ -132,6 +194,3 @@ def whitepapers(request):
 def FAQs(request):
     faqs = FAQ.objects.all()
     return render(request, 'website/FAQs.html', {'faqs': faqs})
-
-def casestudies(request):
-    return render(request, 'website/casestudies.html')
