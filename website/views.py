@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -84,7 +84,14 @@ def support(request):
 
 def partners(request):
     investors = Investor.objects.all()
-    return render(request, 'website/partners.html', {'investors': investors})
+    opportunities_list = Opportunity.objects.all().order_by('-date_posted')
+    
+    context = {
+        'investors': investors,
+        'opportunities': opportunities_list,
+    }
+    
+    return render(request, 'website/partners.html', context)
 
 def feedback(request):
     return render(request, 'website/feedback.html')

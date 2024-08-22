@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity
 from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
@@ -97,5 +97,11 @@ class CSR(admin.ModelAdmin):
 
 @admin.register(Initiative)
 class Initiative(admin.ModelAdmin):
-    lisy_display = ('title', 'image')
+    list_display = ('title', 'image')
     fields = ('title', 'image', 'content', 'slug')
+
+@admin.register(Opportunity)
+class Opportunity(admin.ModelAdmin):
+    list_display = ('title', 'organizer', 'venue', 'date_posted')
+    search_fields = ('title', 'organizer')
+    list_filter = ('date_posted', 'venue')

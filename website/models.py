@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from tinymce.models import HTMLField
 # from ckeditor.fields import RichTextField
+from django.utils import timezone
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
@@ -205,3 +206,14 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.rating} Stars)"
+    
+class Opportunity(models.Model):
+    title = models.CharField(max_length=200)
+    description = HTMLField(max_length=250)
+    image = models.ImageField(null=True, blank=True, upload_to="opportunity_images/")
+    venue = models.CharField(max_length=255)
+    organizer = models.CharField(max_length=100, default="GreenAI")
+    date_posted = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
