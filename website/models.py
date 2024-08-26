@@ -17,6 +17,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Feedback(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    occupation = models.CharField(max_length=100)
+    message = models.TextField()
+    received_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.first_name
 
 class TeamMember(models.Model):
     name = models.CharField(max_length=255)

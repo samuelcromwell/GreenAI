@@ -1,11 +1,15 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback
 from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
 
-@admin.register(TeamMember)
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'received_at')
+
+admin.site.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('name', 'role')
     fields = ('name', 'role', 'image', 'facebook_url', 'twitter_url', 'linkedin_url')

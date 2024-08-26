@@ -1,8 +1,8 @@
 import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity
+from .forms import ContactForm, SubscribeForm, ReviewForm, FeedbackForm
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -38,6 +38,22 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
+
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'status': 'success'}, status=200)
+        else:
+            return JsonResponse({'status': 'error', 'errors': form.errors.as_json()}, status=400)
+    else:
+        form = FeedbackForm()
+    
+    # Fetch all feedback to display as testimonials
+    feedbacks = Feedback.objects.all()
+
+    return render(request, 'website/feedback.html', {'form': form, 'feedbacks': feedbacks})
 
 def solutions(request):
     #case studies
@@ -92,9 +108,6 @@ def partners(request):
     }
     
     return render(request, 'website/partners.html', context)
-
-def feedback(request):
-    return render(request, 'website/feedback.html')
 
 def blogs(request):
     blogs = Blog.objects.all().order_by("-time")
