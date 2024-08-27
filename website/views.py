@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm, FeedbackForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -94,9 +94,6 @@ def sustainability(request):
         }
     
     return render(request, 'website/sustainability.html', context)
-
-def support(request):
-    return render(request, 'website/support.html')
 
 def partners(request):
     investors = Investor.objects.all()
@@ -214,3 +211,7 @@ def whitepapers(request):
 def FAQs(request):
     faqs = FAQ.objects.all()
     return render(request, 'website/FAQs.html', {'faqs': faqs})
+
+def support(request):
+    knowledge = Knowledge.objects.all()
+    return render(request, 'website/support.html', {'knowledge': knowledge})

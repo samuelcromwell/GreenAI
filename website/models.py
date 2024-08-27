@@ -187,6 +187,13 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
+class Knowledge(models.Model):
+    statement = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.statement
+    
 class Investor(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)

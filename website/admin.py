@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge
 from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
@@ -77,6 +77,10 @@ class FAQAdmin(admin.ModelAdmin):
     list_display = ('question',)
     search_fields = ('question', 'answer',)
 
+@admin.register(Knowledge)
+class KnowledgeAdmin(admin.ModelAdmin):
+    list_display = ('statement',)
+    search_fields =('statement', 'description',)
 
 @admin.register(Investor)
 class InvestorAdmin(admin.ModelAdmin):
