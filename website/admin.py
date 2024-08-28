@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge
+from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge, Whitepaper
 from tinymce.widgets import TinyMCE
 
 admin.site.register(Contact)
@@ -113,3 +113,15 @@ class Opportunity(admin.ModelAdmin):
     list_display = ('title', 'organizer', 'venue', 'date_posted')
     search_fields = ('title', 'organizer')
     list_filter = ('date_posted', 'venue')
+
+class WhitepaperAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Whitepaper
+        fields = "__all__"
+
+class WhitepaperAdmin(admin.ModelAdmin):
+    form = WhitepaperAdminForm
+
+admin.site.register(Whitepaper, WhitepaperAdmin)

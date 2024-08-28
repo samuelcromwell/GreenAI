@@ -2,7 +2,7 @@ import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm, FeedbackForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge, Whitepaper
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -139,6 +139,11 @@ def industry_detail(request, slug):
     context = {'solutions': solutions}
     return render(request, 'website/industry_detail.html', context)
 
+def whitepaper_detail(request, slug):
+    whitepaper = get_object_or_404(Whitepaper, slug=slug)
+    context = {'whitepaper': whitepaper}
+    return render(request, 'website/whitepaper_detail.html', context)
+
 def casestudies(request):
     casestudies = CaseStudy.objects.all().order_by("-time")
     paginator = Paginator(casestudies, 6) #6 case studies per page
@@ -206,7 +211,8 @@ def footer_gallery_view(request):
     return render(request, 'website/shared/footer.html', {'images': images})
 
 def whitepapers(request):
-    return render(request, 'website/whitepapers.html')
+    papers = Whitepaper.objects.all().order_by('sno')
+    return render(request, 'website/whitepapers.html', {'papers': papers})
 
 def FAQs(request):
     faqs = FAQ.objects.all()

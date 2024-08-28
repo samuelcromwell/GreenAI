@@ -2,18 +2,34 @@
 {% block content %}
 {% load static %}
 <style>
-        .page-banner.bg-image {
-            background-image: url('/static/images/whitepapers/whitepapers.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .pt-130 {
-            padding-top: 130px;
-        }
-        .pb-130 {
-            padding-bottom: 130px;
-        }
+    .page-banner.bg-image {
+        background-image: url('/static/images/whitepapers/whitepapers.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pt-130 {
+        padding-top: 130px;
+    }
+    .pb-130 {
+        padding-bottom: 130px;
+    }
+    .work-five__item {
+        height: 525px; /* Adjust this height as necessary */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .work-five__item h3 {
+        margin-bottom: 5px; 
+    }
+
+    .work__item-icon {
+        margin-bottom: 5px; 
+    }
+    .work__item-arrow {
+        margin-top: auto;
+    }
 </style>
 <main>
         <!-- Page banner area start here -->
@@ -27,6 +43,46 @@
             </div>
         </section>
         <!-- Page banner area end here -->
+
+        <!-- Work area start here -->
+<section class="work work-five pt-130 pb-65">
+    <div class="container">
+        <div class="pb-65 bor-bottom mb-65">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-header m-0">
+                        <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                            <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> WHITEPAPERS
+                        </h5>
+                        <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                            GreenAI Whitepaper section
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for paper in papers %}
+            <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 wow fadeInDown" data-wow-duration="1.2s"
+                data-wow-delay=".{{ forloop.counter|floatformat:1 }}s">
+                <div class="work-five__item">
+                    <div class="work__item-icon mb-30">
+                        <span>{{ paper.sno }}</span>
+                    </div>
+                    <h3><a href="{{ paper.get_absolute_url }}">{{ paper.title }}</a></h3>
+                    <p>{{ paper.description|truncatewords:20|safe }}</p>
+                    <a class="work__item-arrow" href="{{ paper.get_absolute_url }}">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Work area end here -->
+
+        
 </main>
 
 

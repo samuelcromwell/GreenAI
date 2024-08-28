@@ -26,6 +26,7 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     path("footer/", views.footer_gallery_view, name="footer_gallery"),
     path("whitepapers/", views.whitepapers, name="whitepapers"),
+    path("whitepapers/<slug:slug>/", views.whitepaper_detail, name='whitepaper_detail'),
     path("casestudies/", views.casestudies, name="casestudies"),
     path("FAQs/", views.FAQs, name='FAQs'),
 ]
