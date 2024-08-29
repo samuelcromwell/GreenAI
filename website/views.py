@@ -153,11 +153,26 @@ def casestudies(request):
     return render(request, 'website/casestudies.html', context)
 
 def products(request):
+    query = request.GET.get('search', '')
     products = Product.objects.all().order_by("-time")
-    paginator = Paginator(products, 12) #12 products per page
+
+    if query:
+        products = products.filter(name__icontains=query)
+
+    paginator = Paginator(products, 12)
     page = request.GET.get("page")
     products = paginator.get_page(page)
-    context = {"products": products}
+
+    # Check for an AJAX request
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        products_html = render(request, 'templates/website/product_list.html', {'products': products}).content.decode('utf-8')
+        return JsonResponse({'products_html': products_html, 'total_results': paginator.count})
+
+    context = {
+        "products": products,
+        "query": query,
+        "total_results": paginator.count,
+    }
     return render(request, 'website/products.html', context)
 
 def product_detail(request, slug):

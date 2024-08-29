@@ -2,9 +2,11 @@ from django import forms
 from .models import Contact, Subscriber, Review, Feedback
 
 class ContactForm(forms.ModelForm):
+    reply_message = forms.CharField(widget=forms.Textarea, required=False, label="Reply Message")
+
     class Meta:
         model = Contact
-        fields = ['name', 'email', 'subject', 'message']
+        fields = ['name', 'email', 'subject', 'message', 'reply_message']
         widgets = {
             'subject': forms.Select(choices=Contact.SUBJECT_CHOICES),
         }

@@ -1,9 +1,41 @@
 from django.contrib import admin
 from django import forms
 from .models import Contact, TeamMember, Subscriber, FooterGallery, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge, Whitepaper
+from .forms import ContactForm
 from tinymce.widgets import TinyMCE
+from django.utils import timezone
+from django.core.mail import send_mail
 
-admin.site.register(Contact)
+# Define the custom admin form
+class ContactAdminForm(forms.ModelForm):
+    reply_message = forms.CharField(widget=forms.Textarea, required=False, label="Reply Message")
+
+    class Meta:
+        model = Contact
+        fields = '__all__'
+
+# Customize the admin class for Contact
+class ContactAdmin(admin.ModelAdmin):
+    form = ContactAdminForm
+    list_display = ('name', 'email', 'subject', 'replied', 'replied_at')
+    readonly_fields = ('replied', 'replied_at')
+
+    def save_model(self, request, obj, form, change):
+        if form.cleaned_data.get('reply_message'):
+            # Send the reply email
+            send_mail(
+                subject=f"Re: {obj.subject}",
+                message=form.cleaned_data['reply_message'],
+                from_email='your-email@example.com',  # Replace with your actual email
+                recipient_list=[obj.email],
+            )
+            obj.replied = True
+            obj.replied_at = timezone.now()
+            obj.reply_message = form.cleaned_data['reply_message']
+        super().save_model(request, obj, form, change)
+
+# Register the Contact model with the customized admin class
+admin.site.register(Contact, ContactAdmin)
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):

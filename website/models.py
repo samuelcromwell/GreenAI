@@ -3,17 +3,21 @@ from django.utils.text import slugify
 from tinymce.models import HTMLField
 # from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.core.mail import send_mail
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
         ('fibre', 'Fibre Cables'),
-        ('triple play','Triple Play 3-in-1 LED Lights'),
-        ('installation','Installation Services'),
+        ('triple play', 'Triple Play 3-in-1 LED Lights'),
+        ('installation', 'Installation Services'),
     ]
     name = models.CharField(max_length=100)
     email = models.EmailField()
     subject = models.CharField(max_length=100, choices=SUBJECT_CHOICES)
     message = models.TextField()
+    replied = models.BooleanField(default=False)
+    reply_message = models.TextField(blank=True, null=True)
+    replied_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.name
