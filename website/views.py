@@ -236,3 +236,6 @@ def FAQs(request):
 def support(request):
     knowledge = Knowledge.objects.all()
     return render(request, 'website/support.html', {'knowledge': knowledge})
+
+def cart(request):
+    return render(request, 'website/cart.html')
