@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact, Subscriber, Review
+from .models import Contact, Subscriber, Review, Feedback
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -9,6 +9,12 @@ class ContactForm(forms.ModelForm):
             'subject': forms.Select(choices=Contact.SUBJECT_CHOICES),
         }
 
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['first_name', 'last_name', 'occupation', 'message']
+        
+# Still doesnt work
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

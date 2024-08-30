@@ -168,104 +168,105 @@
         <div class="shop pt-130 pb-130">
             <div class="container">
                 <div class="section-header pr-20">
-                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
-                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> E-commerce section</h5>
-                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">You can purchase our
-                                    products here</h2>
+                    <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> E-commerce section
+                    </h5>
+                    <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                        You can purchase our products here
+                    </h2>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-8">
-                        <div
-                            class="top-bar sub-bg mb-4 d-flex flex-wrap justify-content-between align-items-center main-bg radius10 px-4 py-3">
-                            <span>Showing 1–12 of 15 results</span>
-                            {% comment %} <select name="select" id="select">
-                                <option value="select">Sort by latest</option>
-                                <option value="select">Sort by Update</option>
-                                <option value="select">Sort by New</option>
-                            </select> {% endcomment %}
-                        </div>
-                        <div class="product light">
-                            <div class="container">
-                                <div class="row g-4">
-                                    {% for product in products %}
-                                    <div class="col-md-4">
-                                        <div class="item">
-                                            {% if product.image %}
-                                                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>                                            {% else %}
-                                                <img src="{% static 'images/product/default.png' %}" alt="{{ product.name }}">
-                                            {% endif %}
-                                            <div class="content">
-                                                <h4><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-                                                {% if product.initial_price %}
-                                                    <del>Kshs.{{ product.initial_price }}</del>
-                                                {% endif %}
-                                                    <span>Kshs.{{ product.current_price }}</span>
-                                            </div>
-                                            <div class="icon">
-                                                <a href="#0"><i class="fa-solid fa-heart"></i></a>
-                                                <a href="#0" class="active"><i class="fa-solid fa-cart-shopping"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="pt-30 bor-top mt-65">
-                                    {% for page_num in products.paginator.page_range %}
-                                        {% if page_num <= 3 or page_num == products.paginator.num_pages %}
-                                            {% if products.number == page_num %}
-                                                <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
-                                            {% else %}
-                                                <a href="?page={{ page_num }}" class="blog-pegi">{{ page_num }}</a>
-                                            {% endif %}
-                                        {% elif page_num == products.number or page_num == products.paginator.num_pages %}
-                                            <!-- Display the current page number when beyond 3 or the last page -->
-                                            <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
-                                        {% elif page_num == 4 %}
-                                            <span class="blog-pegi">...</span>
-                                        {% endif %}
-                                    {% endfor %}
-                                    
-                                    {% if products.has_next %}
-                                        <a href="?page={{ products.next_page_number }}" class="blog-pegi-arrow">
-                                            <i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i>
-                                        </a>
+            <!-- Products List Section -->
+            <div class="col-lg-8">
+                <div
+                    class="top-bar sub-bg mb-4 d-flex flex-wrap justify-content-between align-items-center main-bg radius10 px-4 py-3">
+                    <span>Showing {{ products.start_index }}-{{ products.end_index }} of {{ total_results }} results</span>
+                </div>
+                <div class="product light">
+                    <div class="container">
+                        <div id="product-list" class="row g-4">
+                            {% for product in products %}
+                            <div class="col-md-4">
+                                <div class="item">
+                                    {% if product.image %}
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    </a>
+                                    {% else %}
+                                    <img src="{% static 'images/product/default.png' %}" alt="{{ product.name }}">
                                     {% endif %}
+                                    <div class="content">
+                                        <h4><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
+                                        {% if product.initial_price %}
+                                        <del>Kshs.{{ product.initial_price }}</del>
+                                        {% endif %}
+                                        <span>Kshs.{{ product.current_price }}</span>
+                                    </div>
+                                    <div class="icon">
+                                        <a href="#0"><i class="fa-solid fa-heart"></i></a>
+                                        <a href="#0" class="active"><i class="fa-solid fa-cart-shopping"></i></a>
+                                    </div>
                                 </div>
                             </div>
+                            {% endfor %}
+                        </div>
+                        <div class="pt-30 bor-top mt-65">
+                            {% for page_num in products.paginator.page_range %}
+                                {% if page_num <= 3 or page_num == products.paginator.num_pages %}
+                                    {% if products.number == page_num %}
+                                        <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
+                                    {% else %}
+                                        <a href="?page={{ page_num }}" class="blog-pegi">{{ page_num }}</a>
+                                    {% endif %}
+                                {% elif page_num == products.number or page_num == products.paginator.num_pages %}
+                                    <!-- Display the current page number when beyond 3 or the last page -->
+                                    <a href="?page={{ page_num }}" class="blog-pegi active">{{ page_num }}</a>
+                                {% elif page_num == 4 %}
+                                    <span class="blog-pegi">...</span>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if products.has_next %}
+                                        <a href="?page={{ products.next_page_number }}" class="blog-pegi-arrow">
+                                <i class="fa-solid blog_pegi_arrow fa-arrow-right-long"></i>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog-slingle">
-                            <div class="right-item sub-bg">
-                                <h4 class="mb-30">Search</h4>
-                                <div class="search mb-40">
-                                    <input type="text" placeholder="Search here. . .">
-                                    <button><i class="fa-solid fa-search"></i></button>
+                </div>
+            </div>
+
+            <!-- Sidebar Search Section -->
+            <div class="col-lg-4">
+                <div class="blog-slingle">
+                    <div class="right-item sub-bg">
+                        <h4 class="mb-30">Search</h4>
+                        <div class="search mb-40">
+                            <input type="text" placeholder="Search here. . .">
+                            <button><i class="fa-solid fa-search"></i></button>
+                        </div>
+                        <h4 class="mb-30">Categories</h4>
+                        <ul class="right_list mb-40">
+                            <li><a class="d-block pb-1 mb-2" href="#0">LED Lights</a></li>
+                            <li><a class="d-block pb-1 mb-2" href="#0">Charging Stations</a></li>
+                            <li><a class="d-block pb-1 mb-2" href="#0">Installation Services</a></li>
+                        </ul>
+                        <h4 class="mb-30 mt-40">Hot Items</h4>
+                        <div class="swiper hot-items__slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="image">
+                                        <img src="{% static 'images/product/product8.png' %}" alt="image">
+                                    </div>
                                 </div>
-                                <h4 class="mb-30">Categories</h4>
-                                <ul class="right_list mb-40">
-                                    <li><a class="d-block pb-1 mb-2" href="#0">LED Lights</a></li>
-                                    <li><a class="d-block pb-1 mb-2" href="#0">Charging Stations</a></li>
-                                    <li><a class="d-block pb-1 mb-2" href="#0">Installation Services</a></li>
-                                </ul>
-                                <h4 class="mb-30 mt-40">Hot Items</h4>
-                                <div class="swiper hot-items__slider">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="image">
-                                                <img src="{% static 'images/product/product8.png' %}" alt="image">
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="image">
-                                                <img src="{% static 'images/product/product9.png' %}" alt="image">
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="image">
-                                                <img src="{% static 'images/product/product10.png' %}" alt="image">
-                                            </div>
-                                        </div>
+                                <div class="swiper-slide">
+                                    <div class="image">
+                                        <img src="{% static 'images/product/product9.png' %}" alt="image">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="image">
+                                        <img src="{% static 'images/product/product10.png' %}" alt="image">
                                     </div>
                                 </div>
                             </div>
@@ -274,6 +275,8 @@
                 </div>
             </div>
         </div>
-        <!-- Shop page area end here -->
-    </main>
+    </div>
+</div>
+<!-- Shop page area end here -->
+</main>
 {% endblock %}

@@ -14,7 +14,83 @@
         .pb-130 {
             padding-bottom: 130px;
         }
+        .content.bg-image {
+            background-image: url("{% static 'images/icon/feedback.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: black; /* Ensure text is readable on the background */
+    }
 </style>
+
+<!-- Add necessary scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{ csrf_token }}' }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "feedback" %}',
+            data: {
+                first_name: $('input[name="first_name"]').val(),
+                last_name: $('input[name="last_name"]').val(),
+                occupation: $('input[name="occupation"]').val(),
+                message: $('textarea[name="message"]').val(),
+                'g-recaptcha-response': token,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#form-messages').html('<p style="color: green;">Your feedback has been recorded! Thank you.</p>');
+                    $('#feedback_form')[0].reset();
+                    grecaptcha.reset();
+                    // Clear the message after 5 seconds
+                    setTimeout(function() {
+                        $('#form-messages').html('');
+                    }, 5000);
+                } else {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try again.</p>');
+                    // Clear the message after 5 seconds
+                    setTimeout(function() {
+                        $('#form-messages').html('');
+                    }, 5000);
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                try {
+                    let errors = JSON.parse(xhr.responseText).errors;
+                    let errorMessages = '<p style="color: red;">Please fill in the form correctly:</p><ul style="color: red;">';
+                    for (let field in errors) {
+                        errors[field].forEach(function(error) {
+                            errorMessages += '<li>' + error + '</li>';
+                        });
+                    }
+                    errorMessages += '</ul>';
+                    $('#form-messages').html(errorMessages);
+                } catch (e) {
+                    $('#form-messages').html('<p style="color: red;">An error occurred. Please try filling in the form again.</p>');
+                }
+                // Clear the message after 5 seconds
+                setTimeout(function() {
+                    $('#form-messages').html('');
+                }, 5000);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#feedback_form').on('submit', function(e) {
+            e.preventDefault();
+            grecaptcha.execute();
+        });
+
+        window.onSubmit = onSubmit; // Make onSubmit function available globally
+    });
+</script>
+
 <!-- Page banner area start here -->
 <section class="page-banner bg-image pt-130 pb-130">
     <div class="container">
@@ -28,139 +104,89 @@
 <!-- Page banner area end here -->
 
 <main>
-<!-- Shop single area start here -->
-        <section class="shop-single pt-130 pb-130">
-            <div class="container">
-                <!-- product-details area start here -->
-                <div class="product-details-single pb-40">
-                    <div class="row g-4">
-                        <div class="col-lg-5">
-                        </div>
+<!-- Feedback form area start here -->
+    <section class="contact pt-130 pb-130">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="content bg-image" style="color: black;">
+                        <h2>We Value Your Feedback <br> Please leave a Review.</h2>
+                        <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17" target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City</a></li>
+                            <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678</a></li>
+                            <li><a href="mailto:company.info@mail.com"><i class="fa-solid fa-envelope"></i>info@greenai.com</a></li>
+                        </ul>
                     </div>
                 </div>
-
-                <!-- description review area start here -->
-                <div class="shop-singe-tab">
-                    <ul class="nav nav-pills mb-4 bor-top bor-bottom py-2">
-                        <li class="nav-item">
-                            <a href="#description" data-bs-toggle="tab" class="nav-link ps-0 active">
-                                <h4 class="text-uppercase">description</h4>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#review" data-bs-toggle="tab" class="nav-link">
-                                <h4 class="text-uppercase">reviews (4)</h4>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="description" class="tab-pane fade show active">
-                            <p class="pb-4 text-justify">                      
-                        </div>
-                        <div id="review" class="tab-pane fade">
-                            <div class="review-wrp">
-                                <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                                    <div class="img pb-4 pb-md-0 me-4">
-                                        <img src="'images/about/comment3.png" alt="image">
-                                    </div>
-                                    <div class="content position-relative p-4 bor">
-                                        <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <div class="star primary-color">
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                                    <div class="img pb-4 pb-md-0 me-4">
-                                        <img src="'images/about/comment2.png" alt="image">
-                                    </div>
-                                    <div class="content position-relative p-4 bor">
-                                        <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <div class="star primary-color">
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                                    <div class="img pb-4 pb-md-0 me-4">
-                                        <img src="'images/about/comment1.png" alt="image">
-                                    </div>
-                                    <div class="content position-relative p-4 bor">
-                                        <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <div class="star primary-color">
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="abmin d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                                    <div class="img pb-4 pb-md-0 me-4">
-                                        <img src="'images/about/comment4.png" alt="image">
-                                    </div>
-                                    <div class="content position-relative p-4 bor">
-                                        <div class="head-wrp pb-1 d-flex flex-wrap justify-content-between">
-                                            <div class="star primary-color">
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star sm-font"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke sm-font"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-title mt-5 py-15 mb-30">
-                                    <h2 class="text-capitalize primary-color mb-10">Add a Review</h2>
-                                    <p class="mb-20">All Required fields are marked *</p>
-                                    <div class="shop-single__rate-now">
-                                        <p>Rate this product? *</p>
-                                        <div class="star" id="rating-stars">
-                                            <span data-value="1"><i class="fa-solid fa-star"></i></span>
-                                            <span data-value="2"><i class="fa-solid fa-star"></i></span>
-                                            <span data-value="3"><i class="fa-solid fa-star"></i></span>
-                                            <span data-value="4"><i class="fa-solid fa-star"></i></span>
-                                            <span data-value="5"><i class="fa-solid fa-star"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-form">
-                                    <form method="post" id="review_form">
-                                        {% csrf_token %}
-                                        {{ form.as_p }}
-                                        <input type="hidden" id="rating" name="rating" value="0">
-                                    </form>
-                                    <div class="btn-wrp">
-                                        <button class="g-recaptcha btn-one" 
-                                                data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
-                                                data-callback="onSubmit" 
-                                                data-action="submit">
-                                            <span>Post Review</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                    <div id="form-messages" class="col-md-12 mt-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-6">
+                    <div class="form-area">
+                        <form method="post" action="{% url 'feedback' %}" id="feedback_form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <!-- Invisible reCAPTCHA button -->
+                            <button class="g-recaptcha mt-40" 
+                                    data-sitekey="6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN" 
+                                    data-callback="onSubmit" 
+                                    data-action="submit">Submit Now <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </form>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li class="{{ message.tags }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div id="form-messages" class="col-md-12 mt-3"></div>
+                    </div>    
                 </div>
             </div>
-            <!-- description review area end here -->
-        </section>
-        <!-- Shop single area end here -->
+        </div>
+    </section>
+<!-- Feedback form area end here -->
+
+<!-- Testimonial area start here -->
+<section class="testimonial pt-130 pb-130 sub-bg">
+    <div class="container">
+        <div class="testimonial__head-wrp mb-65">
+            <div class="section-header m-0">
+                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                    <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> our customer's reviews
+                </h5>
+                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">green aI reviews</h2>
+            </div>
+            <div class="dot-wrp wow fadeInUp mt-5 mt-sm-0" data-wow-duration="1.6s" data-wow-delay=".6s">
+                <div class="dot testimonial__dot"></div>
+            </div>
+        </div>
+        <div class="swiper testimonial__slider">
+            <div class="swiper-wrapper">
+                {% for feedback in feedbacks %}
+                <div class="swiper-slide">
+                    <div class="testimonial__item">
+                        <div class="testimonial__item-head">
+                            <div class="testimonial__item-head-info">
+                                {% comment %} <div class="testimonial__item-head-info-image">
+                                    <img src="{% static 'images/testimonial/default.png' %}" alt="image">
+                                </div> {% endcomment %}
+                                <div class="testimonial__item-head-info-con">
+                                    <h3>{{ feedback.first_name }} {{ feedback.last_name }}</h3>
+                                    <span>{{ feedback.occupation }}</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-quote-right"></i>
+                        </div>
+                        <div class="testimonial__item-content">
+                            <p>{{ feedback.message }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonial area end here -->
 </main>
 {% endblock %}

@@ -14,6 +14,27 @@
     .pb-130 {
         padding-bottom: 130px;
     }
+    
+    .event__image{
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .event__image img{
+        width: 100%;
+        height: 100%; /* Ensure the image height matches the container height */
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .event__image{
+        max-height: 100%; /* Ensure the image container does not exceed the height of the content */
+        overflow: hidden; /* Hide any part of the image that overflows */
+        display: flex; /* Align the image container with the content height */
+        align-items: stretch; /* Stretch the image container to match content height */
+    }
+
 </style>
 <main>
     <!-- Page banner area start here -->
@@ -86,38 +107,49 @@
     </section>
     <!-- About area end here -->
 
-    <!-- Achievement area start here -->
-    <section class="achievement" data-background="{% static 'images/bg/achievement-bg2.jpg' %}">
+    <!-- Event area start here -->
+    <div class="event pt-130 pb-130 sub-bg">
         <div class="container">
-            <div class="row g-4 align-items-center justify-content-between">
-                <div class="col-lg-5 achievement__bor-right wow fadeInUp" data-wow-duration="1.2s"
-                    data-wow-delay=".2s">
-                    <div class="achievement__item">
-                        <h2 class="text-white pt-3 pb-3">Our trusted 
-                            partners</h2>
+            <div class="section-header text-center">
+                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img src="{% static 'images/icon/leaf.svg' %}" alt="image"> our opportunities</h5>
+                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">greenAI Opportunities</h2>
+            </div>
+            
+            {% for opportunity in opportunities %}
+            <div class="event__item-scroll mb-30 wow fadeInUp" data-wow-duration="{{ forloop.counter0|add:"1.2" }}s" data-wow-delay=".{{ forloop.counter }}s">
+                <div class="row g-5 g-lg-0 align-items-center">
+                    <div class="col-lg-4">
+                        <div class="event__image">
+                            <img src="{{ opportunity.image.url }}" alt="image">
+                            <span class="event-tag">{{ opportunity.date_posted|date:"d" }} <br> {{ opportunity.date_posted|date:"F" }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-2 achievement__bor-right wow fadeInUp" data-wow-duration="1.4s"
-                    data-wow-delay=".4s">
-                    <div class="achievement__item text-center">
-                        <img src="{% static 'images/icon/achieve1.png' %}" alt="icon">
-                    </div>
-                </div>
-                <div class="col-lg-2 achievement__bor-right wow fadeInUp" data-wow-duration="1.6s"
-                    data-wow-delay=".6s">
-                    <div class="achievement__item text-center">
-                        <img src="{% static 'images/icon/achieve2.png' %}" alt="icon">
-                    </div>
-                </div>
-                <div class="col-lg-2 wow fadeInUp" data-wow-duration="1.8s" data-wow-delay=".8s">
-                    <div class="achievement__item text-center">
-                        <img src="{% static 'images/icon/achieve3.png' %}" alt="icon">
+                    <div class="col-lg-8">
+                        <div class="event__content">
+                            <h3 class="mt-20 mb-20"><a> {{ opportunity.title }} </a></h3>
+                            <p class="pb-30 bor-bottom mb-30">{{ opportunity.description|truncatewords:30|safe }}</p>
+                            <br>
+                            <div class="event-info">
+                                <ul>
+                                    <li>
+                                        <h5>Organizer</h5>
+                                        <p>{{ opportunity.organizer }}</p>
+                                    </li>
+                                    <li>
+                                        <h5>Venue</h5>
+                                        <a>{{ opportunity.venue }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+            
         </div>
-    </section>
-    <!-- Achievement area end here -->
+    </div>
+    <!-- Event area end here -->
 
     <!-- Team area start here -->
     <section class="team pt-130 pb-130">

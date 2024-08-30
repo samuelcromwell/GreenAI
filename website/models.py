@@ -2,20 +2,35 @@ from django.db import models
 from django.utils.text import slugify
 from tinymce.models import HTMLField
 # from ckeditor.fields import RichTextField
+from django.utils import timezone
+from django.core.mail import send_mail
 
 class Contact(models.Model):
     SUBJECT_CHOICES = [
         ('fibre', 'Fibre Cables'),
-        ('triple play','Triple Play 3-in-1 LED Lights'),
-        ('installation','Installation Services'),
+        ('triple play', 'Triple Play 3-in-1 LED Lights'),
+        ('installation', 'Installation Services'),
     ]
     name = models.CharField(max_length=100)
     email = models.EmailField()
     subject = models.CharField(max_length=100, choices=SUBJECT_CHOICES)
     message = models.TextField()
+    replied = models.BooleanField(default=False)
+    reply_message = models.TextField(blank=True, null=True)
+    replied_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+    
+class Feedback(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    occupation = models.CharField(max_length=100)
+    message = models.TextField()
+    received_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.first_name
 
 class TeamMember(models.Model):
     name = models.CharField(max_length=255)
@@ -103,7 +118,24 @@ class CaseStudy(models.Model):
     def __str__(self):
         return self.title
 
+class Whitepaper(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255)
+    description = HTMLField()
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('whitepaper_detail', kwargs={'slug': self.slug})
 
+    def __str__(self):
+        return self.title
+    
 class CSR(models.Model):
     name = models.CharField(max_length=100)
     number = models.DecimalField(max_digits=10, decimal_places=0)
@@ -176,6 +208,13 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
+class Knowledge(models.Model):
+    statement = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.statement
+    
 class Investor(models.Model):
     name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
@@ -205,3 +244,14 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.rating} Stars)"
+    
+class Opportunity(models.Model):
+    title = models.CharField(max_length=200)
+    description = HTMLField(max_length=250)
+    image = models.ImageField(null=True, blank=True, upload_to="opportunity_images/")
+    venue = models.CharField(max_length=255)
+    organizer = models.CharField(max_length=100, default="GreenAI")
+    date_posted = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
