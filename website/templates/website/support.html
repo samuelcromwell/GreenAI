@@ -1,11 +1,133 @@
 {% extends 'website/base.html' %}
 {% block content %}
 {% load static %}
+<style>
+    .page-banner.bg-image {
+        background-image: url('/static/images/support/support.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .pt-130 {
+        padding-top: 130px;
+    }
+    .pb-130 {
+        padding-bottom: 130px;
+    }
+</style>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/66d0646050c10f7a00a1aaa0/1i6f0g6ae';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+<main>
+<!-- Page banner area start here -->
+        <section class="page-banner bg-image pt-130 pb-130">
+            <div class="container">
+                <h2 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">Support</h2>
+                <div class="breadcrumb-list wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                    <a href="{% url 'index' %}">Home :</a>
+                    <span class="primary-color">Support</span>
+                </div>
+            </div>
+        </section>
+    <!-- Page banner area end here -->
 
+    <!-- About area start here -->
+        <section class="involve-two sub-bg pt-130 pb-130">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-xl-6">
+                        <div class="involve-two__image">
+                            <img src="{% static 'images/support/young.jpg' %}" alt="image">
+                            <div class="image-sm">
+                                <img src="{% static 'images/support/books.jpg' %}" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="involve-two__item">
+                            <div class="section-header mb-4">
+                                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                                        src="{% static 'images/icon/leaf.svg' %}" alt="image"> KNOWLEDGE BASE</h5>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Knowledge Base & User Guides
+                                </h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.6s" data-wow-delay=".6s">Our knowledge base is designed to provide you with comprehensive information about our products, services, and sustainable technology solutions. Here, you can find articles, FAQs, and resources to help you understand and utilize our offerings effectively.
+                                </p>
+                            </div>
+                            <div class="accordion" id="accordionExample-two">
+                                {% for knowledge in knowledge %}
+                                <div class="accordion-item wow fadeInDown" data-wow-duration="1.2s"
+                                    data-wow-delay=".2s">
+                                    <h2 class="accordion-header" id="heading1">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse1{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse1{{ forloop.counter }}">
+                                            {{ knowledge.statement}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse1{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                                        aria-labelledby="heading1{{ forloop.counter }}" data-bs-parent="#accordionExample-two">
+                                        <div class="accordion-body">
+                                            <p>{{ knowledge.description }}</p>                       
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <a href="{% static 'pdf/Green Ai.pdf' %}" target="_blank" class="btn-one mt-35"><span>View Document</span> <i
+                                    class="fa-solid fa-angles-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About area end here -->
 
+        <!-- Login area start here -->
+        <section class="login-area pt-130 pb-130">
+            <div class="section-header text-center">
+                <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s"><img
+                        src="{% static 'images/icon/leaf.svg' %}" alt="image">LIVE CHAT</h5>
+                <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Live Chat Support
+                </h2>
+            </div>
+            <div class="container">
+                <div class="login__item">
+                    <div class="row g-4">
+                        <div class="col-xxl-8">
+                            <div class="login__image">
+                                <img src="{% static 'images/support/livechat.png' %}" alt="image">
+                            </div>
+                        </div>
+                        <div class="col-xxl-4">
+                            <div class="login__content">
+                                <h2 class="text-white mb-65">Talk To US</h2>
+                                <p>For immediate assistance, our live chat feature connects you with our customer support team in real-time. Whether you have questions about our products, need technical support, or want to learn more about our sustainability initiatives, our team is here to help.</p>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="login__with">
+                                    <a href="#"><i class="fas fa-comments" style="margin-right: 56px;"></i> Live Chat</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Login area end here -->
 
-
-
-
-
+</main>
 {% endblock %}

@@ -1,8 +1,7 @@
-import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import ContactForm, SubscribeForm, ReviewForm
-from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution
+from .forms import ContactForm, SubscribeForm, ReviewForm, FeedbackForm
+from .models import TeamMember, FooterGallery, Subscriber, Blog, FAQ, Investor, Product, Review, Sustainability, CSR, Initiative, CaseStudy, Solution, Opportunity, Feedback, Knowledge, Whitepaper
 from django.http import JsonResponse
 from django.conf import settings
 from django.views import View
@@ -38,6 +37,22 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
+
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'status': 'success'}, status=200)
+        else:
+            return JsonResponse({'status': 'error', 'errors': form.errors.as_json()}, status=400)
+    else:
+        form = FeedbackForm()
+    
+    # Fetch all feedback to display as testimonials
+    feedbacks = Feedback.objects.all()
+
+    return render(request, 'website/feedback.html', {'form': form, 'feedbacks': feedbacks})
 
 def solutions(request):
     #case studies
@@ -79,15 +94,16 @@ def sustainability(request):
     
     return render(request, 'website/sustainability.html', context)
 
-def support(request):
-    return render(request, 'website/support.html')
-
 def partners(request):
     investors = Investor.objects.all()
-    return render(request, 'website/partners.html', {'investors': investors})
-
-def feedback(request):
-    return render(request, 'website/feedback.html')
+    opportunities_list = Opportunity.objects.all().order_by('-date_posted')
+    
+    context = {
+        'investors': investors,
+        'opportunities': opportunities_list,
+    }
+    
+    return render(request, 'website/partners.html', context)
 
 def blogs(request):
     blogs = Blog.objects.all().order_by("-time")
@@ -122,6 +138,11 @@ def industry_detail(request, slug):
     context = {'solutions': solutions}
     return render(request, 'website/industry_detail.html', context)
 
+def whitepaper_detail(request, slug):
+    whitepaper = get_object_or_404(Whitepaper, slug=slug)
+    context = {'whitepaper': whitepaper}
+    return render(request, 'website/whitepaper_detail.html', context)
+
 def casestudies(request):
     casestudies = CaseStudy.objects.all().order_by("-time")
     paginator = Paginator(casestudies, 6) #6 case studies per page
@@ -131,11 +152,26 @@ def casestudies(request):
     return render(request, 'website/casestudies.html', context)
 
 def products(request):
+    query = request.GET.get('search', '')
     products = Product.objects.all().order_by("-time")
-    paginator = Paginator(products, 12) #12 products per page
+
+    if query:
+        products = products.filter(name__icontains=query)
+
+    paginator = Paginator(products, 12)
     page = request.GET.get("page")
     products = paginator.get_page(page)
-    context = {"products": products}
+
+    # Check for an AJAX request
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        products_html = render(request, 'templates/website/product_list.html', {'products': products}).content.decode('utf-8')
+        return JsonResponse({'products_html': products_html, 'total_results': paginator.count})
+
+    context = {
+        "products": products,
+        "query": query,
+        "total_results": paginator.count,
+    }
     return render(request, 'website/products.html', context)
 
 def product_detail(request, slug):
@@ -189,8 +225,16 @@ def footer_gallery_view(request):
     return render(request, 'website/shared/footer.html', {'images': images})
 
 def whitepapers(request):
-    return render(request, 'website/whitepapers.html')
+    papers = Whitepaper.objects.all().order_by('sno')
+    return render(request, 'website/whitepapers.html', {'papers': papers})
 
 def FAQs(request):
     faqs = FAQ.objects.all()
     return render(request, 'website/FAQs.html', {'faqs': faqs})
+
+def support(request):
+    knowledge = Knowledge.objects.all()
+    return render(request, 'website/support.html', {'knowledge': knowledge})
+
+def cart(request):
+    return render(request, 'website/cart.html')
