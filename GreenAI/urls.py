@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from website.views import contact, feedback, product_detail
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,5 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('feedback/', feedback, name='feedback'),
     path('submit_review/', product_detail, name='submit_review'),
-]
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

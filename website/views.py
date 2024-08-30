@@ -1,4 +1,3 @@
-import requests # type: ignore
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import ContactForm, SubscribeForm, ReviewForm, FeedbackForm
