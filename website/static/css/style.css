@@ -4568,7 +4568,31 @@ input {
 }
 .blog-two__image {
   position: relative;
+  height: 300px; /* Set height to your preferred value */
+  width: 100%; /* Make sure it spans the container width */
+  object-fit: cover; /* Ensures the image covers the area */
 }
+
+.blog-two .col-xl-4,
+.blog-two .col-lg-6,
+.blog-two .col-md-6 {
+  display: flex;
+  justify-content: center;
+}
+.blog-two .col-xl-4,
+.blog-two .col-lg-6,
+.blog-two .col-md-6 {
+  display: flex;
+  align-items: stretch;  /* Make all images stretch to fill the container */
+}
+.blog-two .col-xl-4 .image,
+.blog-two .col-lg-6 .image,
+.blog-two .col-md-6 .image {
+  height: 300px;  /* Consistent height */
+  width: 100%;    /* Make images take full width */
+  object-fit: cover; /* Ensures no distortion */
+}
+
 .blog-two__item .blog-two__info {
   text-align: center;
   display: inline-block;
