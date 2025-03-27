@@ -40,9 +40,9 @@
                         <div class="blog-two__image mb-85">
                             <div class="image">
                                 {% if blog.thumbnail_img %}
-                                    <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}">
+                                    <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}" loading="lazy">
                                 {% else %}
-                                    <img src="{% static 'images/blog/default.jpg' %}" alt="{{ blog.title }}">
+                                    <img src="{% static 'images/blog/default.jpg' %}" alt="{{ blog.title }}" loading="lazy">
                                 {% endif %}
                                 <div class="blog-two__info">
                                     <h4>{{ blog.time|date:"d" }} <br> {{ blog.time|date:"F" }}</h4>

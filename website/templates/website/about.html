@@ -56,7 +56,7 @@
                         <div class="about-two__right-item">
                             <div class="section-header mb-4">
                                 <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                                <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR History</h5>
+                                <img src="{% static 'images/icon/leaf.svg' %}" alt="image" loading="lazy"> OUR History</h5>
                                 <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
                                     History of Our
                                     Organization</h2>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-xl-6">
                         <div class="image">
-                            <img src="{% static 'images/history/history.jpg' %}" alt="image">
+                            <img src="{% static 'images/history/history.jpg' %}" alt="image" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
             <div class="container">
                 <div class="section-header text-center">
                     <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> OUR TEAM MEMBERS
+                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image" loading="lazy"> OUR TEAM MEMBERS
                     </h5>
                     <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">Green AI Leadership Team</h2>
                 </div>
@@ -113,7 +113,7 @@
                         <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
                             <div class="team__item team-two__item">
                                 <div class="team__item-image">
-                                    <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                                    <img src="{{ member.image.url }}" alt="{{ member.name }}" loading="lazy">
                                     <div class="team__item-image-icon social-icon">
                                         {% if member.facebook_url %}
                                             <a href="{{ member.facebook_url }}"><i class="fa-brands fa-facebook-f"></i></a>
@@ -143,7 +143,7 @@
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="image pe-lg-5 pe-0">
-                            <img src="{% static 'images/involve/vision_mission.jpg' %}" alt="image">
+                            <img src="{% static 'images/involve/vision_mission.jpg' %}" alt="image" loading="lazy">
                         </div>
                     </div>
                     <div class="col-lg-6">
