@@ -56,17 +56,17 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="project__image project-right__image">
-                                <img src="{% static 'images/product/fibrecables.jpg' %}" alt="Fibre Cables">
+                                <img src="{% static 'images/product/fibrecables.jpg' %}" alt="Fibre Cables" loading="lazy">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="project__image project-right__image">
-                                <img src="{% static 'images/product/ledlights.jpg' %}" alt="Project Image 02">
+                                <img src="{% static 'images/product/ledlights.jpg' %}" alt="Project Image 02" loading="lazy">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="project__image project-right__image">
-                                <img src="{% static 'images/product/installation.jpg' %}" alt="Project Image 03">
+                                <img src="{% static 'images/product/installation.jpg' %}" alt="Project Image 03" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -140,17 +140,17 @@
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <div class="image">
-                                                <img src="{% static 'images/project/fibrecables.jpg' %}" alt="image">
+                                                <img src="{% static 'images/project/fibrecables.jpg' %}" alt="image" loading="lazy">
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="image">
-                                                <img src="{% static 'images/project/led-lights.jpg' %}" alt="image">
+                                                <img src="{% static 'images/project/led-lights.jpg' %}" alt="image" loading="lazy">
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="image">
-                                                <img src="{% static 'images/project/installation.jpg' %}" alt="image">
+                                                <img src="{% static 'images/project/installation.jpg' %}" alt="image" loading="lazy">
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
             <div class="container">
                 <div class="section-header pr-20">
                     <h5 class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image"> E-commerce section
+                        <img src="{% static 'images/icon/leaf.svg' %}" alt="image" loading="lazy"> E-commerce section
                     </h5>
                     <h2 class="wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
                         You can purchase our products here
@@ -190,10 +190,10 @@
                                 <div class="item">
                                     {% if product.image %}
                                     <a href="{{ product.get_absolute_url }}">
-                                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
                                     </a>
                                     {% else %}
-                                    <img src="{% static 'images/product/default.png' %}" alt="{{ product.name }}">
+                                    <img src="{% static 'images/product/default.png' %}" alt="{{ product.name }}" loading="lazy">
                                     {% endif %}
                                     <div class="content">
                                         <h4><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
@@ -256,17 +256,17 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="image">
-                                        <img src="{% static 'images/product/product8.png' %}" alt="image">
+                                        <img src="{% static 'images/product/product8.png' %}" alt="image" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="image">
-                                        <img src="{% static 'images/product/product9.png' %}" alt="image">
+                                        <img src="{% static 'images/product/product9.png' %}" alt="image" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="image">
-                                        <img src="{% static 'images/product/product10.png' %}" alt="image">
+                                        <img src="{% static 'images/product/product10.png' %}" alt="image" loading="lazy">
                                     </div>
                                 </div>
                             </div>

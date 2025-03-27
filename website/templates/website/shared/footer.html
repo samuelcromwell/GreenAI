@@ -96,7 +96,7 @@
                                 {% for image in images %}
                                 <div class="gallery-item">
                                     <a data-fancybox="gallery" href="{{ image.image.url }}">
-                                        <img src="{{ image.image.url }}" alt="{{ image.image.name }}" class="footer-gallery-image">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.name }}" loading="lazy" class="footer-gallery-image">
                                         <div class="icon">
                                             <i class="fa-solid fa-plus"></i>
                                         </div>

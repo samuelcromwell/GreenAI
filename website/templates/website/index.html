@@ -70,9 +70,9 @@
         <!-- Banner area start here -->
         <section class="banner-two bor-bottom">
             <div class="banner-two__shape-left wow slideInLeft d-none d-xl-block" data-wow-duration="1s"
-                data-wow-delay="1s"><img src="{% static 'images/shape/banner-shape-left.png' %}" alt="shape"></div>
+                data-wow-delay="1s"><img src="{% static 'images/shape/banner-shape-left.png' %}" alt="shape" loading="lazy"></div>
             <div class="banner-two__shape-right wow slideInRight d-none d-xl-block" data-wow-duration="1.2s"
-                data-wow-delay="1.2s"><img src="{% static 'images/shape/banner-shape-right.png' %}" alt="shape">
+                data-wow-delay="1.2s"><img src="{% static 'images/shape/banner-shape-right.png' %}" alt="shape" loading="lazy">
             </div>
             <div class="swiper banner-two__slider">
                 <div class="swiper-wrapper">
@@ -145,16 +145,16 @@
         <!-- About area start here -->
         <section class="about-two pt-130 pb-130">
             <div class="about-two__shape-left d-none d-md-block sway_Y__animation">
-                <img src="{% static 'images/shape/about-two-shape-left.png' %}" alt="shape">
+                <img src="{% static 'images/shape/about-two-shape-left.png' %}" alt="shape" loading="lazy">
             </div>
             <div class="about-two__shape-right d-none d-md-block bobble__animation">
-                <img src="{% static 'images/shape/about-two-shape-right.png' %}" alt="shape">
+                <img src="{% static 'images/shape/about-two-shape-right.png' %}" alt="shape" loading="lazy">
             </div>
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-xl-6">
                         <div class="about-two__image">
-                            <img src="{% static 'images/about/greenbuilding.jpg' %}" alt="image">
+                            <img src="{% static 'images/about/greenbuilding.jpg' %}" alt="image" loading="lazy">
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -218,7 +218,7 @@
                     <div class="col-lg-6">
                         <div class="content bg-image">
                             <h2>Have a question for us? <br> Let's talk.</h2>
-                            <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt=""></div>
+                            <div class="arry"><img src="{% static 'images/icon/arry.png' %}" alt="" loading="lazy"></div>
                             <ul>
                                 <li><a href="https://www.google.com/maps/d/viewer?mid=1UZ57Drfs3SGrTgh6mrYjQktu6uY&amp;hl=en_US&amp;ll=18.672105000000013%2C105.68673800000003&amp;z=17" target="_blank"><i class="fa-solid fa-location-dot"></i>Westport Industrial City</a></li>
                                 <li><a href="tel:1-732-798-0976"><i class="fa-solid fa-phone-volume"></i>+254 712 345 678</a></li>
@@ -276,9 +276,9 @@
                             <div class="blog-two__image blog-three__image">
                                 <div class="image">
                                     {% if blog.thumbnail_img %}
-                                        <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}">
+                                        <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}" loading="lazy">
                                     {% else %}
-                                        <img src="{% static 'images/blog/default.jpg' %}" alt="{{ blog.title }}">
+                                        <img src="{% static 'images/blog/default.jpg' %}" alt="{{ blog.title }}" loading="lazy">
                                     {% endif %}
                                     <div class="blog-two__info">
                                         <h4>{{ blog.time|date:"d"}} <br> {{ blog.time|date:"F" }}</h4>
