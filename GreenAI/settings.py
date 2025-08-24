@@ -13,173 +13,204 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# --------------------------------------------------------------------------------------
+# Paths
+# --------------------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# --------------------------------------------------------------------------------------
+# Security & core config
+# --------------------------------------------------------------------------------------
+# Read from env in production; default False locally.
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# Never hardcode real secrets in code. Set these in Render → Environment.
+SECRET_KEY = os.getenv("SECRET_KEY", "CHANGE-ME-DEV-ONLY")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kza-j39=a7ddae4@v#^tbou@2t(j_cu%-8i0qzx3z5*o41=xad'
+# Allow local dev and Render by default; add your custom domain via env if any.
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "localhost,127.0.0.1,.onrender.com"
+).split(",")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Needed for forms/admin on Render
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+]
+# Optionally allow extra origins via env, comma-separated (e.g. "https://yourdomain.com")
+_extra_csrf = os.getenv("CSRF_TRUSTED_ORIGINS_EXTRA", "").split(",")
+CSRF_TRUSTED_ORIGINS += [o.strip() for o in _extra_csrf if o.strip()]
 
-ALLOWED_HOSTS = ['*']
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# If behind a proxy (Render), trust the X-Forwarded-Proto header for secure requests
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-# Application definition
+# Cookies secure in production
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
+# --------------------------------------------------------------------------------------
+# Applications
+# --------------------------------------------------------------------------------------
 INSTALLED_APPS = [
-    'jazzmin',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'website',
-    'tinymce',
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",
+    "website",
+    "tinymce",
 ]
 
+# --------------------------------------------------------------------------------------
+# Middleware (WhiteNoise right after SecurityMiddleware)
+# --------------------------------------------------------------------------------------
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serves /static/ in prod
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'GreenAI.urls'
+ROOT_URLCONF = "GreenAI.urls"
 
+# --------------------------------------------------------------------------------------
+# Templates
+# --------------------------------------------------------------------------------------
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'website.context_processors.footer_gallery_images',
-                'website.context_processors.subscribe_form',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        # add a templates directory if you plan to use it
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "website.context_processors.footer_gallery_images",
+                "website.context_processors.subscribe_form",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'GreenAI.wsgi.application'
+WSGI_APPLICATION = "GreenAI.wsgi.application"
 
-
+# --------------------------------------------------------------------------------------
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# --------------------------------------------------------------------------------------
+# Stays sqlite by default. If you later add Postgres on Render, switch via env or dj_database_url.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
-
+# --------------------------------------------------------------------------------------
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
+# --------------------------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
-
+# --------------------------------------------------------------------------------------
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+# --------------------------------------------------------------------------------------
+LANGUAGE_CODE = "en-us"
+TIME_ZONE = "Africa/Nairobi"
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGOUT_REDIRECT_URL = '/'
-
-STATIC_URL = '/static/'
+# --------------------------------------------------------------------------------------
+# Static files (CSS/JS) – WhiteNoise
+# --------------------------------------------------------------------------------------
+STATIC_URL = "/static/"
+# Where collectstatic puts files (Render will serve these via WhiteNoise)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# Source asset folders inside your repo
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'website/static'),
+    BASE_DIR / "website" / "static",
 ]
+# Hashed & compressed files for proper caching + correct MIME types
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# --------------------------------------------------------------------------------------
+# Media (user uploads from admin)
+# --------------------------------------------------------------------------------------
+# For Render: attach a Disk (e.g., /var/media) and set MEDIA_ROOT=/var/media in env.
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.getenv("MEDIA_ROOT", str(BASE_DIR / "media"))
 
-TIME_ZONE = 'Africa/Nairobi'
+# --------------------------------------------------------------------------------------
+# Django defaults
+# --------------------------------------------------------------------------------------
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGOUT_REDIRECT_URL = "/"
 
-RECAPTCHA_PUBLIC_KEY = '6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN'
-RECAPTCHA_SECRET_KEY = '6LeavgsqAAAAAAgyMutCg5jo3XFsf4ySjJ7T9O95'
+# --------------------------------------------------------------------------------------
+# reCAPTCHA (move to env in production)
+# --------------------------------------------------------------------------------------
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY", "")
 
-# CKEDITOR_UPLOAD_PATH = "uploads/"
-# CKEDITOR_IMAGE_BACKEND = "pillow"
-
+# --------------------------------------------------------------------------------------
+# TinyMCE
+# --------------------------------------------------------------------------------------
 TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
-    'width': 800,
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'silver',
-    'plugins': '''
-            textcolor save link image media preview codesample contextmenu
-            table code lists fullscreen  insertdatetime  nonbreaking
-            contextmenu directionality searchreplace wordcount visualblocks
-            visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
-            ''',
-    'toolbar1': '''
-            fullscreen preview bold italic underline | fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft alignright |
-            aligncenter alignjustify | indent outdent | bullist numlist table |
-            | link image media | codesample |
-            ''',
-    'toolbar2': '''
-            visualblocks visualchars |
-            charmap hr pagebreak nonbreaking anchor |  code |
-            ''',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'statusbar': True,
+    "height": 360,
+    "width": 800,
+    "cleanup_on_startup": True,
+    "custom_undo_redo_levels": 20,
+    "selector": "textarea",
+    "theme": "silver",
+    "plugins": """
+        textcolor save link image media preview codesample contextmenu
+        table code lists fullscreen insertdatetime nonbreaking
+        contextmenu directionality searchreplace wordcount visualblocks
+        visualchars code fullscreen autolink lists charmap print hr
+        anchor pagebreak
+    """,
+    "toolbar1": """
+        fullscreen preview bold italic underline | fontselect
+        fontsizeselect | forecolor backcolor | alignleft alignright |
+        aligncenter alignjustify | indent outdent | bullist numlist table |
+        | link image media | codesample |
+    """,
+    "toolbar2": """
+        visualblocks visualchars |
+        charmap hr pagebreak nonbreaking anchor | code |
+    """,
+    "contextmenu": "formats | link image",
+    "menubar": True,
+    "statusbar": True,
 }
 
+# --------------------------------------------------------------------------------------
+# Email – use env vars; never hardcode passwords
+# --------------------------------------------------------------------------------------
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587  # Gmail SMTP port
-EMAIL_HOST_USER = 'cromwellsamuel3@gmail.com'  # Your Gmail email address
-EMAIL_HOST_PASSWORD = 'ldot jehk yuuo luhf'  # Your Gmail password or app-specific password
-EMAIL_USE_TLS = True  # Enable TLS encryption 
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")          # e.g. your Gmail address
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")  # Gmail App Password (with 2FA)
