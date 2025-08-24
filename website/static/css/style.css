@@ -2811,7 +2811,7 @@ input {
 }
 
 .page-banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../static/images/banner/page-banner.jpg);
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/banner/page-banner.jpg); */
   text-transform: capitalize;
   text-align: center;
 }
@@ -4225,7 +4225,7 @@ input {
 }
 .testimonial-two__image::after {
   position: absolute;
-  content: url(../../static/images/testimonial/testimonial-line.png);
+  content: url(../images/testimonial/testimonial-line.png);
   left: -80px;
   top: 5px;
 }
@@ -4264,7 +4264,7 @@ input {
 }
 .team__item::after {
   content: "";
-  background-image: url("../../static/images/team/bg.jpg");
+  /* background-image: url("../images/team/bg.jpg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -5337,7 +5337,7 @@ input {
 }
 .contact .content {
   color: var(--white);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../static/images/contact/01.jpg);
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/contact/01.jpg); */
   padding: 40px 30px;
 }
 .contact .content h2 {
