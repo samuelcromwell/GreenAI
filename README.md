@@ -17,7 +17,7 @@ cd GreenAI
 
 ### 2. Create a Virtual Environment
 
-We recommend using `venv` to manage your Python dependencies:
+Use Python 3.11 or newer and `venv` to manage your Python dependencies:
 
 ```bash
 python3 -m venv env
@@ -47,7 +47,17 @@ Make sure you're inside the virtual environment, then run:
 pip install -r requirements.txt
 ```
 
-> If `requirements.txt` is missing or outdated, run `pip freeze > requirements.txt` after installing packages manually.
+Copy `.env.example` to `.env` and set `DJANGO_SECRET_KEY` to a new random value before running Django. You can generate one with:
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+For local development, set `DJANGO_DEBUG=True`. In production, keep it `False`, set `DJANGO_ALLOWED_HOSTS` to your domain names, and configure the email and reCAPTCHA credentials through your host's environment settings.
+
+Credentials previously committed to this repository must be revoked and replaced, including the Gmail app password, reCAPTCHA secret, and Django secret key. Replacing the Django key invalidates existing signed sessions. Removing values from the current files does not remove them from Git history.
+
+After updating dependencies, run `python -m pip check`, `python manage.py check`, and `python manage.py test`. Audit the pinned requirements with `pip-audit -r requirements.txt` before deployment.
 
 ---
 
@@ -82,18 +92,13 @@ To access the Django admin panel, visit:
 http://127.0.0.1:8000/admin/
 ```
 
-### ✅ Credentials:
-
-- **Username:** `greenaiadmin`  
-- **Password:** `admin123`
-
-If you haven't created the superuser yet, run:
+Create your own administrator account with a unique password:
 
 ```bash
 python manage.py createsuperuser
 ```
 
-And follow the prompts using the credentials above.
+If you previously used the credentials published here, change that account's password immediately.
 
 ---
 ## 🧩 Dynamic Admin Content
