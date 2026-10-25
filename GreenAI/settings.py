@@ -12,21 +12,23 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kza-j39=a7ddae4@v#^tbou@2t(j_cu%-8i0qzx3z5*o41=xad'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [host.strip() for host in os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Application definition
@@ -141,7 +143,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TIME_ZONE = 'Africa/Nairobi'
 
 RECAPTCHA_PUBLIC_KEY = '6LeavgsqAAAAAEm5c6yrGnTh8KHoginxZkd0-_UN'
-RECAPTCHA_SECRET_KEY = '6LeavgsqAAAAAAgyMutCg5jo3XFsf4ySjJ7T9O95'
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY', '')
 
 # CKEDITOR_UPLOAD_PATH = "uploads/"
 # CKEDITOR_IMAGE_BACKEND = "pillow"
@@ -180,6 +182,6 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Gmail SMTP port
-EMAIL_HOST_USER = 'cromwellsamuel3@gmail.com'  # Your Gmail email address
-EMAIL_HOST_PASSWORD = 'ldot jehk yuuo luhf'  # Your Gmail password or app-specific password
-EMAIL_USE_TLS = True  # Enable TLS encryption 
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = True  # Enable TLS encryption
