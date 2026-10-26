@@ -6,7 +6,7 @@ django-crispy-forms==2.7
 django-jazzmin==3.0.5
 django-js-asset==2.2.0
 django-tinymce==5.0.0
-gunicorn==23.0.0
+gunicorn==26.2.0
 packaging==26.3
 pillow==13.0.0
 python-dotenv==1.2.2
