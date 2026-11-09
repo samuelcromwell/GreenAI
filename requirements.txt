@@ -10,5 +10,5 @@ gunicorn==26.2.0
 packaging==26.3
 pillow==13.0.0
 python-dotenv==1.2.4
-sqlparse==0.6.0
+sqlparse==0.6.1
 whitenoise==6.12.0
